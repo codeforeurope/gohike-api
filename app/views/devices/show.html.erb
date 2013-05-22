@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Identifier:</b>
+  <%= @device.identifier %>
+</p>
+
+<p>
+  <b>Platform:</b>
+  <%= @device.platform %>
+</p>
+
+<p>
+  <b>Platform version:</b>
+  <%= @device.platform_version %>
+</p>
+
+<p>
+  <b>Default language:</b>
+  <%= @device.default_language %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @device.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>

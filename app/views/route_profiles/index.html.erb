@@ -1,0 +1,33 @@
+<h1>Listing route_profiles</h1>
+
+<table>
+  <tr>
+    <th>Name en</th>
+    <th>Description en</th>
+    <th>Name nl</th>
+    <th>Description nl</th>
+    <th>Icon</th>
+    <th>Image</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @route_profiles.each do |route_profile| %>
+  <tr>
+    <td><%= route_profile.name_en %></td>
+    <td><%= route_profile.description_en %></td>
+    <td><%= route_profile.name_nl %></td>
+    <td><%= route_profile.description_nl %></td>
+    <td><%= route_profile.icon %></td>
+    <td><%= route_profile.image %></td>
+    <td><%= link_to 'Show', route_profile %></td>
+    <td><%= link_to 'Edit', edit_route_profile_path(route_profile) %></td>
+    <td><%= link_to 'Destroy', route_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Route profile', new_route_profile_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  identifier: MyString
+  platform: MyString
+  platform_version: MyString
+  default_language: MyString
+  user: 
+
+two:
+  identifier: MyString
+  platform: MyString
+  platform_version: MyString
+  default_language: MyString
+  user: 

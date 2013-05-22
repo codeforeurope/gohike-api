@@ -1,4 +1,18 @@
 Gohike::Application.routes.draw do
+  get "home", :to => "home#index"
+
+  resources :route_profiles
+
+
+  resources :locations
+
+
+  resources :routes
+
+
+  resources :devices
+
+
   devise_for :users
 
   # The priority is based upon order of creation:

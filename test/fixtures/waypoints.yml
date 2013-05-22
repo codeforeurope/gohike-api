@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  route: 
+  location: 
+  previous_location: 
+  next_location: 
+
+two:
+  route: 
+  location: 
+  previous_location: 
+  next_location: 

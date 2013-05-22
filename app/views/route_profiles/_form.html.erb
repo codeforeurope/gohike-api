@@ -1,0 +1,16 @@
+<%= simple_form_for(@route_profile, :html => {:multipart => true}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name_en %>
+    <%= f.input :description_en %>
+    <%= f.input :name_nl %>
+    <%= f.input :description_nl %>
+    <%= f.input :icon %>
+    <%= f.input :image %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

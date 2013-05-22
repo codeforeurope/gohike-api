@@ -1,0 +1,116 @@
+<%= simple_form_for(@location) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs clearfix">
+    <div class="span4">
+      <%= f.input :name_en %>
+      <%= f.input :description_en, :input_html => {:rows => 10} %>
+    </div>
+    <div class="span4">
+      <%= f.input :name_nl %>
+      <%= f.input :description_nl, :input_html => {:rows => 10} %>
+    </div>
+    <div class="span5">
+
+      <%= f.input :address %>
+      <%= f.input :city %>
+      <%= f.input :postal_code %>
+      <%= f.input :latitude, :as => :string, :input_html => {:readonly => true} %>
+      <%= f.input :longitude, :as => :string, :input_html => {:readonly => true} %>
+    </div>
+    <div class="span4">
+      <% options = {
+          :map_options => {:auto_adjust => true, zoomControl: true, zoom: 14, streetViewControl: false, scaleControl: false, rotateControl: false, mapTypeControl: false, panControl: false},
+          :markers => {:data => [], :options => {:do_clustering => true}}
+      }
+      %>
+      <%= gmaps(options) %>
+    </div>
+
+  </div>
+
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+
+<% content_for :scripts do %>
+  <script>
+    Gmaps.map.callback = function () {
+      console.log("callback", arguments);
+      var map = Gmaps.map.map,
+          geocoder = new google.maps.Geocoder(),
+          latitude = <%= @location.latitude || 0 %>,
+          longitude = <%= @location.longitude || 0 %>,
+          latLng = new google.maps.LatLng(latitude, longitude),
+          crosshairShape = {coords: [0, 0, 0, 0], type: 'rect'},
+          marker, mapChanged = false;
+
+      marker = new google.maps.Marker({
+        map: map,
+        icon: 'http://www.daftlogic.com/images/cross-hairs.gif',
+        shape: crosshairShape
+      });
+      marker.bindTo('position', map, 'center');
+      setMapCenter(map, latLng);
+
+
+      google.maps.event.addListener(map, 'center_changed', function () {
+        mapChanged = true;
+      });
+      google.maps.event.addListener(map, 'zoom_changed', function () {
+        // mapChanged = true;
+      });
+
+      google.maps.event.addListener(map, 'idle', function () {
+        var currentCenter = map.getCenter(),
+            request = {location: currentCenter },
+            $address = $("#location_address"),
+            $city = $("#location_city"),
+            $postal_code = $("#location_postal_code"),
+            $latitude = $("#location_latitude"),
+            $longitude = $("#location_longitude");
+
+
+        if (mapChanged) {
+          $latitude.val(currentCenter.lat());
+          $longitude.val(currentCenter.lng());
+          geocoder.geocode(request, function (results, status) {
+
+            var result ,
+                parts, city_parts;
+            if (status == google.maps.GeocoderStatus.OK) {
+              result = results[0];
+              if (result) {
+                parts = result.formatted_address.split(", ");
+                city_parts = parts[1].split(" ")
+                $address.val(parts[0]);
+                $city.val(city_parts.pop());
+                $postal_code.val(city_parts.join(" "));
+              }
+            }
+          });
+        }
+      });
+    }
+
+    setMapCenter = function (map, latLng) {
+      var geocoder;
+      if (latLng.lat() == 0 || latLng.lng() == 0) {
+        geocoder = new google.maps.Geocoder();
+        geocoder.geocode({address: "Amsterdam, Netherlands"}, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            result = results[0];
+            if (result) {
+
+              map.setCenter(result.geometry.location);
+            }
+          }
+        });
+      } else {
+        map.setCenter(latLng);
+      }
+    }
+  </script>
+<% end %>
