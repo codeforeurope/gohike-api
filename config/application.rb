@@ -61,5 +61,7 @@ module Gohike
 
     config.paths.add "app/api", glob: "**/*.rb"
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
+    config.assets.initialize_on_precompile = false
   end
 end
