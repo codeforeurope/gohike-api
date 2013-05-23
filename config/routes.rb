@@ -1,13 +1,15 @@
 Gohike::Application.routes.draw do
   get "home", :to => "home#index"
 
-  resources :route_profiles
+  resources :route_profiles do
+
+    resources :routes
+  end
 
 
   resources :locations
 
 
-  resources :routes
 
 
   resources :devices

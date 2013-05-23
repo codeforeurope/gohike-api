@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522103322) do
+ActiveRecord::Schema.define(:version => 20130523124640) do
 
   create_table "devices", :force => true do |t|
     t.string   "identifier"
@@ -59,9 +59,12 @@ ActiveRecord::Schema.define(:version => 20130522103322) do
     t.text     "description_nl"
     t.string   "icon"
     t.string   "image"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "route_profile_id"
   end
+
+  add_index "routes", ["route_profile_id"], :name => "index_routes_on_route_profile_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

@@ -2,12 +2,12 @@
 
 <p>
   <b>Name:</b>
-  <%= @route.name %>
+  <%= @route.name_en %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @route.description %>
+  <%= @route.description_en %>
 </p>
 
 <p>
@@ -21,5 +21,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_route_path(@route) %> |
-<%= link_to 'Back', routes_path %>
+<%= link_to 'Edit', edit_route_profile_route_path(@route_profile,@route) %> |
+<%= link_to 'Back', route_profile_routes_path(@route_profile) %>
