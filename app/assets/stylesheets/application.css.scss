@@ -1,9 +1,13 @@
 @import "bootstrap";
+body {
+  padding-top: 60px;
+}
 @import "bootstrap-responsive";
 @import "devices";
 @import "routes";
 @import "navbar";
 @import "gmaps4rails";
+
 #map img {
   max-width: none;
 }
