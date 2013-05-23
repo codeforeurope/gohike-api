@@ -20,7 +20,19 @@
     </div>
     <div class="span4">
       <% options = {
-          :map_options => {:auto_adjust => true, zoomControl: true, zoom: 14, streetViewControl: false, scaleControl: false, rotateControl: false, mapTypeControl: false, panControl: false},
+          :map_options => {
+              :auto_adjust => true,
+              zoomControl: true,
+              zoom: 14,
+              streetViewControl: false,
+              scaleControl: false,
+              rotateControl: false,
+              mapTypeControl: false,
+              panControl: false,
+              center_latitude: @location.latitude,
+              center_longitude: @location.longitude
+
+          },
           :markers => {:data => [], :options => {:do_clustering => true}}
       }
       %>
@@ -53,17 +65,28 @@
         shape: crosshairShape
       });
       marker.bindTo('position', map, 'center');
-      setMapCenter(map, latLng);
+      if (latLng.lat() == 0 || latLng.lng() == 0) {
+        setMapCenter(map);
+      }
 
+
+      google.maps.event.addListener(map, 'tilesloaded', function () {
+        console.log("tiles loaded")
+      });
 
       google.maps.event.addListener(map, 'center_changed', function () {
+        console.log("center_changed");
         mapChanged = true;
       });
       google.maps.event.addListener(map, 'zoom_changed', function () {
         // mapChanged = true;
+        console.log("zoom_changed");
+
       });
 
       google.maps.event.addListener(map, 'idle', function () {
+        console.log("idle");
+
         var currentCenter = map.getCenter(),
             request = {location: currentCenter },
             $address = $("#location_address"),
@@ -74,6 +97,7 @@
 
 
         if (mapChanged) {
+          console.log("go")
           $latitude.val(currentCenter.lat());
           $longitude.val(currentCenter.lng());
           geocoder.geocode(request, function (results, status) {
@@ -95,22 +119,16 @@
       });
     }
 
-    setMapCenter = function (map, latLng) {
-      var geocoder;
-      if (latLng.lat() == 0 || latLng.lng() == 0) {
-        geocoder = new google.maps.Geocoder();
-        geocoder.geocode({address: "Amsterdam, Netherlands"}, function (results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            result = results[0];
-            if (result) {
-
-              map.setCenter(result.geometry.location);
-            }
+    setMapCenter = function (map) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({address: "Amsterdam, Netherlands"}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          result = results[0];
+          if (result) {
+            map.setCenter(result.geometry.location);
           }
-        });
-      } else {
-        map.setCenter(latLng);
-      }
+        }
+      });
     }
   </script>
 <% end %>
