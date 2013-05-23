@@ -53,11 +53,8 @@
       console.log("callback", arguments);
       var map = Gmaps.map.map,
           geocoder = new google.maps.Geocoder(),
-          latitude = <%= @location.latitude || 0 %>,
-          longitude = <%= @location.longitude || 0 %>,
-          latLng = new google.maps.LatLng(latitude, longitude),
           crosshairShape = {coords: [0, 0, 0, 0], type: 'rect'},
-          marker, mapChanged = false;
+          marker, mapReady = false;
 
       marker = new google.maps.Marker({
         map: map,
@@ -65,27 +62,25 @@
         shape: crosshairShape
       });
       marker.bindTo('position', map, 'center');
-      if (latLng.lat() == 0 || latLng.lng() == 0) {
-        setMapCenter(map);
-      }
+      <% if @location.new_record? %>
+        setDefaultMapCenter(map);
+      <% end %>
 
 
       google.maps.event.addListener(map, 'tilesloaded', function () {
-        console.log("tiles loaded")
+//        console.log("tiles loaded")
       });
 
       google.maps.event.addListener(map, 'center_changed', function () {
-        console.log("center_changed");
-        mapChanged = true;
+//        console.log("center_changed");
       });
       google.maps.event.addListener(map, 'zoom_changed', function () {
-        // mapChanged = true;
-        console.log("zoom_changed");
+//        console.log("zoom_changed");
 
       });
 
       google.maps.event.addListener(map, 'idle', function () {
-        console.log("idle");
+//        console.log("idle");
 
         var currentCenter = map.getCenter(),
             request = {location: currentCenter },
@@ -96,7 +91,7 @@
             $longitude = $("#location_longitude");
 
 
-        if (mapChanged) {
+        if (mapReady) {
           console.log("go")
           $latitude.val(currentCenter.lat());
           $longitude.val(currentCenter.lng());
@@ -108,7 +103,7 @@
               result = results[0];
               if (result) {
                 parts = result.formatted_address.split(", ");
-                city_parts = parts[1].split(" ")
+                city_parts = parts[1].split(" ");
                 $address.val(parts[0]);
                 $city.val(city_parts.pop());
                 $postal_code.val(city_parts.join(" "));
@@ -116,10 +111,11 @@
             }
           });
         }
+        mapReady = true;
       });
-    }
+    };
 
-    setMapCenter = function (map) {
+    setDefaultMapCenter = function (map) {
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({address: "Amsterdam, Netherlands"}, function (results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
