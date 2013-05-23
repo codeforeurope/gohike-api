@@ -1,3 +1,9 @@
+<ul class="breadcrumb">
+  <li><%= link_to t(:home) , home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.route_profiles') , route_profiles_path %> <span class="divider">/</span></li>
+  <li class="active"><%=@route_profile.name_en %></li>
+</ul>
+
 <p id="notice"><%= notice %></p>
 
 <p>

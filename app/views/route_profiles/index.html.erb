@@ -1,3 +1,8 @@
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li class="active"><%= t(:'navbar.route_profiles') %></li>
+</ul>
+
 <div class="row-fluid">
   <ul class="thumbnails">
     <% @route_profiles.each do |route_profile| %>
@@ -17,10 +22,12 @@
             <div class="tab-content">
               <div class="tab-pane active" id="profile<%= route_profile.id %>_en">
                 <h3><%= route_profile.name_en %></h3>
+
                 <p><%= route_profile.description_en %></p>
               </div>
               <div class="tab-pane" id="profile<%= route_profile.id %>_nl">
                 <h3><%= route_profile.name_nl %></h3>
+
                 <p><%= route_profile.description_nl %></p>
               </div>
 
