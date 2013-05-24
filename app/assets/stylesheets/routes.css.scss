@@ -1,3 +1,28 @@
 // Place all the styles related to the routes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.waypoint-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 0 2.5em;
+  float: left;
+  margin-right: 10px;
+  min-width: 200px;
+  min-height: 300px;
+  border: 1px solid #cecece;
+  &.ui-sortable-disabled {
+    opacity: .5;
+  }
+}
+
+.waypoint-list li {
+  margin: 0 5px 5px 5px;
+  padding: 5px;
+  font-size: 1.2em;
+  width: 200px;
+
+  border: 1px solid #cecece;
+
+}
+

@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+
   before_filter :load_profile
   # GET /routes
   # GET /routes.json
@@ -14,7 +15,11 @@ class RoutesController < ApplicationController
   # GET /routes/1
   # GET /routes/1.json
   def show
+    @waypoints = []
+    @location_ids = []
     @route = @route_profile.routes.find(params[:id])
+    sort_waypoints
+    @locations = Location.where('id NOT in (?)', @location_ids.empty? ? 0 : @location_ids)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,7 +50,7 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.save
-        format.html { redirect_to route_profile_route_url(@route_profile,@route), notice: 'Route was successfully created.' }
+        format.html { redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully created.' }
         format.json { render json: @route, status: :created, location: @route }
       else
         format.html { render action: "new" }
@@ -61,7 +66,7 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.update_attributes(params[:route])
-        format.html { redirect_to route_profile_route_url(@route_profile,@route), notice: 'Route was successfully updated.' }
+        format.html { redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -77,7 +82,7 @@ class RoutesController < ApplicationController
     @route.destroy
 
     respond_to do |format|
-      format.html { redirect_to route_profile_route_url(@route_profile,@route)}
+      format.html { redirect_to route_profile_route_url(@route_profile, @route) }
       format.json { head :no_content }
     end
   end
@@ -87,4 +92,19 @@ class RoutesController < ApplicationController
   def load_profile
     @route_profile = RouteProfile.find(params[:route_profile_id])
   end
+
+  def sort_waypoints
+
+    waypoint = @route.waypoints.where(:previous_waypoint_id => nil).first
+    if !waypoint.nil?
+      until waypoint.next_waypoint.nil? do
+        @waypoints << waypoint
+        @location_ids << waypoint.location.id
+        waypoint = waypoint.next_waypoint
+      end
+      @waypoints << waypoint
+      @location_ids << waypoint.location.id
+    end
+  end
+
 end

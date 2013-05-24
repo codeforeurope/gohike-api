@@ -3,7 +3,9 @@ Gohike::Application.routes.draw do
 
   resources :route_profiles do
 
-    resources :routes
+    resources :routes do
+      resources :waypoints
+    end
   end
 
 

@@ -1,31 +1,62 @@
 <ul class="breadcrumb">
-  <li><%= link_to t(:home) , home_path %> <span class="divider">/</span></li>
-  <li><%= link_to t(:'navbar.route_profiles') , route_profiles_path %> <span class="divider">/</span></li>
-  <li><%= link_to @route_profile.name_en , route_profile_path(@route_profile) %> <span class="divider">/</span></li>
-  <li class="active"><%=@route.name_en %></li>
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
+  <li><%= link_to @route_profile.name_en, route_profile_path(@route_profile) %> <span class="divider">/</span></li>
+  <li class="active"><%= @route.name_en %></li>
 </ul>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @route.name_en %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @route.description_en %>
-</p>
-
-<p>
-  <b>Icon:</b>
-  <%= @route.icon %>
-</p>
-
-<p>
-  <b>Image:</b>
-  <%= @route.image %>
-</p>
+<div class="row-fluid">
 
 
-<%= link_to 'Edit', edit_route_profile_route_path(@route_profile,@route) %> |
+  <div class="span6">
+    <h4><%= t :details %></h4>
+    <ul class="nav nav-tabs" id="route<%= @route.id %>_tab">
+      <li><a href="#route<%= @route.id %>_en" data-toggle="tab"><%= t :english %></a></li>
+      <li><a href="#route<%= @route.id %>_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="route<%= @route.id %>_en">
+        <h5><%= @route.name_en %></h5>
+        <p><%= @route.description_en %></p>
+      </div>
+      <div class="tab-pane" id="route<%= @route.id %>_nl">
+        <h5><%= @route.name_nl %></h5>
+        <p><%= @route.description_nl %></p>
+      </div>
+
+    </div>
+  </div>
+  <div class="span5">
+    <h4><%= t :icon_and_image %></h4>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span6">
+    <h4><%= t :waipoints %></h4>
+    <ul class="connected waypoint-list clearfix " id="waypoints">
+      <% @route.waypoints.each do |waypoint| %>
+        <li class="ui-state-default" data-waypoint-id="<%= waypoint.id %>" data-location-id="<%= waypoint.location.id %>">
+          <%= waypoint.location.name_en %>
+        </li>
+      <% end %>
+    </ul>
+
+    <ul class="connected waypoint-list clearfix" id="locations">
+      <% @locations.each do |location| %>
+        <li class="ui-state-default" data-location-id="<%= location.id %>"><%= location.name_en %></li>
+      <% end %>
+    </ul>
+
+
+  </div>
+  <div class="span5">
+    <h4><%= t :map %></h4>
+  </div>
+
+</div>
+
+
+<%= link_to 'Edit', edit_route_profile_route_path(@route_profile, @route) %> |
 <%= link_to 'Back', route_profile_routes_path(@route_profile) %>
