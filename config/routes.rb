@@ -1,3 +1,4 @@
+require 'api'
 Gohike::Application.routes.draw do
   get "home", :to => "home#index"
 
@@ -7,17 +8,11 @@ Gohike::Application.routes.draw do
       resources :waypoints
     end
   end
-
-
   resources :locations
-
-
-
-
   resources :devices
-
-
   devise_for :users
+
+  mount Gohike::API => "/api"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

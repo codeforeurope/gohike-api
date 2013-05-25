@@ -11,6 +11,11 @@ end
 
 module Gohike
   class Application < Rails::Application
+    config.paths.add "app/api", glob: "**/*.rb"
+    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+    config.middleware.use(Rack::Config) do |env|
+      env['api.tilt.root'] = Rails.root.join "app", "views", "api"
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -59,9 +64,10 @@ module Gohike
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.paths.add "app/api", glob: "**/*.rb"
-    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
 
     config.assets.initialize_on_precompile = false
+
+    config.middleware.insert_before(ActionDispatch::Static, Rack::Deflater)
   end
 end
