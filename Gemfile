@@ -13,6 +13,12 @@ gem 'grape'
 gem "carrierwave"
 gem "cancan"
 gem 'gmaps4rails'
+gem 'redis'
+gem 'grape-rabl'
+gem 'mini_magick'
+gem "fog"
+
+gem 'dotenv-rails', :groups => [:development, :test]
 
 # Gems used only for assets and not required
 # in production environments by default.
