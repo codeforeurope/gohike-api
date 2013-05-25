@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130524104832) do
+ActiveRecord::Schema.define(:version => 20130525214152) do
 
   create_table "devices", :force => true do |t|
     t.string   "identifier"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130524104832) do
     t.datetime "created_at",                                    :null => false
     t.datetime "updated_at",                                    :null => false
     t.boolean  "gmaps"
+    t.string   "image"
   end
 
   create_table "route_profiles", :force => true do |t|
