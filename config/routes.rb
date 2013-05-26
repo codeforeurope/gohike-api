@@ -1,11 +1,14 @@
 require 'api'
 Gohike::Application.routes.draw do
+
   get "home", :to => "home#index"
 
   resources :route_profiles do
 
     resources :routes do
-      resources :waypoints
+      member do
+        put :waypoints
+      end
     end
   end
   resources :locations

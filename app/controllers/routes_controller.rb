@@ -15,10 +15,9 @@ class RoutesController < ApplicationController
   # GET /routes/1
   # GET /routes/1.json
   def show
-    @waypoints = []
-    @location_ids = []
     @route = @route_profile.routes.find(params[:id])
-    sort_waypoints
+    @waypoints = @route.waypoints.order("rank ASC")
+    @location_ids = @waypoints.map { |waypoint| waypoint.location_id }
     @locations = Location.where('id NOT in (?)', @location_ids.empty? ? 0 : @location_ids)
 
     respond_to do |format|
@@ -87,24 +86,29 @@ class RoutesController < ApplicationController
     end
   end
 
+  def waypoints
+    to_preserve = []
+    @route = @route_profile.routes.find(params[:id])
+    waypoints = params[:waypoints]
+    waypoints.each_with_index do | waypoint, index|
+      w = @route.waypoints.where(:location_id => waypoint[:location_id]).first_or_create
+      w.rank = index
+      w.save
+      to_preserve << w.id
+    end
+    if !to_preserve.empty?
+      @route.waypoints.where("id NOT IN (?)", to_preserve).destroy_all
+    end
+    respond_to do |format|
+      format.html { head :no_content }
+      format.json { head :no_content }
+    end
+  end
 
   private
   def load_profile
     @route_profile = RouteProfile.find(params[:route_profile_id])
   end
 
-  def sort_waypoints
-
-    waypoint = @route.waypoints.where(:previous_waypoint_id => nil).first
-    if !waypoint.nil?
-      until waypoint.next_waypoint.nil? do
-        @waypoints << waypoint
-        @location_ids << waypoint.location.id
-        waypoint = waypoint.next_waypoint
-      end
-      @waypoints << waypoint
-      @location_ids << waypoint.location.id
-    end
-  end
 
 end

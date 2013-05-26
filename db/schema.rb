@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525214152) do
+ActiveRecord::Schema.define(:version => 20130526200429) do
 
   create_table "devices", :force => true do |t|
     t.string   "identifier"
@@ -89,15 +89,12 @@ ActiveRecord::Schema.define(:version => 20130525214152) do
   create_table "waypoints", :force => true do |t|
     t.integer  "route_id"
     t.integer  "location_id"
-    t.integer  "previous_waypoint_id"
-    t.integer  "next_waypoint_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "rank"
   end
 
   add_index "waypoints", ["location_id"], :name => "index_waypoints_on_location_id"
-  add_index "waypoints", ["next_waypoint_id"], :name => "index_waypoints_on_next_location_id"
-  add_index "waypoints", ["previous_waypoint_id"], :name => "index_waypoints_on_previous_location_id"
   add_index "waypoints", ["route_id"], :name => "index_waypoints_on_route_id"
 
 end
