@@ -6,17 +6,12 @@ child :routes do
     attributes :id => :profile_id
   end
   child :waypoints do
+    attributes :rank
     glue :location do
       attributes :id => :location_id, :name_en => :name_en, :name_nl => :name_nl, :description_en => :description_en, :description_nl => :description_nl
     end
     glue :route do
       attributes :id => :route_id
-    end
-    glue :next_waypoint do
-      attributes :location_id => :next_location_id
-    end
-    glue :previous_waypoint do
-      attributes :location_id => :previous_location_id
     end
   end
 end

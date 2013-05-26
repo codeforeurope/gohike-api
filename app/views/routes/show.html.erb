@@ -10,7 +10,7 @@
 
   <div class="span6">
     <h4><%= t :details %></h4>
-    <ul class="nav nav-tabs" id="route_tab">
+    <ul class="nav nav-tabs">
       <li class="active"><a href="#route_en" data-toggle="tab"><%= t :english %></a></li>
       <li class=""><a href="#route_nl" data-toggle="tab"><%= t :nederlands %></a></li>
     </ul>
@@ -36,7 +36,7 @@
   <div class="span6">
     <h4><%= t :waipoints %></h4>
     <ul class="connected waypoint-list clearfix " id="waypoints">
-      <% @waypoints.each do |waypoint| %>
+      <% @route.waypoints.each do |waypoint| %>
         <li class="ui-state-default" data-waypoint-id="<%= waypoint.id %>" data-location-id="<%= waypoint.location.id %>">
           <%= waypoint.location.name_en %>
         </li>
