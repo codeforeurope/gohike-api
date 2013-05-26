@@ -8,6 +8,7 @@ class Ability
     if user.is_admin?
       #can :discount, :offer
       can :manage, :all
+      cannot [:create,:update,:destroy], Checkin
     else
 
     end

@@ -1,4 +1,6 @@
 class RouteProfilesController < ApplicationController
+  before_filter :authenticate_user!
+  load_and_authorize_resource
   # GET /route_profiles
   # GET /route_profiles.json
   def index
