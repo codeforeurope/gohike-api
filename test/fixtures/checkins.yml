@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  route: 
+  location: 
+  stamp: 2013-05-26 23:13:06
+
+two:
+  route: 
+  location: 
+  stamp: 2013-05-26 23:13:06

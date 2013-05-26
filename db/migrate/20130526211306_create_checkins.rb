@@ -1,0 +1,13 @@
+class CreateCheckins < ActiveRecord::Migration
+  def change
+    create_table :checkins do |t|
+      t.references :route
+      t.references :location
+      t.datetime :stamp
+
+      t.timestamps
+    end
+    add_index :checkins, :route_id
+    add_index :checkins, :location_id
+  end
+end

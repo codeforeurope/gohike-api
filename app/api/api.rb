@@ -7,8 +7,26 @@ module Gohike
 
     desc "Pipe out all content"
     get '/content', :rabl => "content" do
-      #current_version = params[:current_version]
-      @route_profiles = RouteProfile.all(:include =>:routes)
+      @route_profiles = RouteProfile.all(:include => :routes)
+    end
+
+    get '/ping/:version' do
+
+    end
+
+    get '/progress' do
+
+    end
+
+    params do
+      requires :checkins, type: Array, desc: "Checkins array"
+    end
+    post '/checkin' do
+      checkins = params[:checkins]
+      checkins.each do |checkin|
+        c = Checkin.where(:location_id => checkin[:location_id], :route_id => checkin[:route_id]).first_or_create
+        c.update_attribute(:stamp, Time.zone.parse(checkin[:timestamp])) unless checkin[:timestamp].nil?
+      end
     end
 
   end

@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Route:</b>
+  <%= @checkin.route %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @checkin.location %>
+</p>
+
+<p>
+  <b>Stamp:</b>
+  <%= @checkin.stamp %>
+</p>
+
+
+<%= link_to 'Edit', edit_checkin_path(@checkin) %> |
+<%= link_to 'Back', checkins_path %>
