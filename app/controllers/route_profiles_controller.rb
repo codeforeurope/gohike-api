@@ -62,7 +62,7 @@ class RouteProfilesController < ApplicationController
 
     respond_to do |format|
       if @route_profile.update_attributes(params[:route_profile])
-        format.html { redirect_to @route_profile, notice: 'Route profile was successfully updated.' }
+        format.html { redirect_to route_profile_routes_url(@route_profile), notice: 'Route profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

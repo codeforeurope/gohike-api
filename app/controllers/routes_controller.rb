@@ -17,8 +17,8 @@ class RoutesController < ApplicationController
   # GET /routes/1.json
   def show
     @route = @route_profile.routes.find(params[:id])
-    @location_ids = @route.waypoints.map { |waypoint| waypoint.location_id }
-    @locations = Location.where('id NOT in (?)', @location_ids.empty? ? 0 : @location_ids)
+    location_ids = @route.waypoints.map { |waypoint| waypoint.location_id }
+    @locations = Location.where('id NOT in (?)', location_ids.empty? ? 0 : location_ids)
 
     respond_to do |format|
       format.html # show.html.erb

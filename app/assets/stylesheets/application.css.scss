@@ -7,11 +7,3 @@ body {
 @import "routes";
 @import "navbar";
 @import "gmaps4rails";
-
-#map img {
-  max-width: none;
-}
-#map label {
-  width: auto; display:inline;
-}
-.map_container img{max-width: none;}
