@@ -3,15 +3,23 @@ module Gohike
   class API < Grape::API
     version 'v1', using: :header, vendor: 'code_for_europe'
     format :json
-    formatter :json, Grape::Formatter::Rabl
 
     desc "Pipe out all content"
-    get '/content' do
-      JSON.parse($redis.get('content'))
+    get '/content', :format => :text do
+      {:profiles => JSON.parse($redis.get(:profiles)), :version => $redis.get(:version)}
+      #'{"profiles":' + $redis.get(:profiles) + ', "version":"' + $redis.get(:version) +'" }'
     end
 
-    get '/ping/:version' do
-
+    desc "Respond with either OK or UPDATE"
+    params do
+      optional :version, type: String, desc: "Content version on the device or none"
+    end
+    post '/ping' do
+      if params[:version] && params[:version] == $redis.get(:version)
+        {status: :ok}
+      else
+        {status: :update}
+      end
     end
 
     get '/progress' do
