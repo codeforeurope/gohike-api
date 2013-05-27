@@ -2,6 +2,7 @@ require 'api'
 Gohike::Application.routes.draw do
 
   get "home", :to => "home#index"
+  post "publish", :to => "home#publish"
 
   resources :route_profiles do
 

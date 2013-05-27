@@ -6,8 +6,8 @@ module Gohike
     formatter :json, Grape::Formatter::Rabl
 
     desc "Pipe out all content"
-    get '/content', :rabl => "content" do
-      @route_profiles = RouteProfile.all(:include => :routes)
+    get '/content' do
+      JSON.parse($redis.get('content'))
     end
 
     get '/ping/:version' do
