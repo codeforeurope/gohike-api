@@ -23,11 +23,13 @@ module Gohike
 
     params do
       requires :checkins, type: Array, desc: "Checkins array"
+      requires :identifier, type: String, desc: "Device Identifier"
     end
     post '/checkin' do
-      checkins = params[:checkins]
-      checkins.each do |checkin|
-        c = Checkin.where(:location_id => checkin[:location_id], :route_id => checkin[:route_id]).first_or_create
+      error!('Unauthorized', 401) unless headers['Take-A-Hike-Secret'] == ENV["APP_SECRET"].strip
+      device = Device.where(:identifier => params[:identifier]).first_or_create
+      params[:checkins].each do |checkin|
+        c = Checkin.where(:location_id => checkin[:location_id], :route_id => checkin[:route_id], :device_id => device.id).first_or_create
         c.update_attribute(:stamp, Time.zone.parse(checkin[:timestamp])) unless checkin[:timestamp].nil?
       end
     end

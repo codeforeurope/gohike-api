@@ -1,4 +1,5 @@
 class Checkin < ActiveRecord::Base
+  belongs_to :device
   belongs_to :route
   belongs_to :location
   attr_accessible :stamp
