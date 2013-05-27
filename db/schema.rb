@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130526211306) do
+ActiveRecord::Schema.define(:version => 20130527153657) do
 
   create_table "checkins", :force => true do |t|
-    t.integer  "device_id"
     t.integer  "route_id"
     t.integer  "location_id"
     t.datetime "stamp"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "device_id"
   end
 
   add_index "checkins", ["device_id"], :name => "index_checkins_on_device_id"
