@@ -7,7 +7,6 @@ module Gohike
     desc "Pipe out all content"
     get '/content', :format => :text do
       {:profiles => JSON.parse($redis.get(:profiles)), :version => $redis.get(:version)}
-      #'{"profiles":' + $redis.get(:profiles) + ', "version":"' + $redis.get(:version) +'" }'
     end
 
     desc "Respond with either OK or UPDATE"
@@ -20,10 +19,6 @@ module Gohike
       else
         {status: :update}
       end
-    end
-
-    get '/progress' do
-
     end
 
     params do
