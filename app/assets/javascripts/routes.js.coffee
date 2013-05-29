@@ -22,3 +22,5 @@ jQuery ->
 
   }).disableSelection()
 
+  $(".waypoint-info").popover()
+

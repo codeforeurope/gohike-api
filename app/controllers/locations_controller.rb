@@ -4,7 +4,6 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,8 +14,7 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
-    @location = Location.find(params[:id])
-
+    @markers = @location.to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @location }
@@ -26,7 +24,6 @@ class LocationsController < ApplicationController
   # GET /locations/new
   # GET /locations/new.json
   def new
-    @location = Location.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +33,11 @@ class LocationsController < ApplicationController
 
   # GET /locations/1/edit
   def edit
-    @location = Location.find(params[:id])
   end
 
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(params[:location])
 
     respond_to do |format|
       if @location.save
@@ -58,7 +53,6 @@ class LocationsController < ApplicationController
   # PUT /locations/1
   # PUT /locations/1.json
   def update
-    @location = Location.find(params[:id])
 
     respond_to do |format|
       if @location.update_attributes(params[:location])
@@ -74,7 +68,6 @@ class LocationsController < ApplicationController
   # DELETE /locations/1
   # DELETE /locations/1.json
   def destroy
-    @location = Location.find(params[:id])
     @location.destroy
 
     respond_to do |format|

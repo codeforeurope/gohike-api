@@ -46,7 +46,7 @@ class RouteProfilesController < ApplicationController
 
     respond_to do |format|
       if @route_profile.save
-        format.html { redirect_to @route_profile, notice: 'Route profile was successfully created.' }
+        format.html { redirect_to route_profile_routes_url(@route_profile), notice: 'Route profile was successfully created.' }
         format.json { render json: @route_profile, status: :created, location: @route_profile }
       else
         format.html { render action: "new" }

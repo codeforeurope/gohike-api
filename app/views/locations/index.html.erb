@@ -1,39 +1,34 @@
-<h1>Listing locations</h1>
+<%- model_class = Location -%>
+<div class="page-header">
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
 
-<table>
+    <%= link_to t(:add_location), new_location_path ,:class => "btn btn-large btn-success pull-right"%>
+  </h1>
+</div>
+<table class="table table-striped">
+  <thead>
   <tr>
-    <th>Name en</th>
-    <th>Description en</th>
-    <th>Name nl</th>
-    <th>Description nl</th>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Postal code</th>
+    <th><%= model_class.human_attribute_name(:name_en)%></th>
+    <th><%= model_class.human_attribute_name(:name_nl)%></th>
+    <th><%= model_class.human_attribute_name(:address)%></th>
+    <th><%= model_class.human_attribute_name(:postal_code)%></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
+  </thead>
+  <% @locations.each do |location| %>
+    <tr>
+      <td><%= location.name_en %></td>
+      <td><%= location.name_nl %></td>
+      <td><%= location.address %></td>
+      <td><%= location.postal_code %></td>
+      <td><%= link_to t(:details), location_path(location) ,:class => "btn btn-mini"%></td>
+      <td><%= link_to t(:edit), edit_location_path(location) ,:class => "btn btn-mini btn-primary"%></td>
 
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.name_en %></td>
-    <td><%= location.description_en %></td>
-    <td><%= location.name_nl %></td>
-    <td><%= location.description_nl %></td>
-    <td><%= location.latitude %></td>
-    <td><%= location.longitude %></td>
-    <td><%= location.address %></td>
-    <td><%= location.city %></td>
-    <td><%= location.postal_code %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+    </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
-<%= link_to 'New Location', new_location_path %>

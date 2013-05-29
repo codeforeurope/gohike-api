@@ -26,8 +26,8 @@
 
 }
 
-.add-route {
-  margin-right: 10px;
+a.btn.pull-right {
+  margin-left: 10px;
 }
 
 .navbar .nav > li > a {
@@ -39,5 +39,22 @@
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 4px;
+    &:hover{
+      color: white;
+      background-color: #f89406;
+      *background-color: #df8505;
+    }
+
   }
+}
+
+.waypoint-info {
+  height:22px;
+  width: 22px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.popover-content {
+  font-size: $fontSizeSmall;
+  font-weight: normal;
 }

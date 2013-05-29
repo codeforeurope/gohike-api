@@ -2,6 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs clearfix">
+
     <div class="span4">
       <%= f.input :name_en %>
       <%= f.input :description_en, :input_html => {:rows => 10} %>
@@ -9,6 +10,9 @@
     <div class="span4">
       <%= f.input :name_nl %>
       <%= f.input :description_nl, :input_html => {:rows => 10} %>
+    </div>
+    <div class="span10">
+      <%= f.input :image %>
     </div>
     <div class="span5">
 
