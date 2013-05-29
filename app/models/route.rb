@@ -2,7 +2,7 @@ class Route < ActiveRecord::Base
   mount_uploader :image, RouteImageUploader
   mount_uploader :icon, RouteIconUploader
   attr_accessible :description, :icon, :image, :name_en, :name_nl, :description_en, :description_nl
-  has_many :waypoints, :order => "rank ASC"
+  has_many :waypoints, :order => "rank ASC", :dependent => :destroy
   belongs_to :route_profile
 
   def image_data

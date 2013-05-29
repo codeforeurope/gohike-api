@@ -81,7 +81,7 @@ class RoutesController < ApplicationController
     @route.destroy
 
     respond_to do |format|
-      format.html { redirect_to route_profile_route_url(@route_profile, @route) }
+      format.html { redirect_to route_profile_routes_url(@route_profile) }
       format.json { head :no_content }
     end
   end
