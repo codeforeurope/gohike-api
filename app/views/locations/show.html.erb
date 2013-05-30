@@ -3,10 +3,9 @@
   <li><%= link_to t(:'navbar.locations'), locations_path %> <span class="divider">/</span></li>
   <li class="active"><%= @location.name_en %></li>
 </ul>
-<p id="notice"><%= notice %></p>
 <div class="row-fluid">
 
-  <div class="span6">
+  <div class="span5">
     <h4><%= t :details %>
       <%= link_to t(:edit), edit_location_path(@location), :class => "btn btn-mini btn-primary pull-right" %>
     </h4>

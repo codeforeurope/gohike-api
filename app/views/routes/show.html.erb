@@ -1,11 +1,11 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
-  <li><%= link_to @route_profile.name_en, route_profile_routes_path(@route_profile) %> <span class="divider">/</span>
+  <li><%= link_to @route_profile.name_en, route_profile_routes_path(@route_profile) %>
+    <span class="divider">/</span>
   </li>
   <li class="active"><%= @route.name_en %></li>
 </ul>
-<p id="notice"><%= notice %></p>
 <div class="row-fluid">
 
 
@@ -34,13 +34,14 @@
     </div>
   </div>
   <div class="span5">
-    <h4><%= t :icon_and_image %></h4>
-    <img style="width: 300px; height: 200px;" src="<%= @route.image %>">
+    <h4><%= t :icon_and_image %><%= link_to t(:crop), crop_route_profile_route_path(@route_profile), :class => "btn btn-mini pull-right" %></h4>
+    <img style="width: 300px; height: 200px;" src="<%= @route.image.mobile %>">
   </div>
 </div>
 <div class="row-fluid">
   <div class="span6">
-    <h4><%= t :waipoints %><span class="waypoint-info icon-question-sign" data-content="<%= t(:waypoint_instructions)%>"></span> </h4>
+    <h4><%= t :waipoints %>
+      <span class="waypoint-info icon-question-sign" data-content="<%= t(:waypoint_instructions) %>"></span></h4>
 
     <div class="pull-left">
       <h6><%= t :included %></h6>

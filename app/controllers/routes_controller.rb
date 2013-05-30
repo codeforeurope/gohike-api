@@ -49,7 +49,13 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.save
-        format.html { redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully created.' }
+        format.html {
+          if params[:route][:image].present?
+            redirect_to route_profile_crop_route_path(@route_profile, @route), notice: 'Route was successfully created.'
+          else
+            redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully created.'
+          end
+         }
         format.json { render json: @route, status: :created, location: @route }
       else
         format.html { render action: "new" }
@@ -65,7 +71,13 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.update_attributes(params[:route])
-        format.html { redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully updated.' }
+        format.html {
+          if params[:route][:image].present?
+            redirect_to route_profile_crop_route_path(@route_profile, @route), notice: 'Route was successfully updated.'
+          else
+            redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully updated.'
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

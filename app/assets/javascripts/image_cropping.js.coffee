@@ -11,10 +11,10 @@ class AvatarCropper
       onChange: @update
 
   update: (coords) =>
-    $('#location_crop_x').val(coords.x)
-    $('#location_crop_y').val(coords.y)
-    $('#location_crop_w').val(coords.w)
-    $('#location_crop_h').val(coords.h)
+    $("input[id*=crop_x]").val(coords.x)
+    $("input[id*=crop_y]").val(coords.y)
+    $("input[id*=crop_w]").val(coords.w)
+    $("input[id*=crop_h]").val(coords.h)
     @updatePreview(coords)
 
   updatePreview: (coords) =>

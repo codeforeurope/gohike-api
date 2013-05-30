@@ -5,10 +5,13 @@ Gohike::Application.routes.draw do
   post "publish", :to => "home#publish"
 
   resources :route_profiles do
-
+    member do
+      get :crop
+    end
     resources :routes do
       member do
         put :waypoints
+        get :crop
       end
     end
   end

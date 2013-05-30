@@ -1,17 +1,18 @@
 class Location < ActiveRecord::Base
   mount_uploader :image, RouteImageUploader
   acts_as_gmappable :process_geocoding => :geocode?
+  include ImageModel
 
-  attr_accessible :address, :city, :description_en, :description_nl, :latitude, :longitude, :name_en, :name_nl, :postal_code, :image, :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :address, :city, :description_en, :description_nl, :latitude, :longitude, :name_en, :name_nl, :postal_code, :image
+  attr_accessible :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   has_many :waypoints
   has_many :routes, :through => :waypoints
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  #attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   after_update :crop_image
-
-
   validate :validate_minimum_image_size
 
   def geocode?
@@ -23,26 +24,5 @@ class Location < ActiveRecord::Base
     "#{self.address},  #{self.postal_code} #{self.city}"
   end
 
-  def image_data
-    Base64.encode64(open(self.image.mobile.to_s) { |io| io.read }) unless self.image.mobile.to_s.blank?
-  end
 
-  def crop_image
-    image.recreate_versions! if crop_x.present?
-  end
-
-  MIN_WIDTH = 570
-  MIN_HEIGHT = 380
-
-  def validate_minimum_image_size
-    if image.file.respond_to?(:sanitize_regexp)
-      img = MiniMagick::Image.read(image.file)
-    else
-
-      img = MiniMagick::Image.open(image.url)
-    end
-    unless img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT
-      errors.add :image, :image_minimum_size, :min_width => MIN_WIDTH, :min_height => MIN_HEIGHT
-    end
-  end
 end
