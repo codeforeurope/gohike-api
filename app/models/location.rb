@@ -24,7 +24,7 @@ class Location < ActiveRecord::Base
   end
 
   def image_data
-    Base64.encode64(open(self.image.to_s) { |io| io.read }) unless self.image.to_s.blank?
+    Base64.encode64(open(self.image.mobile.to_s) { |io| io.read }) unless self.image.mobile.to_s.blank?
   end
 
   def crop_image
