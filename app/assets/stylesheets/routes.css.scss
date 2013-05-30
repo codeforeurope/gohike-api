@@ -58,3 +58,13 @@ a.btn.pull-right {
   font-size: $fontSizeSmall;
   font-weight: normal;
 }
+
+.original-image {
+  float: left;
+}
+.preview-image {
+  float: right;
+  img {
+    max-width: none;
+  }
+}

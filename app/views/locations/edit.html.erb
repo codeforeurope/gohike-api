@@ -1,4 +1,8 @@
-<h1>Editing location</h1>
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.locations'), locations_path %> <span class="divider">/</span></li>
+  <li class="active"><%= @location.name_en %></li>
+</ul>
 
 <%= render 'form' %>
 

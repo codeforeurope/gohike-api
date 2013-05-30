@@ -28,6 +28,8 @@ group :assets do
   gem 'compass-rails'
   gem 'bootstrap-sass', '2.3.1.0'
 
+  gem 'jcrop-rails'
+
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

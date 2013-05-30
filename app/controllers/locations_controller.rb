@@ -41,7 +41,13 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html {
+          if params[:location][:image].present?
+            redirect_to crop_location_path(@location), notice: 'Location was successfully created.'
+          else
+            redirect_to @location, notice: 'Location was successfully created.'
+          end
+        }
         format.json { render json: @location, status: :created, location: @location }
       else
         format.html { render action: "new" }
@@ -56,7 +62,13 @@ class LocationsController < ApplicationController
 
     respond_to do |format|
       if @location.update_attributes(params[:location])
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        format.html {
+          if params[:location][:image].present?
+            redirect_to crop_location_path(@location), notice: 'Location was successfully updated.'
+          else
+            redirect_to @location, notice: 'Location was successfully updated.'
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

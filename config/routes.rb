@@ -12,7 +12,11 @@ Gohike::Application.routes.draw do
       end
     end
   end
-  resources :locations
+  resources :locations do
+    member do
+      get :crop
+    end
+  end
   resources :devices
   devise_for :users
 
