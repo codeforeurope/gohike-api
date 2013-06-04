@@ -51,7 +51,7 @@ class RoutesController < ApplicationController
       if @route.save
         format.html {
           if params[:route][:image].present?
-            redirect_to route_profile_crop_route_path(@route_profile, @route), notice: 'Route was successfully created.'
+            redirect_to crop_route_profile_route_path(@route_profile, @route), notice: 'Route was successfully created.'
           else
             redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully created.'
           end
@@ -73,7 +73,7 @@ class RoutesController < ApplicationController
       if @route.update_attributes(params[:route])
         format.html {
           if params[:route][:image].present?
-            redirect_to route_profile_crop_route_path(@route_profile, @route), notice: 'Route was successfully updated.'
+            redirect_to crop_route_profile_route_path(@route_profile, @route), notice: 'Route was successfully updated.'
           else
             redirect_to route_profile_route_url(@route_profile, @route), notice: 'Route was successfully updated.'
           end

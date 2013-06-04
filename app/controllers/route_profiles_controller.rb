@@ -42,7 +42,7 @@ class RouteProfilesController < ApplicationController
     respond_to do |format|
       if @route_profile.save
         format.html {
-          if params[:route][:image].present?
+          if params[:route_profile][:image].present?
             redirect_to crop_route_profile_url(@route_profile), notice: 'Route profile was successfully created.'
           else
             redirect_to route_profile_routes_url(@route_profile), notice: 'Route profile was successfully created.'
