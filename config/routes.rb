@@ -1,6 +1,9 @@
 require 'api'
 Gohike::Application.routes.draw do
 
+  resources :rewards
+
+
   get "home", :to => "home#index"
   post "publish", :to => "home#publish"
 
@@ -9,9 +12,11 @@ Gohike::Application.routes.draw do
       get :crop
     end
     resources :routes do
+      resource :reward
       member do
         put :waypoints
         get :crop
+
       end
     end
   end

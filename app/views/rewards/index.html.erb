@@ -1,0 +1,35 @@
+<h1>Listing rewards</h1>
+
+<table>
+  <tr>
+    <th>Name en</th>
+    <th>Name nl</th>
+    <th>Description en</th>
+    <th>Descripton nl</th>
+    <th>Image</th>
+    <th>Rewardable type</th>
+    <th>Rewardable</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rewards.each do |reward| %>
+  <tr>
+    <td><%= reward.name_en %></td>
+    <td><%= reward.name_nl %></td>
+    <td><%= reward.description_en %></td>
+    <td><%= reward.descripton_nl %></td>
+    <td><%= reward.image %></td>
+    <td><%= reward.rewardable_type %></td>
+    <td><%= reward.rewardable_id %></td>
+    <td><%= link_to 'Show', reward %></td>
+    <td><%= link_to 'Edit', edit_reward_path(reward) %></td>
+    <td><%= link_to 'Destroy', reward, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reward', new_reward_path %>

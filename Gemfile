@@ -17,7 +17,7 @@ gem 'redis'
 gem 'grape-rabl'
 gem 'mini_magick'
 gem "fog"
-
+gem "remotipart", "~> 1.0"
 gem 'dotenv-rails', :groups => [:development, :test]
 
 # Gems used only for assets and not required

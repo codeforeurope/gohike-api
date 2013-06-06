@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name_en: MyString
+  name_nl: MyString
+  description_en: MyText
+  descripton_nl: MyText
+  image: MyString
+  rewardable_type: MyString
+  rewardable_id: 1
+
+two:
+  name_en: MyString
+  name_nl: MyString
+  description_en: MyText
+  descripton_nl: MyText
+  image: MyString
+  rewardable_type: MyString
+  rewardable_id: 1

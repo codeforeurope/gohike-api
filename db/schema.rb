@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527153657) do
+ActiveRecord::Schema.define(:version => 20130605123010) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -55,6 +55,18 @@ ActiveRecord::Schema.define(:version => 20130527153657) do
     t.string   "image"
   end
 
+  create_table "rewards", :force => true do |t|
+    t.string   "name_en"
+    t.string   "name_nl"
+    t.text     "description_en"
+    t.text     "description_nl"
+    t.string   "image"
+    t.string   "rewardable_type"
+    t.integer  "rewardable_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
   create_table "route_profiles", :force => true do |t|
     t.string   "name_en"
     t.text     "description_en"
@@ -64,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20130527153657) do
     t.string   "image"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.boolean  "is_publishable"
   end
 
   create_table "routes", :force => true do |t|
@@ -76,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130527153657) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "route_profile_id"
+    t.boolean  "is_publishable"
   end
 
   add_index "routes", ["route_profile_id"], :name => "index_routes_on_route_profile_id"

@@ -8,6 +8,7 @@ class Route < ActiveRecord::Base
 
   has_many :waypoints, :order => "rank ASC", :dependent => :destroy
   belongs_to :route_profile
+  has_one :reward, :as => :rewardable
 
   def icon_data
     Base64.encode64(open(self.icon.to_s) { |io| io.read }) unless self.icon.to_s.blank?

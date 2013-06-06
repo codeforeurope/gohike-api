@@ -1,0 +1,27 @@
+<%= simple_form_for([@route_profile, @route, @reward], :url=> route_profile_route_reward_path(@route_profile, @route), :remote => true) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs clearfix">
+    <div class="span5">
+
+      <%= f.input :image %>
+    </div>
+    <div class="span4">
+      <%= f.input :name_en %>
+      <%= f.input :description_en, :input_html => {:rows => 10} %>
+    </div>
+    <div class="span4">
+      <%= f.input :name_nl %>
+      <%= f.input :description_nl, :input_html => {:rows => 10} %>
+    </div>
+
+  </div>
+
+  <div class="form-actions hidden">
+    <%= f.button :submit %>
+  </div>
+
+
+<% end %>
+
+

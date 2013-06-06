@@ -1,0 +1,31 @@
+<h4><%= t :reward %>
+  <%= link_to t(:add_reward), new_route_profile_route_reward_path(@route_profile,@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-success pull-right" if (@route.reward.blank?) %>
+
+  <%= link_to t(:delete_reward), route_profile_route_reward_path(@route_profile,@route), :method => :delete, :confirm => :are_you_sure, :remote => true, :class => "btn btn-mini btn-danger pull-right" unless (@route.reward.blank?) %>
+  <%= link_to t(:edit_reward), edit_route_profile_route_reward_path(@route_profile,@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-primary pull-right" unless (@route.reward.blank?) %>
+
+</h4>
+<% if @route.reward.blank? %>
+  <p>none</p>
+<% else %>
+  <img style="width: 200px; height: 200px;" src="<%= @route.reward.image_url %>">
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#reward_en" data-toggle="tab"><%= t :english %></a></li>
+    <li class=""><a href="#reward_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane active" id="reward_en">
+      <h5><%= @route.reward.name_en %></h5>
+
+      <p><%= @route.reward.description_en %></p>
+    </div>
+    <div class="tab-pane" id="reward_nl">
+      <h5><%= @route.reward.name_nl %></h5>
+
+      <p><%= @route.reward.description_nl %></p>
+    </div>
+
+  </div>
+<% end %>
