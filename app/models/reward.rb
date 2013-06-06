@@ -11,7 +11,7 @@ class Reward < ActiveRecord::Base
 
 
   def image_data
-    Base64.encode64(open(self.image.mobile.to_s) { |io| io.read }) unless self.image.mobile.to_s.blank?
+    Base64.encode64(open(self.image.to_s) { |io| io.read }) unless self.image.to_s.blank?
   end
 
   def validate_image_size_and_ratio

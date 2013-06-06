@@ -8,7 +8,9 @@
 
   <div class="span6">
     <h4><%= t :details %>
-    <%= link_to t(:edit_profile), edit_route_profile_path(@route_profile), :class => "edit-profile btn btn-mini btn-primary pull-right" %>
+      <%= link_to t(:delete_profile), route_profile_path(@route_profile), :method => :delete, :confirm => :are_you_sure, :class => "btn btn-mini btn-danger pull-right" %>
+
+      <%= link_to t(:edit_profile), edit_route_profile_path(@route_profile), :class => "edit-profile btn btn-mini btn-primary pull-right" %>
     <%= link_to t(:add_route), new_route_profile_route_path , :class => "add-route btn btn-mini btn-success pull-right"%>
 
     </h4>

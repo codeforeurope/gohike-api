@@ -2,6 +2,9 @@ collection :route_profiles, :object_root => false
 attributes :id, :name_en, :name_nl, :description_en, :description_nl, :image_data, :icon_data
 child :routes do
   attributes :id, :name_en, :name_nl, :description_en, :description_nl, :image_data, :icon_data
+  child :reward do
+    attributes :id, :name_en, :name_nl, :description_en, :description_nl, :image_data
+  end
   glue :route_profile do
     attributes :id => :profile_id
   end

@@ -3,6 +3,8 @@ module ImageModel
 
   def image_data
     Base64.encode64(open(self.image.mobile.to_s) { |io| io.read }) unless self.image.mobile.to_s.blank?
+  rescue OpenURI::HTTPError
+    puts " problem with: " + self.image.mobile.to_s
   end
 
   def crop_image
