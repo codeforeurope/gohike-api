@@ -14,5 +14,8 @@
 /log/*.log
 /tmp
 
+# Mac OS X
+.DS_Store
+
 .idea
 .env
