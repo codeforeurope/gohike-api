@@ -13,7 +13,7 @@ class HomeController < ApplicationController
       $redis.del :profiles, :version
       $redis.set(:profiles, profiles)
       $redis.set(:version, version)
-
+      $redis.set(:size, profiles.length)
       render :json => {version: version, length: profiles.length}
     else
       head :forbidden

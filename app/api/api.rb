@@ -17,7 +17,7 @@ module Gohike
       if params[:version] && params[:version] == $redis.get(:version)
         {status: :ok}
       else
-        {status: :update}
+        {status: :update, size: $redis.get(:size)}
       end
     end
 
