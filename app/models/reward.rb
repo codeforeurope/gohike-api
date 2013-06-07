@@ -22,7 +22,7 @@ class Reward < ActiveRecord::Base
 
         img = MiniMagick::Image.open(image.url)
       end
-      unless (img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT) && (img[:width]/img[:height] != 1)
+      unless (img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT) && (img[:width]/img[:height] == 1)
         errors.add :image, :image_minimum_size, :min_width => MIN_WIDTH, :min_height => MIN_HEIGHT
       end
     end
