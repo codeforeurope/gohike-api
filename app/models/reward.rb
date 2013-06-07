@@ -1,6 +1,6 @@
 class Reward < ActiveRecord::Base
-  MIN_WIDTH = 640
-  MIN_HEIGHT = 640
+  MIN_WIDTH = 480
+  MIN_HEIGHT = 480
   mount_uploader :image, RewardUploader
   belongs_to :rewardable, :polymorphic => true
   attr_accessible :description_en, :description_nl, :image, :name_en, :name_nl, :rewardable_id, :rewardable_type
@@ -22,7 +22,7 @@ class Reward < ActiveRecord::Base
 
         img = MiniMagick::Image.open(image.url)
       end
-      unless (img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT) || (img[:width]/img[:height] != 1)
+      unless (img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT) && (img[:width]/img[:height] != 1)
         errors.add :image, :image_minimum_size, :min_width => MIN_WIDTH, :min_height => MIN_HEIGHT
       end
     end
