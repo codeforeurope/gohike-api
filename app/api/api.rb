@@ -6,6 +6,7 @@ module Gohike
 
     desc "Pipe out all content"
     get '/content', :format => :text do
+      header "Content-Version",$redis.get(:version)
       {:version => $redis.get(:version), :profiles => JSON.parse($redis.get(:profiles))}
     end
 
