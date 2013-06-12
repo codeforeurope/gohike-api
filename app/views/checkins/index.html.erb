@@ -12,8 +12,8 @@
 
 <% @checkins.each do |checkin| %>
   <tr>
-    <td><%= checkin.route %></td>
-    <td><%= checkin.location %></td>
+    <td><%= checkin.route.name_en %></td>
+    <td><%= checkin.location.name_en %></td>
     <td><%= checkin.stamp %></td>
     <td><%= link_to 'Show', checkin %></td>
     <td><%= link_to 'Edit', edit_checkin_path(checkin) %></td>
