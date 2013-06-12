@@ -2,6 +2,7 @@ require 'api'
 Gohike::Application.routes.draw do
 
   resources :rewards
+  resources :checkins
 
 
   get "home", :to => "home#index"
