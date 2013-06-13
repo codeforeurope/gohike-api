@@ -9,11 +9,10 @@ en:
     route_profiles: "Profiles"
     locations: "Locations"
     logged_in_as: "Logged in as "
-  activerecords:
+  activerecord:
     errors:
       models:
         location:
           attributes:
             image:
               image_minimum_size: "The picture is below the minimum size. (570x380 pixel for pictures, 480x480 for rewards)
-
