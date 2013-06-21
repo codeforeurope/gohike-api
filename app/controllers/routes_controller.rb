@@ -8,7 +8,7 @@ class RoutesController < ApplicationController
     @routes = @route_profile.routes
 
     respond_to do |format|
-      format.html # index.html.old.erb
+      format.html # index.html.erb
       format.json { render json: @routes }
     end
   end

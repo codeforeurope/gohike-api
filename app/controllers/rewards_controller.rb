@@ -7,7 +7,7 @@ class RewardsController < ApplicationController
   def index
 
     respond_to do |format|
-      format.html # index.html.old.erb
+      format.html # index.html.erb
       format.json { render json: @rewards }
     end
   end
