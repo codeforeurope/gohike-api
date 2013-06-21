@@ -6,7 +6,7 @@ class LocationsController < ApplicationController
   def index
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.old.erb
       format.json { render json: @locations }
     end
   end

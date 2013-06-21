@@ -1,0 +1,58 @@
+// Place all the styles related to the start controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+  *zoom: 1;
+}
+
+.container:before, .container:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+
+.container:after {
+  clear: both;
+}
+
+a, a:active, a:visited {
+  color: #1e8fbb;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  width: 300px;
+  display: block;
+  font-family: sans-serif;
+}
+
+table, th, td
+{
+  border: 0px;
+  padding: 0;
+  background-color: white;
+  border-spacing: 0px;
+}
+td.top
+{
+  background-image: url(launch-placeholder_01.png);
+  width: 800px;
+  height: 297px;
+}
+td.right
+{
+  text-align: right;
+  border-spacing: 0px;
+  background-image: url(launch-placeholder_03.png);
+  width: 391px;
+  height: 149px;
+}
+td.bottom
+{
+  background-image: url(launch-placeholder_04.png);
+  width: 800px;
+  height: 154px;
+}

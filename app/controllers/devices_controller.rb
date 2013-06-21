@@ -7,7 +7,7 @@ class DevicesController < ApplicationController
     @devices = Device.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.old.erb
       format.json { render json: @devices }
     end
   end

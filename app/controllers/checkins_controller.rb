@@ -7,7 +7,7 @@ class CheckinsController < ApplicationController
     @checkins = Checkin.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.old.erb
       format.json { render json: @checkins }
     end
   end

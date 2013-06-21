@@ -1,23 +1,45 @@
-<h1></h1>
+<div class="container-narrow">
 
-<p>
-  <b>Name en:</b>
-  <%= @reward.name_en %>
-</p>
+  <div class="masthead">
+
+  </div>
+
+  <hr>
+
+  <div class="jumbotron">
+    <h1><%= @reward.name_en %> </h1>
+    <p class="lead">
+      <img style="width: 400px; height: 400px;" src="<%= @reward.image %>">
+    </p>
+    <p class="lead">  <%= @reward.description_en %></p>
+  </div>
+  <hr>
+  <p class="lead centered">Take a Hike!</p>
+  <div class="row-fluid marketing">
+    <div class="span6">
+      <p class="centered">
+        <a href="https://itunes.apple.com/nl/app/take-a-hike!/id659545032?l=en&mt=8" target="_blank">
+          <%= image_tag("Available_on_the_App_Store_Badge_172.png")%></a>
+      </p>
+      </div>
+    <div class="span6">
+      <p class="centered">
+        <a href="#" target="_blank">
+          <%= image_tag("en_generic_rgb_wo_172.png")%></a>
+      </p>
+
+    </div>
 
 
-<p>
-  <b>Description en:</b>
-  <%= @reward.description_en %>
-</p>
+  </div>
+
+  <div class="footer-center">
+
+  </div>
+
+</div>
 
 
-<%= @reward.image %>
-
-
-<% content_for :reward_meta do %>
-  <%= @reward.name_en %>
-<% end %>
 
 <% content_for :reward_meta do %>
   <meta property="og:title" content="<%= @reward.name_en %>">
