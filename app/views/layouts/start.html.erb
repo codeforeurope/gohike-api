@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Take a Hike!</title>
+
+  <%= stylesheet_link_tag "start", :cache => true %>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -10,8 +12,8 @@
 
     ga('create', '<%=ENV["GOOGLE_ANALYTICS"] %>>', 'gotakeahike.nl');
     ga('send', 'pageview');
+
   </script>
-  <%= stylesheet_link_tag "application", :media => "all" %>
 </head>
 <body>
 <%= yield %>
