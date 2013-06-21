@@ -1,40 +1,29 @@
-<p id="notice"><%= notice %></p>
+<h1></h1>
 
 <p>
   <b>Name en:</b>
   <%= @reward.name_en %>
 </p>
 
-<p>
-  <b>Name nl:</b>
-  <%= @reward.name_nl %>
-</p>
 
 <p>
   <b>Description en:</b>
   <%= @reward.description_en %>
 </p>
 
-<p>
-  <b>Descripton nl:</b>
-  <%= @reward.description_nl %>
-</p>
 
-<p>
-  <b>Image:</b>
-  <%= @reward.image %>
-</p>
-
-<p>
-  <b>Rewardable type:</b>
-  <%= @reward.rewardable_type %>
-</p>
-
-<p>
-  <b>Rewardable:</b>
-  <%= @reward.rewardable_id %>
-</p>
+<%= @reward.image %>
 
 
-<%= link_to 'Edit', edit_reward_path(@reward) %> |
-<%= link_to 'Back', rewards_path %>
+<% content_for :reward_meta do %>
+  <%= @reward.name_en %>
+<% end %>
+
+<% content_for :reward_meta do %>
+  <meta property="og:title" content="<%= @reward.name_en %>">
+  <meta property="og:url" content="<%= reward_path(@reward) %>">
+  <meta property="og:description" content="<%= @reward.description_en %>">
+  <meta property="og:image" content="<%= @reward.image_url %>">
+  <meta property="game:points" content="5">
+  <meta property="fb:app_id" content="547542925309510">
+<% end %>
