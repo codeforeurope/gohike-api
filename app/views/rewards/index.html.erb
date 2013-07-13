@@ -2,10 +2,8 @@
 
 <table>
   <tr>
-    <th>Name en</th>
-    <th>Name nl</th>
-    <th>Description en</th>
-    <th>Descripton nl</th>
+    <th>Name</th>
+    <th>Description</th>
     <th>Image</th>
     <th>Rewardable type</th>
     <th>Rewardable</th>
@@ -16,10 +14,8 @@
 
 <% @rewards.each do |reward| %>
   <tr>
-    <td><%= reward.name_en %></td>
-    <td><%= reward.name_nl %></td>
-    <td><%= reward.description_en %></td>
-    <td><%= reward.descripton_nl %></td>
+    <td><%= reward.name %></td>
+    <td><%= reward.description%></td>
     <td><%= reward.image %></td>
     <td><%= reward.rewardable_type %></td>
     <td><%= reward.rewardable_id %></td>

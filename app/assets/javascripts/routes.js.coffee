@@ -59,6 +59,8 @@ jQuery ->
     attachErrorCallback()
     $rewardModal.find(".modal-body form input[id*=rewardable_id]").val($rewardModal.data("rewardable-id"))
     $rewardModal.find(".modal-body form input[id*=rewardable_type]").val($rewardModal.data("rewardable-type"))
+    $rewardModal.find(".modal-body .add-translation").on "click", onAddTranslation
+
 
 
   fixLoad = ()->

@@ -11,7 +11,7 @@
     <p class="lead">
       <img style="width: 400px; height: 400px;" src="<%= @reward.image %>">
     </p>
-    <p class="lead">  <%= @reward.description_en %></p>
+    <p class="lead">  <%= @reward.description %></p>
   </div>
   <hr>
   <p class="lead centered">Take a Hike!</p>
@@ -42,9 +42,9 @@
 
 
 <% content_for :reward_meta do %>
-  <meta property="og:title" content="<%= @reward.name_en %>">
+  <meta property="og:title" content="<%= @reward.name %>">
   <meta property="og:url" content="<%= reward_path(@reward) %>">
-  <meta property="og:description" content="<%= @reward.description_en %>">
+  <meta property="og:description" content="<%= @reward.description %>">
   <meta property="og:image" content="<%= @reward.image_url %>">
   <meta property="game:points" content="5">
   <meta property="fb:app_id" content="547542925309510">

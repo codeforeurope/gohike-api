@@ -9,23 +9,25 @@
   <p>none</p>
 <% else %>
   <img style="width: 200px; height: 200px;" src="<%= @route.reward.image_url %>">
-
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#reward_en" data-toggle="tab"><%= t :english %></a></li>
-    <li class=""><a href="#reward_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+    <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route.reward, :active => true} %>
+    <% @route.reward.translations.each do |translation| %>
+      <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route.reward} if (translation.locale != I18n.locale) %>
+    <% end %>
   </ul>
 
   <div class="tab-content">
-    <div class="tab-pane active" id="reward_en">
-      <h5><%= @route.reward.name_en %></h5>
+    <div class="tab-pane active" id="<%= translation_tab_id(@route.reward, locale) %>">
+      <h5><%= @route.reward.name %></h5>
 
-      <p><%= @route.reward.description_en %></p>
+      <p><%= @route.reward.description %></p>
     </div>
-    <div class="tab-pane" id="reward_nl">
-      <h5><%= @route.reward.name_nl %></h5>
-
-      <p><%= @route.reward.description_nl %></p>
-    </div>
+    <% @route.reward.translations.each do |translation| %>
+      <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @route.reward} %>
+    <% end %>
 
   </div>
+
+
+
 <% end %>
