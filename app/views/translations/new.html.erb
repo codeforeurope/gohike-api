@@ -1,6 +1,4 @@
-<%= simple_form_for (@resource) do |builder| %>
+<%= simple_form_for (@form_source) do |builder| %>
   <%= render :partial => 'shared/translation_fields', :locals => {:locale => @locale, :f => builder, :resource => @resource} %>
 <% end %>
-
 <%= render :partial => "shared/translation_tabs", :locals => {:locale => @locale, :resource => @resource} %>
-
