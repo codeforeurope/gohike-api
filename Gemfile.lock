@@ -77,6 +77,10 @@ GEM
       ruby-hmac
     formatador (0.2.4)
     fssm (0.2.10)
+    globalize3 (0.3.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      paper_trail (~> 2)
     gmaps4rails (1.5.6)
     grape (0.4.1)
       activesupport
@@ -117,6 +121,9 @@ GEM
     net-ssh (2.6.7)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
+    paper_trail (2.7.2)
+      activerecord (~> 3.0)
+      railties (~> 3.0)
     pg (0.15.1)
     polyglot (0.3.3)
     rabl (0.8.5)
@@ -194,6 +201,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   fog
+  globalize3
   gmaps4rails
   grape
   grape-rabl
