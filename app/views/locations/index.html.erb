@@ -8,8 +8,7 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:name_en)%></th>
-    <th><%= model_class.human_attribute_name(:name_nl)%></th>
+    <th><%= model_class.human_attribute_name(:name)%></th>
     <th><%= model_class.human_attribute_name(:address)%></th>
     <th><%= model_class.human_attribute_name(:postal_code)%></th>
     <th></th>
@@ -19,8 +18,7 @@
   </thead>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.name_en %></td>
-      <td><%= location.name_nl %></td>
+      <td><%= location.name %> </td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>
       <td><%= link_to t(:details), location_path(location) ,:class => "btn btn-mini"%></td>

@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.locations'), locations_path %> <span class="divider">/</span></li>
-  <li class="active"><%= @location.name_en %></li>
+  <li class="active"><%= @location.name %></li>
 </ul>
 <div class="row-fluid">
 
@@ -10,28 +10,29 @@
       <%= link_to t(:edit), edit_location_path(@location), :class => "btn btn-mini btn-primary pull-right" %>
     </h4>
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#location_en" data-toggle="tab"><%= t :english %></a></li>
-      <li class=""><a href="#location_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+      <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @location, :active => true} %>
+      <% @location.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @location} if (translation.locale != I18n.locale) %>
+      <% end %>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="location_en">
-        <h5><%= @location.name_en %></h5>
+      <div class="tab-pane active" id="<%= translation_tab_id(@location, locale) %>">
 
-        <p><%= @location.description_en %></p>
-      </div>
-      <div class="tab-pane" id="location_nl">
-        <h5><%= @location.name_nl %></h5>
+        <h5><%= @location.name %></h5>
 
-        <p><%= @location.description_nl %></p>
+        <p><%= @location.description %></p>
       </div>
+      <% @location.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @location} %>
+      <% end %>
 
     </div>
   </div>
   <div class="span5">
     <h4><%= t :icon_and_image %>
 
-      <%= link_to t(:remove), @location, method: :delete, data: {confirm: 'Are you sure?'} ,:class => "btn btn-mini btn-danger pull-right" if @location.waypoints.empty? %>
+      <%= link_to t(:remove), @location, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-mini btn-danger pull-right" if @location.waypoints.empty? %>
       <%= link_to t(:crop), crop_location_path(@location), :class => "btn btn-mini pull-right" unless @location.image.blank? %>
     </h4>
     <img style="width: 285px; height: 190px;" src="<%= @location.image.mobile %>">
@@ -41,6 +42,7 @@
 
   <div class="span5">
     <h4><%= t :address_and_coordinates %></h4>
+
     <p>
       <b>Address:</b>
       <%= @location.address %>
@@ -55,6 +57,7 @@
       <b>Postal code:</b>
       <%= @location.postal_code %>
     </p>
+
     <p>
       <b>Latitude:</b>
       <%= @location.latitude %>

@@ -2,6 +2,7 @@ require 'api'
 Gohike::Application.routes.draw do
 
 
+  get '/translation/:resource_type/:resource_id(/:target_locale)', :to => "translations#new", :as => :translation
   #root :to => "start#index"
 
   resources :rewards
@@ -28,6 +29,7 @@ Gohike::Application.routes.draw do
   resources :locations do
     member do
       get :crop
+
     end
   end
   resources :devices

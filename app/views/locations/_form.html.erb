@@ -3,14 +3,7 @@
 
   <div class="form-inputs clearfix">
 
-    <div class="span4">
-      <%= f.input :name_en %>
-      <%= f.input :description_en, :input_html => {:rows => 10} %>
-    </div>
-    <div class="span4">
-      <%= f.input :name_nl %>
-      <%= f.input :description_nl, :input_html => {:rows => 10} %>
-    </div>
+
     <div class="span10">
       <%= f.input :image %>
     </div>
@@ -42,6 +35,12 @@
       %>
       <%= gmaps(options) %>
     </div>
+    <div class="span9">
+
+      <%= render :partial => "shared/localized_attributes", :locals => {:resource => @location, :f => f}  %>
+
+    </div>
+
 
   </div>
 
@@ -67,7 +66,7 @@
       });
       marker.bindTo('position', map, 'center');
       <% if @location.new_record? %>
-        setDefaultMapCenter(map);
+      setDefaultMapCenter(map);
       <% end %>
 
 
