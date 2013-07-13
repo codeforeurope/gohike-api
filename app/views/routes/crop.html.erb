@@ -1,10 +1,10 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
-  <li><%= link_to @route_profile.name_en, route_profile_routes_path(@route_profile) %>
+  <li><%= link_to @route_profile.name, route_profile_routes_path(@route_profile) %>
     <span class="divider">/</span>
   </li>
-  <li class="active"><%= link_to @route.name_en, route_profile_route_path(@route_profile, @route) %></li>
+  <li class="active"><%= link_to @route.name, route_profile_route_path(@route_profile, @route) %></li>
 </ul>
 
 
