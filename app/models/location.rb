@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
   acts_as_gmappable :process_geocoding => :geocode?
   include ImageModel
 
-  attr_accessible :address, :city, :description_en, :description_nl, :latitude, :longitude, :name_en, :name_nl, :postal_code, :image, :name, :description
+  attr_accessible :address, :city, :latitude, :longitude, :postal_code, :image, :name, :description
   attr_accessible :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
