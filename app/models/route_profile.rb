@@ -3,6 +3,8 @@ class RouteProfile < ActiveRecord::Base
   mount_uploader :image, RouteImageUploader
   mount_uploader :icon, RouteIconUploader
 
+  translates :name, :description, :fallbacks_for_empty_translations => true
+
   attr_accessible :description_en, :description_nl, :icon, :image, :name_en, :name_nl
   attr_accessible :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
