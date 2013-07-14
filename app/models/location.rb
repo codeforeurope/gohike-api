@@ -9,7 +9,7 @@ class Location < ActiveRecord::Base
 
 
   translates :name, :description, :fallbacks_for_empty_translations => true
-  accepts_nested_attributes_for :translations
+  accepts_nested_attributes_for :translations, :allow_destroy => true
 
   has_many :waypoints
   has_many :routes, :through => :waypoints

@@ -7,7 +7,7 @@ nl:
   de: "Duits"
   fi: "Fins"
   es: "Spaans"
-  add_translation: "Add Locale"
+  add_translation: "Voeg toe"
   crop: "Crop Image"
   waypoint_instructions: "On the right is a list of all locations available, which are not yet included in this route. On the left are the locations which will be included in the route and meant to be traveled in the exact order they are defined. To add a location as a waypoint just drag it from right to left and release in the desired location. Waypoints can be re-ordered in the same manner."
   navbar:

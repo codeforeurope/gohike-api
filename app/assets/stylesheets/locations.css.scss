@@ -2,7 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .add-translation {
   margin: 2px;
+
+}
+
+.nav .dropdown-toggle {
+
+  .caret {
+    border-top-color: white;
+
+  }
+  &:hover .caret,  &:focus .caret,  {
+    border-top-color: white;
+  }
 }

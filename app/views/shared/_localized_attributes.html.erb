@@ -3,12 +3,19 @@
   <% resource.translations.each do |translation| %>
     <%= render :partial => "shared/translation_tabs", :locals => {:resource => resource, :locale => translation.locale, :f => f} if (translation.locale != I18n.locale) %>
   <% end %>
-  <li><%= select_tag :new_locale, options_from_collection_for_select(outstanding_translations(resource), "to_s", "to_s"), :include_blank => false %>
-  </li>
+
   <li>
-    <%= button_tag :type => 'button', :class => "btn btn-primary add-translation", :data => {:'translation-url' => translation_path(resource.class.name, resource.id || 0) + "/"} do %>
-      <%= t(:add_translation) %>
-    <% end %>
+    <div class="btn-group">
+      <%= button_tag :type => 'button', :class => "btn btn-primary dropdown-toggle add-translation", :data => {:toggle => "dropdown"} do %>
+        <%= t(:add_translation) %> <span class="caret"></span>
+      <% end %>
+      <ul class="dropdown-menu">
+        <!-- dropdown menu links -->
+        <% outstanding_translations(resource).each do |locale| %>
+          <li><%= link_to t(locale), "#", :data => {:locale => locale, :'translation-url' => translation_path(resource.class.name, resource.id || 0) + "/"} %></li>
+        <% end %>
+      </ul>
+    </div>
   </li>
 </ul>
 <div class="tab-content">
