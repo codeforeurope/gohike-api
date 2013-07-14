@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:psteininger/batch_translations.git
+  revision: be991d54dc4abb1314e23d3f8abc0608cec27e6f
+  specs:
+    batch_translations (0.0.4)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -193,6 +199,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  batch_translations!
   bootstrap-sass (= 2.3.1.0)
   cancan
   carrierwave
