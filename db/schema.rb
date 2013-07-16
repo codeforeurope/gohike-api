@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130717133538) do
 
+
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
     t.integer  "location_id"
@@ -107,6 +108,17 @@ ActiveRecord::Schema.define(:version => 20130717133538) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "authorizable_id"
+    t.string   "authorizable_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "roles", ["authorizable_type", "authorizable_id"], :name => "index_roles_on_authorizable_type_and_authorizable_id"
 
   create_table "route_profile_translations", :force => true do |t|
     t.integer  "route_profile_id"

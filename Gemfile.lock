@@ -213,7 +213,7 @@ DEPENDENCIES
   batch_translations!
   bootstrap-sass (= 2.3.1.0)
   bootstrap-slider-rails!
-  cancan
+  cancan (= 1.6.10)
   carmen-rails
   carrierwave
   coffee-rails (~> 3.2.1)
