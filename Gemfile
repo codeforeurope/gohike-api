@@ -11,7 +11,7 @@ gem "jquery-rails"
 gem "simple_form"
 gem 'grape'
 gem "carrierwave"
-gem "cancan"
+gem "cancan", "1.6.10"
 gem 'gmaps4rails'
 gem 'redis'
 gem 'grape-rabl'

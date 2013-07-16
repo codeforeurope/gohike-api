@@ -201,7 +201,7 @@ PLATFORMS
 DEPENDENCIES
   batch_translations!
   bootstrap-sass (= 2.3.1.0)
-  cancan
+  cancan (= 1.6.10)
   carrierwave
   coffee-rails (~> 3.2.1)
   compass-rails

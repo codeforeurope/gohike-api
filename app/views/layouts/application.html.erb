@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Language" content="<%= I18n.locale %>" />
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -30,30 +31,35 @@
 
         <div class="container nav-collapse">
           <ul class="nav">
-            <% if can? :manage, Route %>
+            <% if can? :read, RouteProfile %>
               <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path, :class => current_page?(:controller => "/route_profiles") ? "active" : "" %></li>
+            <% end %>
+            <% if can? :read, Route %>
               <li><%= link_to t(:'navbar.routes'), routes_path, :class => current_page?(:controller => "/routes") ? "active" : "" %></li>
+            <% end %>
+            <% if can? :read, Location %>
               <li><%= link_to t(:'navbar.locations'), locations_path, :class => current_page?(:controller => "/locations") ? "active" : "" %></li>
 
             <% end %>
           </ul>
           <ul class="nav pull-right">
+            <li class="dropdown">
+              <a class="dropdown-toggle"
+                 data-toggle="dropdown"
+                 href="#">
+                <%= t(I18n.locale) %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <% I18n.available_locales.each do |locale| %>
+                  <li><%= link_to t(locale), :locale => locale unless locale == I18n.locale %></li>
+                <% end %>
+              </ul>
+            </li>
             <% if user_signed_in? %>
               <li><span class="user-email"><%= t(:'navbar.logged_in_as') + " " + current_user.email %></span></li>
               <li class="divider"></li>
-              <li class="dropdown">
-                <a class="dropdown-toggle"
-                   data-toggle="dropdown"
-                   href="#">
-                  <%= t(I18n.locale) %>
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <% I18n.available_locales.each do |locale| %>
-                    <li><%= link_to t(locale), :locale => locale unless locale == I18n.locale %></li>
-                  <% end %>
-                </ul>
-              </li>
+
               <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
 
             <% else %>
