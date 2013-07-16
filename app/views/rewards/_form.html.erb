@@ -6,13 +6,10 @@
 
       <%= f.input :image %>
     </div>
-    <div class="span4">
-      <%= f.input :name_en %>
-      <%= f.input :description_en, :input_html => {:rows => 10} %>
-    </div>
-    <div class="span4">
-      <%= f.input :name_nl %>
-      <%= f.input :description_nl, :input_html => {:rows => 10} %>
+    <div class="span5">
+
+      <%= render :partial => "shared/localized_attributes", :locals => {:resource => @reward, :f => f}  %>
+
     </div>
 
   </div>

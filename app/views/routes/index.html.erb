@@ -1,7 +1,7 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
-  <li class="active"><%= @route_profile.name_en %></li>
+  <li class="active"><%= @route_profile.name %></li>
 </ul>
 <div class="row-fluid">
 
@@ -15,21 +15,21 @@
 
     </h4>
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#profile_en" data-toggle="tab"><%= t :english %></a></li>
-      <li><a href="#profile_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+      <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route_profile, :active => true} %>
+      <% @route_profile.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route_profile} if (translation.locale != I18n.locale) %>
+      <% end %>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="profile_en">
-        <h5><%= @route_profile.name_en %></h5>
+      <div class="tab-pane active" id="<%= translation_tab_id(@route_profile, locale) %>">
+        <h5><%= @route_profile.name %></h5>
 
-        <p><%= @route_profile.description_en %></p>
+        <p><%= @route_profile.description %></p>
       </div>
-      <div class="tab-pane" id="profile_nl">
-        <h5><%= @route_profile.name_nl %></h5>
-
-        <p><%= @route_profile.description_nl %></p>
-      </div>
+      <% @route_profile.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @route_profile} %>
+      <% end %>
 
     </div>
   </div>
@@ -49,22 +49,21 @@
 
           <div class="caption">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#route<%= route.id %>_en" data-toggle="tab"><%= t :english %></a></li>
-              <li><a href="#route<%= route.id %>_nl" data-toggle="tab"><%= t :nederlands %></a></li>
-
+              <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => route, :active => true} %>
+              <% route.translations.each do |translation| %>
+                <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => route} if (translation.locale != I18n.locale) %>
+              <% end %>
             </ul>
 
             <div class="tab-content">
-              <div class="tab-pane active" id="route<%= route.id %>_en">
-                <h3><%= route.name_en %></h3>
+              <div class="tab-pane active" id="<%= translation_tab_id(route, locale) %>">
+                <h5><%= route.name %></h5>
 
-                <p><%= route.description_en %></p>
+                <p><%= route.description %></p>
               </div>
-              <div class="tab-pane" id="route<%= route.id %>_nl">
-                <h3><%= route.name_nl %></h3>
-
-                <p><%= route.description_nl %></p>
-              </div>
+              <% route.translations.each do |translation| %>
+                <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => route} %>
+              <% end %>
 
             </div>
 

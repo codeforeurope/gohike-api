@@ -1,14 +1,13 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
-en:
+de:
+  de: "Deutsch"
   en: "English"
-  de: "German"
-  nl: "Dutch"
-  fi: "Finnish"
-  es: "Spanish"
-
-  add_translation: "Add"
+  nl: "Niederländisch"
+  fi: "Finnisch"
+  es: "Spanisch"
+  add_translation: "Addieren"
   crop: "Crop Image"
   waypoint_instructions: "On the right is a list of all locations available, which are not yet included in this route. On the left are the locations which will be included in the route and meant to be traveled in the exact order they are defined. To add a location as a waypoint just drag it from right to left and release in the desired location. Waypoints can be re-ordered in the same manner."
   navbar:

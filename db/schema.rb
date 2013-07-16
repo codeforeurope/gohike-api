@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605123010) do
+ActiveRecord::Schema.define(:version => 20130712151735) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -39,9 +39,21 @@ ActiveRecord::Schema.define(:version => 20130605123010) do
   add_index "devices", ["identifier"], :name => "index_devices_on_identifier"
   add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
 
+  create_table "location_translations", :force => true do |t|
+    t.integer  "location_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "location_translations", ["locale"], :name => "index_location_translations_on_locale"
+  add_index "location_translations", ["location_id"], :name => "index_location_translations_on_location_id"
+
   create_table "locations", :force => true do |t|
-    t.string   "name_en"
-    t.text     "description_en"
+    t.string   "name"
+    t.text     "description"
     t.string   "name_nl"
     t.text     "description_nl"
     t.decimal  "latitude",       :precision => 12, :scale => 9
@@ -55,10 +67,22 @@ ActiveRecord::Schema.define(:version => 20130605123010) do
     t.string   "image"
   end
 
+  create_table "reward_translations", :force => true do |t|
+    t.integer  "reward_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "reward_translations", ["locale"], :name => "index_reward_translations_on_locale"
+  add_index "reward_translations", ["reward_id"], :name => "index_reward_translations_on_reward_id"
+
   create_table "rewards", :force => true do |t|
-    t.string   "name_en"
+    t.string   "name"
     t.string   "name_nl"
-    t.text     "description_en"
+    t.text     "description"
     t.text     "description_nl"
     t.string   "image"
     t.string   "rewardable_type"
@@ -67,9 +91,21 @@ ActiveRecord::Schema.define(:version => 20130605123010) do
     t.datetime "updated_at",      :null => false
   end
 
+  create_table "route_profile_translations", :force => true do |t|
+    t.integer  "route_profile_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "route_profile_translations", ["locale"], :name => "index_route_profile_translations_on_locale"
+  add_index "route_profile_translations", ["route_profile_id"], :name => "index_route_profile_translations_on_route_profile_id"
+
   create_table "route_profiles", :force => true do |t|
-    t.string   "name_en"
-    t.text     "description_en"
+    t.string   "name"
+    t.text     "description"
     t.string   "name_nl"
     t.text     "description_nl"
     t.string   "icon"
@@ -79,9 +115,21 @@ ActiveRecord::Schema.define(:version => 20130605123010) do
     t.boolean  "is_publishable"
   end
 
+  create_table "route_translations", :force => true do |t|
+    t.integer  "route_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "route_translations", ["locale"], :name => "index_route_translations_on_locale"
+  add_index "route_translations", ["route_id"], :name => "index_route_translations_on_route_id"
+
   create_table "routes", :force => true do |t|
-    t.string   "name_en"
-    t.text     "description_en"
+    t.string   "name"
+    t.text     "description"
     t.string   "name_nl"
     t.text     "description_nl"
     t.string   "icon"

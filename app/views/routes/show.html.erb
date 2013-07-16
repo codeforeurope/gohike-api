@@ -1,10 +1,10 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
-  <li><%= link_to @route_profile.name_en, route_profile_routes_path(@route_profile) %>
+  <li><%= link_to @route_profile.name, route_profile_routes_path(@route_profile) %>
     <span class="divider">/</span>
   </li>
-  <li class="active"><%= @route.name_en %></li>
+  <li class="active"><%= @route.name %></li>
 </ul>
 <div class="row-fluid">
 
@@ -13,25 +13,27 @@
     <h4><%= t :details %>
       <%= link_to t(:edit), edit_route_profile_route_path(@route_profile, @route), :class => "btn btn-mini btn-primary pull-right" %>
     </h4>
+
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#route_en" data-toggle="tab"><%= t :english %></a></li>
-      <li class=""><a href="#route_nl" data-toggle="tab"><%= t :nederlands %></a></li>
+      <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route, :active => true} %>
+      <% @route.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route} if (translation.locale != I18n.locale) %>
+      <% end %>
     </ul>
 
     <div class="tab-content">
-      <div class="tab-pane active" id="route_en">
-        <h5><%= @route.name_en %></h5>
+      <div class="tab-pane active" id="<%= translation_tab_id(@route, locale) %>">
+        <h5><%= @route.name %></h5>
 
-        <p><%= @route.description_en %></p>
+        <p><%= @route.description %></p>
       </div>
-      <div class="tab-pane" id="route_nl">
-        <h5><%= @route.name_nl %></h5>
-
-        <p><%= @route.description_nl %></p>
-      </div>
+      <% @route.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @route} %>
+      <% end %>
 
     </div>
   </div>
+
   <div class="span5">
 
     <h4>
@@ -53,7 +55,7 @@
       <ul class="connected waypoint-list clearfix " id="waypoints">
         <% @route.waypoints.each do |waypoint| %>
           <li class="ui-state-default alert-info" data-waypoint-id="<%= waypoint.id %>" data-location-id="<%= waypoint.location.id %>">
-            <%= waypoint.location.name_en %>
+            <%= waypoint.location.name %>
           </li>
         <% end %>
       </ul>
@@ -62,7 +64,7 @@
       <h6><%= t :available %></h6>
       <ul class="connected waypoint-list clearfix" id="locations">
         <% @locations.each do |location| %>
-          <li class="ui-state-default alert-info" data-location-id="<%= location.id %>"><%= location.name_en %></li>
+          <li class="ui-state-default alert-info" data-location-id="<%= location.id %>"><%= location.name %></li>
         <% end %>
       </ul>
     </div>

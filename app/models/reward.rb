@@ -3,12 +3,19 @@ class Reward < ActiveRecord::Base
   MIN_HEIGHT = 480
   mount_uploader :image, RewardUploader
   belongs_to :rewardable, :polymorphic => true
-  attr_accessible :description_en, :description_nl, :image, :name_en, :name_nl, :rewardable_id, :rewardable_type
+  attr_accessible :description, :image, :name, :rewardable_id, :rewardable_type, :translations_attributes
+
+  translates :name, :description, :fallbacks_for_empty_translations => true
+  accepts_nested_attributes_for :translations
 
 
   validate :validate_image_size_and_ratio
-  validates_presence_of :name_en, :description_en, :name_nl, :description_nl, :rewardable_id, :rewardable_type
+  validates_presence_of :name, :description, :rewardable_id, :rewardable_type
 
+  class Translation
+    attr_accessible :locale, :name, :description
+    validates_presence_of :name, :description
+  end
 
   def image_data
     Base64.encode64(open(self.image.to_s) { |io| io.read }) unless self.image.to_s.blank?

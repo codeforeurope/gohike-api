@@ -1,0 +1,11 @@
+<% if translation.locale != I18n.locale %>
+  <div class="tab-pane" id="<%= translation_tab_id(resource, translation.locale) %>">
+    <h5><%= translation.name %></h5>
+
+    <p><%= translation.description %></p>
+
+
+  </div>
+<% end %>
+
+
