@@ -2,40 +2,44 @@ require 'api'
 Gohike::Application.routes.draw do
 
 
-  get '/translation/:resource_type/:resource_id(/:target_locale)', :to => "translations#new", :as => :translation
+
   #root :to => "start#index"
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    get '/translation/:resource_type/:resource_id(/:target_locale)', :to => "translations#new", :as => :translation
+    resources :rewards
+    resources :checkins
 
-  resources :rewards
-  resources :checkins
+    get "start", :to => "start#index"
 
-  get "start", :to => "start#index"
+    get "home", :to => "home#index"
+    post "publish", :to => "home#publish"
 
-  get "home", :to => "home#index"
-  post "publish", :to => "home#publish"
     resources :routes
 
-  resources :route_profiles do
-    member do
-      get :crop
-    end
-    resources :routes do
-      resource :reward
+    resources :route_profiles do
       member do
-        put :waypoints
+        get :crop
+      end
+      resources :routes do
+        resource :reward
+        member do
+          put :waypoints
+          get :crop
+
+        end
+      end
+    end
+    resources :locations do
+      member do
         get :crop
 
       end
     end
+    resources :devices
+    devise_for :users
   end
-  resources :locations do
-    member do
-      get :crop
-
-    end
-  end
-  resources :devices
-  devise_for :users
-
+  #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  #match '', to: redirect("/#{I18n.default_locale}")
   mount Gohike::API => "/api"
 
   # The priority is based upon order of creation:
