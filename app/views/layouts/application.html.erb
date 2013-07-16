@@ -32,6 +32,7 @@
           <ul class="nav">
             <% if can? :manage, Route %>
               <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path, :class => current_page?(:controller => "/route_profiles") ? "active" : "" %></li>
+              <li><%= link_to t(:'navbar.routes'), routes_path, :class => current_page?(:controller => "/routes") ? "active" : "" %></li>
               <li><%= link_to t(:'navbar.locations'), locations_path, :class => current_page?(:controller => "/locations") ? "active" : "" %></li>
 
             <% end %>
