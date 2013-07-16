@@ -1,4 +1,10 @@
 <% active ||= false %>
 <li class="<%= "active" if active %>">
-  <a href="#<%= translation_tab_id(resource, locale)%>" data-toggle="tab"><%= t(locale) %></a>
+  <a href="#<%= translation_tab_id(resource, locale) %>" data-toggle="tab" data-locale="<%= locale %>">
+    <% if false && locale != I18n.locale %>
+      <button class="close close-tab" type="button">×</button>
+    <% end %>
+    <%= t(locale) %>
+
+  </a>
 </li>

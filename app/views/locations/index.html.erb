@@ -18,7 +18,7 @@
   </thead>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.name %> </td>
+      <td><%= location.name %> ( <%= location.translated_locales.join(" | ") %> )</td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>
       <td><%= link_to t(:details), location_path(location) ,:class => "btn btn-mini"%></td>
