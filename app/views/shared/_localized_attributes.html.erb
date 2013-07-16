@@ -12,7 +12,7 @@
       <ul class="dropdown-menu">
         <!-- dropdown menu links -->
         <% outstanding_translations(resource).each do |locale| %>
-          <li><%= link_to t(locale), "#", :data => {:locale => locale, :'translation-url' => translation_path(resource.class.name, resource.id || 0) + "/"} %></li>
+          <li><%= link_to t(locale), "javascript: return false;", :data => {:locale => locale, :'translation-url' => translation_path(resource.class.name, resource.id || 0) + "/"} %></li>
         <% end %>
       </ul>
     </div>
