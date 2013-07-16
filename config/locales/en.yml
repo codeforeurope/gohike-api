@@ -15,6 +15,7 @@ en:
     company_name: "Take a Hike Amsterdam !"
     route_profiles: "Profiles"
     locations: "Locations"
+    routes: "Routes"
     logged_in_as: "Logged in as "
   activerecord:
     errors:
