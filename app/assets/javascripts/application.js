@@ -15,5 +15,6 @@
 //= require jquery.remotipart
 //= require jquery-ui
 //= require jcrop
+//= require bootstrap-slider
 //= require bootstrap
 //= require_tree .

@@ -1,0 +1,34 @@
+<%= simple_form_for(@city) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs clearfix">
+    <div class="span10">
+
+      <%= f.input :country_code do %>
+        <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
+      <% end %>
+    </div>
+    <div class="span10">
+      <%= f.input :state_province do %>
+        <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
+      <% end %>
+    </div>
+    <div class="span10">
+      <%= f.input :name %>
+    </div>
+    <div></div>
+    <div class="span4">
+      <%= f.input :latitude, :input_html => {:readonly => true} %>
+      <%= f.input :longitude, :input_html => {:readonly => true} %>
+      <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
+    </div>
+    <div class="span6">
+      <!-- map -->
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

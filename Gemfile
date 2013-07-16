@@ -22,7 +22,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'globalize3'
 gem 'batch_translations', :require => 'batch_translations',
     :git => 'git@github.com:psteininger/batch_translations.git'
-
+#countries and states
+gem "carmen-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,6 +34,7 @@ group :assets do
   gem 'bootstrap-sass', '2.3.1.0'
 
   gem 'jcrop-rails'
+  gem 'bootstrap-slider-rails', :require => 'bootstrap-slider-rails', :git => 'https://github.com/utahstreetlabs/bootstrap-slider-rails.git'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
