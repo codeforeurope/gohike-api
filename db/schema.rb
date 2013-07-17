@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130717133538) do
 
-
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
     t.integer  "location_id"

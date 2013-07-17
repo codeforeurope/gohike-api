@@ -1,0 +1,15 @@
+<div class="span4">
+  <%= gmaps("map_options" => {"detect_location" => false, "center_on_user" => false, "zoom" => 5},
+            "circles" => {"data" => @circles_json, "options" => {"fillColor" => "#FF0000"}},
+            "markers" => {"data" => @json, "options" => {"do_clustering" => true}
+            }) %>
+
+  <% content_for :scripts do %>
+    <script type="text/javascript">
+      Gmaps.map.callback = function () {
+        //your code
+        $(document).trigger('map:ready');
+      }
+    </script>
+  <% end %>
+</div>

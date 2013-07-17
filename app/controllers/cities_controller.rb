@@ -1,6 +1,6 @@
 class CitiesController < ApplicationController
-  #before_filter :authenticate_user! #TODO: uncomment after merge
-  #load_and_authorize_resource
+  before_filter :authenticate_user!
+  load_and_authorize_resource
 
 
   # GET /cities
@@ -24,6 +24,13 @@ class CitiesController < ApplicationController
   # GET /cities/1.json
   def show
     @city = City.find(params[:id])
+    @json = @city.to_gmaps4rails   do |city, marker|
+      marker.json({:id => city.id, :foo => city.name})
+    end
+
+    @circles_json = @city.to_gmaps4rails do |city, circle|
+      circle.json({:lat => city.latitude, :lon => city.longitude, :radius => city.radius * 1000})
+    end
 
     respond_to do |format|
       format.html # show.html.erb
