@@ -6,7 +6,7 @@ class City < ActiveRecord::Base
 
   #has_many :roles, :as => :authorizable
   #has_many :route_profiles
-  #has_many :locations
+  has_many :locations
 
   def gmaps4rails_address
     #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki

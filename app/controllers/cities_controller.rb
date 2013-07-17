@@ -1,4 +1,8 @@
 class CitiesController < ApplicationController
+  #before_filter :authenticate_user! #TODO: uncomment after merge
+  #load_and_authorize_resource
+
+
   # GET /cities
   # GET /cities.json
   def index

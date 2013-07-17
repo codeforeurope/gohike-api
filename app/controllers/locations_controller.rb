@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :load_cities, :only => [:new, :edit]
   load_and_authorize_resource
   # GET /locations
   # GET /locations.json
@@ -87,4 +88,12 @@ class LocationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def load_cities
+    @cities = City.all
+  end
+
+
 end
