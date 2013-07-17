@@ -22,6 +22,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'globalize3'
 gem 'batch_translations', :require => 'batch_translations',
     :git => 'git@github.com:psteininger/batch_translations.git'
+gem 'omniauth-facebook'
 
 
 # Gems used only for assets and not required
