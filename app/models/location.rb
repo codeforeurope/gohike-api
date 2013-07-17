@@ -20,6 +20,8 @@ class Location < ActiveRecord::Base
   after_update :crop_image
   validates_presence_of :name, :description
   validate :validate_minimum_image_size
+  validates_length_of :name, :maximum => 35
+  validates_length_of :description, :maximum => 540
 
   def geocode?
     (!address.blank? && (latitude.blank? || longitude.blank?))
