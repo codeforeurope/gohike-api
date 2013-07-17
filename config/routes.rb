@@ -36,7 +36,7 @@ Gohike::Application.routes.draw do
       end
     end
     resources :devices
-    devise_for :users
+    devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
   end
   #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   #match '', to: redirect("/#{I18n.default_locale}")
