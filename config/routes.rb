@@ -3,6 +3,11 @@ Gohike::Application.routes.draw do
 
 
 
+  resources :cities
+  get "state_province_list", :to => "cities#states_or_provinces"
+
+
+  get '/translation/:resource_type/:resource_id(/:target_locale)', :to => "translations#new", :as => :translation
   #root :to => "start#index"
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     get '/translation/:resource_type/:resource_id(/:target_locale)', :to => "translations#new", :as => :translation

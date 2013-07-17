@@ -4,6 +4,13 @@ GIT
   specs:
     batch_translations (0.0.4)
 
+GIT
+  remote: https://github.com/utahstreetlabs/bootstrap-slider-rails.git
+  revision: 9a70d58df4b959273d5d0a4a874fa206206b176d
+  specs:
+    bootstrap-slider-rails (2.0.0.2)
+      railties (>= 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -41,6 +48,10 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
+    carmen (1.0.0.beta2)
+    carmen-rails (1.0.0.beta3)
+      carmen (~> 1.0.0.beta2)
+      rails
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -201,7 +212,9 @@ PLATFORMS
 DEPENDENCIES
   batch_translations!
   bootstrap-sass (= 2.3.1.0)
+  bootstrap-slider-rails!
   cancan
+  carmen-rails
   carrierwave
   coffee-rails (~> 3.2.1)
   compass-rails

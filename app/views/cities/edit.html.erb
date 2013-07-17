@@ -1,0 +1,10 @@
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.cities'), cities_path %> <span class="divider">/</span></li>
+  <li class="active"><%= @city.name %></li>
+</ul>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @city %> |
+<%= link_to 'Back', cities_path %>

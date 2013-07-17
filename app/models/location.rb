@@ -3,7 +3,7 @@ class Location < ActiveRecord::Base
   acts_as_gmappable :process_geocoding => :geocode?
   include ImageModel
 
-  attr_accessible :address, :city, :latitude, :longitude, :postal_code, :image, :name, :description
+  attr_accessible :address, :city, :latitude, :longitude, :postal_code, :image, :name, :description, :city_id
   attr_accessible :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
@@ -13,12 +13,15 @@ class Location < ActiveRecord::Base
 
   has_many :waypoints
   has_many :routes, :through => :waypoints
+  belongs_to :network, :class_name => "City", :foreign_key => :city_id
 
   #attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   after_update :crop_image
   validates_presence_of :name, :description
   validate :validate_minimum_image_size
+  validates_length_of :name, :maximum => 35
+  validates_length_of :description, :maximum => 540
 
   def geocode?
     (!address.blank? && (latitude.blank? || longitude.blank?))

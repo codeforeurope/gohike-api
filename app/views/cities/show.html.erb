@@ -1,0 +1,48 @@
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.cities'), cities_path %> <span class="divider">/</span></li>
+  <li class="active"><%= @city.name %></li>
+</ul>
+
+<div class="row-fluid">
+
+
+  <p>
+    <b>Name:</b>
+    <%= @city.name %>
+  </p>
+
+  <p>
+    <b>Latitude:</b>
+    <%= @city.latitude %>
+  </p>
+
+  <p>
+    <b>Longitude:</b>
+    <%= @city.longitude %>
+  </p>
+
+  <p>
+    <b>Radius (KM):</b>
+    <%= @city.radius %>
+  </p>
+
+  <p>
+    <b>Country code:</b>
+    <%= @city.country_code %>
+  </p>
+
+  <p>
+    <b>State province:</b>
+    <%= @city.state_province %>
+  </p>
+
+</div>
+
+
+<div class="form-actions">
+  <% if can? :manage, @city %>
+    <%= link_to 'Edit', edit_city_path(@city), :class => 'btn' %>
+  <% end %>
+  <%= link_to 'Back', cities_path, :class => 'btn' %>
+</div>
