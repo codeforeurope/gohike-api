@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716140154) do
+ActiveRecord::Schema.define(:version => 20130717131118) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -33,9 +33,13 @@ ActiveRecord::Schema.define(:version => 20130716140154) do
     t.float    "radius"
     t.string   "country_code"
     t.string   "state_province"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.boolean  "gmaps"
+    t.float    "top_left_lat"
+    t.float    "top_left_lon"
+    t.float    "bottom_right_lat"
+    t.float    "bottom_right_lon"
   end
 
   create_table "devices", :force => true do |t|

@@ -21,6 +21,10 @@
         <div>
           <%= f.input :latitude, :input_html => {:readonly => true} %>
           <%= f.input :longitude, :input_html => {:readonly => true} %>
+          <%= f.input :top_left_lat, :as => :hidden %>
+          <%= f.input :top_left_lon, :as => :hidden %>
+          <%= f.input :bottom_right_lat, :as => :hidden %>
+          <%= f.input :bottom_right_lon, :as => :hidden %>
           <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
         </div>
       </div>
@@ -71,14 +75,9 @@
       <% if @city.new_record? %>
       setDefaultMapCenter(map);
       <% else %>
-      var rad = $("#city_radius").val();
-      createCircle($("#city_latitude").val(), $("#city_longitude").val(), rad);
-      map_marker = new google.maps.Marker(
-          {
-            map: map,
-            position : new google.maps.LatLng( <%=@city.latitude %>, <%= @city.longitude %>)
-          }
-      );
+      createCircle(<%=@city.latitude %>, <%= @city.longitude %>, <%= @city.radius %>);
+      setMarker(<%=@city.latitude %>, <%= @city.longitude %>);
+
       <% end %>
 
 
@@ -94,15 +93,12 @@
 
       });
 
-
-
       google.maps.event.addListener(map, 'idle', function () {
 //        console.log("idle");
 
 
         if (mapReady) {
           console.log("go")
-
 
         }
         mapReady = true;
@@ -118,13 +114,7 @@
             map.setCenter(result.geometry.location);
             var rad = $("#city_radius").val();
             createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
-            map_marker.setMap(null);
-            map_marker = new google.maps.Marker(
-                {
-                  map: map,
-                  position : result.geometry.location
-                }
-            );
+            setMarker(result.geometry.location.hb, result.geometry.location.ib);
           }
         }
       });
@@ -141,17 +131,28 @@
             map.setCenter(result.geometry.location);
             var rad = $("#city_radius").val();
             createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
-            map_marker.setMap(null);
-            map_marker = new google.maps.Marker(
-                {
-                  map: map,
-                  position : result.geometry.location
-                }
-            );
+            setMarker(result.geometry.location.hb, result.geometry.location.ib);
           }
         }
       });
 
+    }
+
+    window.setMarker = function(lat, lon, map)
+    {
+      if(map == null){
+        map = Gmaps.map.map;
+      }
+      if(map_marker != null){
+        map_marker.setMap(null);
+      }
+
+      map_marker = new google.maps.Marker(
+          {
+            map: map,
+            position : new google.maps.LatLng(lat,lon)
+          }
+      );
     }
 
     // Draw circle with radius
@@ -175,6 +176,29 @@
         fillOpacity: 0.5,
         map: map
       });
+
+      getSquareForCity(lat,lon,rad);
+
+    }
+
+    window.getSquareForCity = function(lat,lon,rad)
+    {
+      var cityLatLng = new google.maps.LatLng(lat,lon);
+      var spherical = google.maps.geometry.spherical;
+      var north = spherical.computeOffset(cityLatLng, rad, 0);
+      var west  = spherical.computeOffset(cityLatLng, rad, -90);
+      var south = spherical.computeOffset(cityLatLng, rad, 180);
+      var east  = spherical.computeOffset(cityLatLng, rad, 90);
+      $("#city_top_left_lat").val(north.hb);
+      $("#city_top_left_lon").val(west.ib);
+      $("#city_bottom_right_lat").val(south.hb);
+      $("#city_bottom_right_lon").val(east.ib);
+
+
+
+      console.log(north);
+      console.log(east);
+
     }
   </script>
 <% end %>
