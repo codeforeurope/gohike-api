@@ -1,7 +1,9 @@
 <%- model_class = City -%>
 <div class="page-header">
   <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <%= link_to t(:add_city), new_city_path, :class => "btn btn-large btn-success pull-right" %>
+    <% if can? :manage, City %>
+      <%= link_to t(:add_city), new_city_path, :class => "btn btn-large btn-success pull-right" %>
+    <% end %>
   </h1>
 </div>
 <div class="span12">
@@ -36,7 +38,9 @@
       <td><%= city.state_province %></td>
       <td><%= city.country_code %></td>
       <td><%= link_to t(:details), city_path(city), :class => "btn btn-mini" %></td>
-      <td><%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %></td>
+      <% if can? :manage, city %>
+        <td><%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %></td>
+      <% end %>
 
     </tr>
   <% end %>

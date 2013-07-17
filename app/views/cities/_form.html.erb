@@ -2,33 +2,179 @@
   <%= f.error_notification %>
 
   <div class="form-inputs clearfix">
-    <div class="span10">
+      <div class="span5">
+        <div>
+          <%= f.input :country_code do %>
+            <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
+          <% end %>
+        </div>
+        <div>
+          <%= f.input :state_province do %>
+            <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
+          <% end %>
+        </div>
+        <div>
+          <%= f.input :name %>
+        </div>
+        <div></div>
 
-      <%= f.input :country_code do %>
-        <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
-      <% end %>
-    </div>
-    <div class="span10">
-      <%= f.input :state_province do %>
-        <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
-      <% end %>
-    </div>
-    <div class="span10">
-      <%= f.input :name %>
-    </div>
-    <div></div>
-    <div class="span4">
-      <%= f.input :latitude, :input_html => {:readonly => true} %>
-      <%= f.input :longitude, :input_html => {:readonly => true} %>
-      <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
-    </div>
-    <div class="span6">
-      <!-- map -->
-    </div>
+        <div>
+          <%= f.input :latitude, :input_html => {:readonly => true} %>
+          <%= f.input :longitude, :input_html => {:readonly => true} %>
+          <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
+        </div>
+      </div>
+      <div class="span4">
+        <% options = {
+            :map_options => {
+                :auto_adjust => true,
+                zoomControl: true,
+                zoom: 10,
+                streetViewControl: false,
+                scaleControl: false,
+                rotateControl: false,
+                mapTypeControl: false,
+                panControl: false,
+                center_latitude: @city.latitude,
+                center_longitude: @city.longitude,
+                draggable: false
+            },
+            :circles => {:data => []},
+            :markers => {:data => [], :options => {:do_clustering => true}}
+
+        }
+        %>
+        <%= gmaps(options) %>
+      </div>
 
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
+<% end %>
+
+<% content_for :scripts do %>
+  <script>
+    var buffer_circle = null;
+    var map_marker = null;
+
+
+    Gmaps.map.callback = function () {
+      console.log("callback", arguments);
+      var map = Gmaps.map.map,
+          geocoder = new google.maps.Geocoder(),
+          crosshairShape = {coords: [0, 0, 0, 0], type: 'rect'},
+          marker, mapReady = false;
+
+
+      <% if @city.new_record? %>
+      setDefaultMapCenter(map);
+      <% else %>
+      var rad = $("#city_radius").val();
+      createCircle($("#city_latitude").val(), $("#city_longitude").val(), rad);
+      map_marker = new google.maps.Marker(
+          {
+            map: map,
+            position : new google.maps.LatLng( <%=@city.latitude %>, <%= @city.longitude %>)
+          }
+      );
+      <% end %>
+
+
+      google.maps.event.addListener(map, 'tilesloaded', function () {
+//        console.log("tiles loaded")
+      });
+
+      google.maps.event.addListener(map, 'center_changed', function () {
+//        console.log("center_changed");
+      });
+      google.maps.event.addListener(map, 'zoom_changed', function () {
+//        console.log("zoom_changed");
+
+      });
+
+
+
+      google.maps.event.addListener(map, 'idle', function () {
+//        console.log("idle");
+
+
+        if (mapReady) {
+          console.log("go")
+
+
+        }
+        mapReady = true;
+      });
+    };
+
+    setDefaultMapCenter = function (map) {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({address: "Amsterdam, Netherlands"}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          result = results[0];
+          if (result) {
+            map.setCenter(result.geometry.location);
+            var rad = $("#city_radius").val();
+            createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
+            map_marker.setMap(null);
+            map_marker = new google.maps.Marker(
+                {
+                  map: map,
+                  position : result.geometry.location
+                }
+            );
+          }
+        }
+      });
+    }
+
+    window.setMapCenter = function(addressToGeocode)
+    {
+      map = Gmaps.map.map;
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({address: addressToGeocode}, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          result = results[0];
+          if (result) {
+            map.setCenter(result.geometry.location);
+            var rad = $("#city_radius").val();
+            createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
+            map_marker.setMap(null);
+            map_marker = new google.maps.Marker(
+                {
+                  map: map,
+                  position : result.geometry.location
+                }
+            );
+          }
+        }
+      });
+
+    }
+
+    // Draw circle with radius
+    window.createCircle = function(lat,lon,rad, map) {
+      rad *= 1000; // convert to meters if in miles
+      if(map == null){
+      map = Gmaps.map.map;
+      }
+
+      if (buffer_circle != null) {
+        buffer_circle.setMap(null);
+      }
+
+      buffer_circle = new google.maps.Circle({
+        center: new google.maps.LatLng(lat, lon),
+        radius: rad,
+        strokeColor: "",
+        strokeOpacity: 0.0,
+        strokeWeight: 2,
+        fillColor: "#ADFF2F",
+        fillOpacity: 0.5,
+        map: map
+      });
+    }
+  </script>
 <% end %>
