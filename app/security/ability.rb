@@ -8,24 +8,26 @@ class Ability
     if user.role? :global_admin
       can :manage, :all
     elsif user.roles.count > 0
-      #can [:read, :update], City do |city|
-      #  user.role? :curator, city
-      #end
-      can :manage, RouteProfile do |profile|
-        user.role? :curator, profile.city
+      can :manage, City
+      cannot [:create, :update, :destroy], City do |city|
+        !user.role? :curator, city
       end
-      can :manage, Route do |route|
-        user.role? :curator, route.profile.city
+      can :manage, RouteProfile
+      cannot [:create, :update, :destroy], RouteProfile do |profile|
+        !user.role? :curator, profile.city
       end
-      can [:read, :index], Location do |location|
-        user.roles.count > 0
+      can :manage, Route
+      cannot [:create, :update, :destroy], Route do |route|
+        !user.role? :curator, route.profile.city
       end
-      can :manage, Location do |location|
-        user.role? :curator, location.city
+      can :manage, Location
+      cannot [:create, :update, :destroy], Location do |location|
+        !user.role? :curator, location.city
       end
       #this would probably only be used in controller
-      can :manage, Reward do |reward|
-        user.role? :curator, reward.route.profile.city
+      can :manage, Reward
+      cannot [:create, :update, :destroy], Reward do |reward|
+        !user.role? :curator, reward.route.profile.city
       end
     else
       can :read, Location
