@@ -4,10 +4,12 @@
 jQuery ->
   $("#city_country_code").change (e)->
     console.log("changed", e, $(this).val())
-    select_wrapper = $(this).parent().next()
+    $select_wrapper = $(this).parent().parent().parent().next()
+    $select_controls = $select_wrapper.find(".controls")
     country_code = $(this).val()
     url = "/state_province_list?country_code=#{country_code}"
-    select_wrapper.load(url)
+    $select_controls.load url, (data, xhr, status)->
+      $select_wrapper.removeClass("hidden")
 
 jQuery ->
 #call the slider and immediately set the value with setValue so that it loads default value from model

@@ -14,7 +14,7 @@
     <th><%= model_class.human_attribute_name(:state_province) %></th>
     <th><%= model_class.human_attribute_name(:country_code) %></th>
     <th></th>
-    <th></th>
+
   </tr>
   </thead>
   <% @cities.each do |city| %>
@@ -22,11 +22,13 @@
       <td><%= city.name %></td>
       <td><%= city.state_province %></td>
       <td><%= city.country_code %></td>
-      <td><%= link_to t(:details), city_path(city), :class => "btn btn-mini" %></td>
-      <% if can? :manage, city %>
-        <td><%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %></td>
-      <% end %>
+      <td>
+        <%= link_to t(:details), city_path(city), :class => "btn btn-mini" %>
 
+      <% if can? :update, city %>
+        <%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %>
+      <% end %>
+      </td>
     </tr>
   <% end %>
 </table>

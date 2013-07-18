@@ -4,12 +4,12 @@
   <div class="form-inputs clearfix">
       <div class="span5">
         <div>
-          <%= f.input :country_code do %>
+          <%= f.input :country_code, :label=> t(:country) do %>
             <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
           <% end %>
         </div>
-        <div>
-          <%= f.input :state_province do %>
+        <div class="hidden">
+          <%= f.input :state_province,:label => t(:state_or_province) do %>
             <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
           <% end %>
         </div>
@@ -73,7 +73,7 @@
 
 
       <% if @city.new_record? %>
-      setDefaultMapCenter(map);
+        setDefaultMapCenter(map);
       <% else %>
       createCircle(<%=@city.latitude %>, <%= @city.longitude %>, <%= @city.radius %>);
       setMarker(<%=@city.latitude %>, <%= @city.longitude %>);
