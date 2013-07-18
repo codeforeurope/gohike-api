@@ -8,7 +8,7 @@
             <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
           <% end %>
         </div>
-        <div class="hidden">
+        <div class="<%= "hidden" if @city.state_province.blank? %>">
           <%= f.input :state_province,:label => t(:state_or_province) do %>
             <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
           <% end %>
@@ -112,6 +112,7 @@
           result = results[0];
           if (result) {
             map.setCenter(result.geometry.location);
+
             var rad = $("#city_radius").val();
             createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
             setMarker(result.geometry.location.hb, result.geometry.location.ib);
@@ -130,6 +131,9 @@
           if (result) {
             map.setCenter(result.geometry.location);
             var rad = $("#city_radius").val();
+            $("#city_latitude").val(result.geometry.location.lat());
+            $("#city_longitude").val(result.geometry.location.lng());
+
             createCircle(result.geometry.location.hb, result.geometry.location.ib, rad);
             setMarker(result.geometry.location.hb, result.geometry.location.ib);
           }

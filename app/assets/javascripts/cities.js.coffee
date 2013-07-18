@@ -11,14 +11,22 @@ jQuery ->
     $select_controls.load url, (data, xhr, status)->
       $select_wrapper.removeClass("hidden")
 
-jQuery ->
+
 #call the slider and immediately set the value with setValue so that it loads default value from model
   $('#city_radius').slider('setValue', $("#city_radius").val()).on('slideStop', (ev) ->
     #create a circle with the radius value
     createCircle($("#city_latitude").val(), $("#city_longitude").val(), $("#city_radius").val()) )
 
-jQuery ->
-  $("#city_name").change (e)->
+  lookupGeocode = (e)->
     #if city name has changed, draw a circle on map (if all the address fields are updated)
     if( $("#city_name") != "" && $("#city_state_province") != "" & $("#city_country") != "")
       setMapCenter($("#city_name").val() + ", " + $("#city_state_province").val() + ", " + $("#city_country").val() )
+
+
+  $("#city_name").change(lookupGeocode).on("keydown", (e)->
+    if(e.keyCode == 13)
+      e.preventDefault()
+      e.stopPropagation()
+      lookupGeocode(e)
+  )
+

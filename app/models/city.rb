@@ -1,6 +1,7 @@
 class City < ActiveRecord::Base
   attr_accessible :country_code, :latitude, :longitude, :name, :radius, :state_province, :top_left_lat, :top_left_lon, :bottom_right_lat, :bottom_right_lon
   validates_presence_of :name, :radius, :country_code, :state_province
+  validates_uniqueness_of :name, :scope => [:country_code, :state_province], :case_sensitive => false
 
   acts_as_gmappable :process_geocoding => true, :lat => "latitude", :lng => "longitude"
 
