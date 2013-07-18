@@ -24,6 +24,7 @@ gem 'batch_translations', :require => 'batch_translations',
     :git => 'git@github.com:psteininger/batch_translations.git'
 #countries and states
 gem "carmen-rails"
+gem 'omniauth-facebook'
 
 # Gems used only for assets and not required
 # in production environments by default.

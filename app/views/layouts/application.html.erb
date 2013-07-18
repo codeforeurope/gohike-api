@@ -59,6 +59,9 @@
             </li>
             <% if user_signed_in? %>
               <li><span class="user-email"><%= t(:'navbar.logged_in_as') + " " + current_user.email %></span></li>
+              <% unless current_user.has_active_fb_token? %>
+              <li><%= link_to "FB", user_omniauth_authorize_path(:facebook) %></li>
+              <% end %>
               <li class="divider"></li>
 
               <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>

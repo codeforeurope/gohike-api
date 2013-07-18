@@ -13,7 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130717133538) do
 
-
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
     t.integer  "location_id"
@@ -119,6 +118,7 @@ ActiveRecord::Schema.define(:version => 20130717133538) do
   end
 
   add_index "roles", ["authorizable_type", "authorizable_id"], :name => "index_roles_on_authorizable_type_and_authorizable_id"
+  add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
 
   create_table "route_profile_translations", :force => true do |t|
     t.integer  "route_profile_id"
@@ -170,6 +170,20 @@ ActiveRecord::Schema.define(:version => 20130717133538) do
   end
 
   add_index "routes", ["route_profile_id"], :name => "index_routes_on_route_profile_id"
+
+  create_table "user_providers", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.integer  "expires_at", :default => 0
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "user_providers", ["provider", "user_id"], :name => "index_user_providers_on_provider_and_user_id"
+  add_index "user_providers", ["uid"], :name => "index_user_providers_on_uid"
+  add_index "user_providers", ["user_id"], :name => "index_user_providers_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",   :null => false
