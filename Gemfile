@@ -25,6 +25,7 @@ gem 'batch_translations', :require => 'batch_translations',
 #countries and states
 gem "carmen-rails"
 gem 'omniauth-facebook'
+gem 'inherited_resources'
 
 # Gems used only for assets and not required
 # in production environments by default.

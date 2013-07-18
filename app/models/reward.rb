@@ -2,15 +2,16 @@ class Reward < ActiveRecord::Base
   MIN_WIDTH = 480
   MIN_HEIGHT = 480
   mount_uploader :image, RewardUploader
-  belongs_to :rewardable, :polymorphic => true
-  attr_accessible :description, :image, :name, :rewardable_id, :rewardable_type, :translations_attributes
+  belongs_to :route
+
+  attr_accessible :description, :image, :name, :route_id, :translations_attributes
 
   translates :name, :description, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations
 
 
   validate :validate_image_size_and_ratio
-  validates_presence_of :name, :description, :rewardable_id, :rewardable_type
+  validates_presence_of :name, :description, :route_id
 
   class Translation
     attr_accessible :locale, :name, :description

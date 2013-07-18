@@ -24,16 +24,19 @@ class Ability
       cannot [:create, :update, :destroy], Location do |location|
         !user.role? :curator, location.city
       end
-      #this would probably only be used in controller
-      can :manage, Reward
-      cannot [:create, :update, :destroy], Reward do |reward|
-        !user.role? :curator, reward.route.profile.city
+      #can :manage, Reward
+
+      can [:new, :create, :update, :destroy], Reward do |reward|
+        user.role? :curator, reward.route.route_profile.city
       end
+
     else
       can :read, Location
+
+
     end
     cannot [:create, :update, :destroy], Checkin
-    can [:read], Reward
+    can :read, Reward
 
   end
 end

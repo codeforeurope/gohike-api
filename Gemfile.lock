@@ -116,10 +116,14 @@ GEM
       i18n
       rabl
       tilt
+    has_scope (0.5.1)
     hashie (2.0.5)
     hike (1.2.2)
     httpauth (0.2.0)
     i18n (0.6.1)
+    inherited_resources (1.4.0)
+      has_scope (~> 0.5.0)
+      responders (~> 0.9)
     jcrop-rails (1.0.3)
       railties (~> 3.0)
       thor (~> 0.14)
@@ -191,11 +195,13 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    rake (10.0.4)
+    rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
     redis (3.0.4)
     remotipart (1.0.5)
+    responders (0.9.3)
+      railties (~> 3.1)
     ruby-hmac (0.4.0)
     sass (3.2.9)
     sass-rails (3.2.6)
@@ -245,6 +251,7 @@ DEPENDENCIES
   gmaps4rails
   grape
   grape-rabl
+  inherited_resources
   jcrop-rails
   jquery-rails
   mini_magick

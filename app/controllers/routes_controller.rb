@@ -1,22 +1,13 @@
-class RoutesController < ApplicationController
+class RoutesController < InheritedResources::Base
   before_filter :authenticate_user!
-  before_filter :load_profile
+  optional_belongs_to :route_profile
   load_and_authorize_resource
-  # GET /routes
-  # GET /routes.json
-  def index
-    @routes = @route_profile.routes
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @routes }
-    end
-  end
 
   # GET /routes/1
   # GET /routes/1.json
   def show
-    @route = @route_profile.routes.find(params[:id])
+    #@route = @route_profile.routes.find(params[:id])
     location_ids = @route.waypoints.map { |waypoint| waypoint.location_id }
     @locations = Location.where('id NOT in (?)', location_ids.empty? ? 0 : location_ids)
 
@@ -26,26 +17,11 @@ class RoutesController < ApplicationController
     end
   end
 
-  # GET /routes/new
-  # GET /routes/new.json
-  def new
-    @route = @route_profile.routes.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @route }
-    end
-  end
-
-  # GET /routes/1/edit
-  def edit
-    @route = @route_profile.routes.find(params[:id])
-  end
 
   # POST /routes
   # POST /routes.json
   def create
-    @route = @route_profile.routes.new(params[:route])
 
     respond_to do |format|
       if @route.save
@@ -67,7 +43,6 @@ class RoutesController < ApplicationController
   # PUT /routes/1
   # PUT /routes/1.json
   def update
-    @route = @route_profile.routes.find(params[:id])
 
     respond_to do |format|
       if @route.update_attributes(params[:route])
@@ -86,17 +61,7 @@ class RoutesController < ApplicationController
     end
   end
 
-  # DELETE /routes/1
-  # DELETE /routes/1.json
-  def destroy
-    @route = @route_profile.routes.find(params[:id])
-    @route.destroy
 
-    respond_to do |format|
-      format.html { redirect_to route_profile_routes_url(@route_profile) }
-      format.json { head :no_content }
-    end
-  end
 
   def waypoints
     to_preserve = []
@@ -117,10 +82,7 @@ class RoutesController < ApplicationController
     end
   end
 
-  private
-  def load_profile
-    @route_profile = RouteProfile.find(params[:route_profile_id])
-  end
+
 
 
 end

@@ -19,7 +19,14 @@ Gohike::Application.routes.draw do
     get "home", :to => "home#index"
     post "publish", :to => "home#publish"
 
-    resources :routes
+    resources :routes do
+      resource :reward
+      member do
+        put :waypoints
+        get :crop
+
+      end
+    end
 
     resources :route_profiles do
       member do
