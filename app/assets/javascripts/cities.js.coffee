@@ -4,7 +4,7 @@
 jQuery ->
   $("#city_country_code").change (e)->
     console.log("changed", e, $(this).val())
-    $select_wrapper = $(this).parent().parent().parent().next()
+    $select_wrapper = $(this).parent().parent().next()
     $select_controls = $select_wrapper.find(".controls")
     country_code = $(this).val()
     url = "/state_province_list?country_code=#{country_code}"

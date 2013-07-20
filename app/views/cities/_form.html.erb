@@ -2,54 +2,50 @@
   <%= f.error_notification %>
 
   <div class="form-inputs clearfix">
-      <div class="span5">
-        <div>
-          <%= f.input :country_code, :label=> t(:country) do %>
-            <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
-          <% end %>
-        </div>
-        <div class="<%= "hidden" if @city.state_province.blank? %>">
-          <%= f.input :state_province,:label => t(:state_or_province) do %>
-            <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
-          <% end %>
-        </div>
-        <div>
-          <%= f.input :name %>
-        </div>
-        <div></div>
-
-        <div>
-          <%= f.input :latitude, :input_html => {:readonly => true} %>
-          <%= f.input :longitude, :input_html => {:readonly => true} %>
-          <%= f.input :top_left_lat, :as => :hidden %>
-          <%= f.input :top_left_lon, :as => :hidden %>
-          <%= f.input :bottom_right_lat, :as => :hidden %>
-          <%= f.input :bottom_right_lon, :as => :hidden %>
-          <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
-        </div>
+    <div class="span5">
+      <%= f.input :country_code, :label => t(:country) do %>
+        <%= f.country_select :country_code, {priority: %w(NL), :include_blank => true}, {object: f.object, prompt: 'Please select a country'} %>
+      <% end %>
+      <%= f.input :state_province, :label => t(:state_or_province), :wrapper_html => {:class => ("hidden" if @city.state_province.blank?)} do %>
+        <%= render partial: 'state', locals: {country_code: f.object.country_code} %>
+      <% end %>
+      <div>
+        <%= f.input :name %>
       </div>
-      <div class="span4">
-        <% options = {
-            :map_options => {
-                :auto_adjust => true,
-                zoomControl: true,
-                zoom: 10,
-                streetViewControl: false,
-                scaleControl: false,
-                rotateControl: false,
-                mapTypeControl: false,
-                panControl: false,
-                center_latitude: @city.latitude,
-                center_longitude: @city.longitude,
-                draggable: false
-            },
-            :circles => {:data => []},
-            :markers => {:data => [], :options => {:do_clustering => true}}
+      <div></div>
 
-        }
-        %>
-        <%= gmaps(options) %>
+      <div>
+        <%= f.input :latitude, :input_html => {:readonly => true} %>
+        <%= f.input :longitude, :input_html => {:readonly => true} %>
+        <%= f.input :top_left_lat, :as => :hidden %>
+        <%= f.input :top_left_lon, :as => :hidden %>
+        <%= f.input :bottom_right_lat, :as => :hidden %>
+        <%= f.input :bottom_right_lon, :as => :hidden %>
+        <%= f.input :radius, :hint => "Radius is shown in Kilometers" %>
       </div>
+    </div>
+    <div class="span4">
+      <% options = {
+          :map_options => {
+              :auto_adjust => true,
+              zoomControl: true,
+              zoom: 10,
+              streetViewControl: false,
+              scaleControl: false,
+              rotateControl: false,
+              mapTypeControl: false,
+              panControl: false,
+              center_latitude: @city.latitude,
+              center_longitude: @city.longitude,
+              draggable: false
+          },
+          :circles => {:data => []},
+          :markers => {:data => [], :options => {:do_clustering => true}}
+
+      }
+      %>
+      <%= gmaps(options) %>
+    </div>
 
   </div>
 
@@ -73,7 +69,7 @@
 
 
       <% if @city.new_record? %>
-        setDefaultMapCenter(map);
+      setDefaultMapCenter(map);
       <% else %>
       createCircle(<%=@city.latitude %>, <%= @city.longitude %>, <%= @city.radius %>);
       setMarker(<%=@city.latitude %>, <%= @city.longitude %>);
@@ -121,8 +117,7 @@
       });
     }
 
-    window.setMapCenter = function(addressToGeocode)
-    {
+    window.setMapCenter = function (addressToGeocode) {
       map = Gmaps.map.map;
       var geocoder = new google.maps.Geocoder();
       geocoder.geocode({address: addressToGeocode}, function (results, status) {
@@ -142,28 +137,27 @@
 
     }
 
-    window.setMarker = function(lat, lon, map)
-    {
-      if(map == null){
+    window.setMarker = function (lat, lon, map) {
+      if (map == null) {
         map = Gmaps.map.map;
       }
-      if(map_marker != null){
+      if (map_marker != null) {
         map_marker.setMap(null);
       }
 
       map_marker = new google.maps.Marker(
           {
             map: map,
-            position : new google.maps.LatLng(lat,lon)
+            position: new google.maps.LatLng(lat, lon)
           }
       );
     }
 
     // Draw circle with radius
-    window.createCircle = function(lat,lon,rad, map) {
+    window.createCircle = function (lat, lon, rad, map) {
       rad *= 1000; // convert to meters if in miles
-      if(map == null){
-      map = Gmaps.map.map;
+      if (map == null) {
+        map = Gmaps.map.map;
       }
 
       if (buffer_circle != null) {
@@ -181,23 +175,21 @@
         map: map
       });
 
-      getSquareForCity(lat,lon,rad);
+      getSquareForCity(lat, lon, rad);
 
     }
 
-    window.getSquareForCity = function(lat,lon,rad)
-    {
-      var cityLatLng = new google.maps.LatLng(lat,lon);
+    window.getSquareForCity = function (lat, lon, rad) {
+      var cityLatLng = new google.maps.LatLng(lat, lon);
       var spherical = google.maps.geometry.spherical;
       var north = spherical.computeOffset(cityLatLng, rad, 0);
-      var west  = spherical.computeOffset(cityLatLng, rad, -90);
+      var west = spherical.computeOffset(cityLatLng, rad, -90);
       var south = spherical.computeOffset(cityLatLng, rad, 180);
-      var east  = spherical.computeOffset(cityLatLng, rad, 90);
+      var east = spherical.computeOffset(cityLatLng, rad, 90);
       $("#city_top_left_lat").val(north.hb);
       $("#city_top_left_lon").val(west.ib);
       $("#city_bottom_right_lat").val(south.hb);
       $("#city_bottom_right_lon").val(east.ib);
-
 
 
       console.log(north);
