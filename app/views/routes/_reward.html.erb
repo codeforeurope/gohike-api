@@ -1,8 +1,8 @@
 <h4><%= t :reward %>
-  <%= link_to t(:add_reward), new_route_profile_route_reward_path(@route_profile,@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-success pull-right" if (@route.reward.blank?) %>
+  <%= link_to t(:add_reward), new_route_reward_path(@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-success pull-right" if (@route.reward.blank?) %>
 
-  <%= link_to t(:delete_reward), route_profile_route_reward_path(@route_profile,@route), :method => :delete, :confirm => :are_you_sure, :remote => true, :class => "btn btn-mini btn-danger pull-right" unless (@route.reward.blank?) %>
-  <%= link_to t(:edit_reward), edit_route_profile_route_reward_path(@route_profile,@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-primary pull-right" unless (@route.reward.blank?) %>
+  <%= link_to t(:delete_reward), route_reward_path(@route), :method => :delete, :confirm => :are_you_sure, :remote => true, :class => "btn btn-mini btn-danger pull-right" unless (@route.reward.blank?) %>
+  <%= link_to t(:edit_reward), edit_route_reward_path(@route), :data => {:target => :"#reward_modal", :toggle => :modal}, :class => "btn btn-mini btn-primary pull-right" unless (@route.reward.blank?) %>
 
 </h4>
 <% if @route.reward.blank? %>

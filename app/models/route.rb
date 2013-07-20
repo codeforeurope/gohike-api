@@ -2,7 +2,8 @@ class Route < ActiveRecord::Base
   include ImageModel
   mount_uploader :image, RouteImageUploader
   mount_uploader :icon, RouteIconUploader
-  attr_accessible :description, :icon, :image, :name, :description, :translations_attributes
+  attr_accessible :description, :icon, :image, :name, :description, :translations_attributes, :city_id
+
   attr_accessible :crop_x, :crop_y, :crop_w, :crop_h
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 

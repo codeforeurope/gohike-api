@@ -32,14 +32,7 @@ Gohike::Application.routes.draw do
       member do
         get :crop
       end
-      resources :routes do
-        resource :reward
-        member do
-          put :waypoints
-          get :crop
 
-        end
-      end
     end
     resources :locations do
       member do

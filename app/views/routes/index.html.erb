@@ -1,45 +1,9 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
-  <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
-  <li class="active"><%= @route_profile.name %></li>
+    <li class="active"><%= t(:'navbar.routes') %></li>
 </ul>
 <div class="row-fluid">
-
-
-  <div class="span6">
-    <h4><%= t :details %>
-      <%= link_to t(:delete_profile), route_profile_path(@route_profile), :method => :delete, :confirm => :are_you_sure, :class => "btn btn-mini btn-danger pull-right" %>
-
-      <%= link_to t(:edit_profile), edit_route_profile_path(@route_profile), :class => "edit-profile btn btn-mini btn-primary pull-right" %>
-    <%= link_to t(:add_route), new_route_profile_route_path , :class => "add-route btn btn-mini btn-success pull-right"%>
-
-    </h4>
-    <ul class="nav nav-tabs">
-      <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route_profile, :active => true} %>
-      <% @route_profile.translations.each do |translation| %>
-        <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route_profile} if (translation.locale != I18n.locale) %>
-      <% end %>
-    </ul>
-
-    <div class="tab-content">
-      <div class="tab-pane active" id="<%= translation_tab_id(@route_profile, locale) %>">
-        <h5><%= @route_profile.name %></h5>
-
-        <p><%= @route_profile.description %></p>
-      </div>
-      <% @route_profile.translations.each do |translation| %>
-        <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @route_profile} %>
-      <% end %>
-
-    </div>
-  </div>
-  <div class="span5">
-    <h4><%= t :icon_and_image %><%= link_to t(:crop), crop_route_profile_path(@route_profile), :class => "btn btn-mini pull-right" %></h4>
-    <img style="width: 300px; height: 200px;" src="<%= @route_profile.image.mobile %>">
-  </div>
-</div>
-<div class="row-fluid">
-  <h4><%= t :routes %> <%= link_to t(:add_route), new_route_profile_route_path , :class => "add-route btn btn-mini btn-success pull-right"%></h4>
+  <h4><%= t :routes %> <%= link_to t(:add_route), new_route_path , :class => "add-route btn btn-mini btn-success pull-right"%></h4>
   <ul class="thumbnails">
     <% @routes.each do |route| %>
 
@@ -68,8 +32,8 @@
             </div>
 
             <p>
-              <%= link_to t(:'.waypoints'), route_profile_route_path( @route_profile,route), :class => "btn btn-primary" %>
-              <%= link_to t(:'.edit'), edit_route_profile_route_path( @route_profile,route), :class => "btn" %>
+              <%= link_to t(:'.waypoints'), route_path(route), :class => "btn btn-primary" %>
+              <%= link_to t(:'.edit'), edit_route_path(route), :class => "btn" %>
             </p>
           </div>
         </div>

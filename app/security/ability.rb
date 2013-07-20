@@ -17,8 +17,8 @@ class Ability
         !user.role? :curator, profile.city
       end
       can :manage, Route
-      cannot [:create, :update, :destroy], Route do |route|
-        !user.role? :curator, route.profile.city
+      cannot [:update, :destroy], Route do |route|
+        !user.role? :curator, route.city
       end
       can :manage, Location
       cannot [:create, :update, :destroy], Location do |location|
@@ -27,7 +27,7 @@ class Ability
       #can :manage, Reward
 
       can [:new, :create, :update, :destroy], Reward do |reward|
-        user.role? :curator, reward.route.route_profile.city
+        user.role? :curator, reward.route.city
       end
 
     else
