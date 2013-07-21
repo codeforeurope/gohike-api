@@ -4,11 +4,14 @@
   <div class="form-inputs clearfix">
 
     <div class="span9">
+      <%= f.association :city, :collection => cities_curated, :include_blank => false %>
+
+
       <%= f.input :image %>
     </div>
     <div class="span9">
 
-      <%= render :partial => "shared/localized_attributes", :locals => {:resource => @route_profile, :f => f}  %>
+      <%= render :partial => "shared/localized_attributes", :locals => {:resource => @route_profile, :f => f} %>
 
     </div>
   </div>

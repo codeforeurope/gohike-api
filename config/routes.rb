@@ -2,9 +2,6 @@ require 'api'
 Gohike::Application.routes.draw do
 
 
-
-
-
   #root :to => "start#index"
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
     resources :cities
@@ -29,6 +26,9 @@ Gohike::Application.routes.draw do
     end
 
     resources :route_profiles do
+      collection do
+        get :in_cities
+      end
       member do
         get :crop
       end
@@ -41,7 +41,7 @@ Gohike::Application.routes.draw do
       end
     end
     resources :devices
-    devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations" }
+    devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations"}
   end
   #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   #match '', to: redirect("/#{I18n.default_locale}")

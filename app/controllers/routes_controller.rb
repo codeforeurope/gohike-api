@@ -4,6 +4,7 @@ class RoutesController < InheritedResources::Base
   load_and_authorize_resource :route_profile, :through => :route
   load_and_authorize_resource
   before_filter :load_locations, :only => :show
+  before_filter :load_profiles, :only => [:new, :edit]
 
 
   # POST /routes
@@ -53,4 +54,8 @@ class RoutesController < InheritedResources::Base
     @locations = Location.where('id NOT in (?)', location_ids.empty? ? 0 : location_ids)
   end
 
+  def load_profiles
+    @profiles = RouteProfile.scoped_by_city_id([@route.city_id])
+  end
 end
+
