@@ -1,11 +1,15 @@
 class RouteProfilesController < InheritedResources::Base
 
   before_filter :authenticate_user!
-  load_and_authorize_resource :route
-  #has_scope :in_cities do |controller, scope, value|
-  #  scope.in_cities(value.split(","))
-  #end
+  load_and_authorize_resource :city, :through => :route_profile
+  load_and_authorize_resource :route_profile
 
+  #defaults :singleton => true
+  optional_belongs_to :city
+
+  def index
+    super
+  end
   def in_cities
     @profiles = RouteProfile.scoped_by_city_id(params[:city_ids])
     render :partial => "routes/profile"

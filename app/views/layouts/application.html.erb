@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Language" content="<%= I18n.locale %>" />
+  <meta http-equiv="Content-Language" content="<%= I18n.locale %>"/>
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
   <![endif]-->
@@ -31,15 +31,16 @@
 
         <div class="container nav-collapse">
           <ul class="nav">
-            <% if can? :read, RouteProfile %>
-              <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path, :class => current_page?(:controller => "/route_profiles") ? "active" : "" %></li>
+            <% if can? :read, City %>
+
+              <li><%= link_to t(:'navbar.cities'), cities_path, :class => current_page?(:controller => "/cities") ? "active" : "" %></li>
+
             <% end %>
             <% if can? :read, Route %>
               <li><%= link_to t(:'navbar.routes'), routes_path, :class => current_page?(:controller => "/routes") ? "active" : "" %></li>
             <% end %>
             <% if can? :read, Location %>
               <li><%= link_to t(:'navbar.locations'), locations_path, :class => current_page?(:controller => "/locations") ? "active" : "" %></li>
-              <li><%= link_to t(:'navbar.cities'), cities_path, :class => current_page?(:controller => "/cities") ? "active" : "" %></li>
 
             <% end %>
           </ul>
@@ -60,7 +61,7 @@
             <% if user_signed_in? %>
               <li><span class="user-email"><%= t(:'navbar.logged_in_as') + " " + current_user.email %></span></li>
               <% unless current_user.has_active_fb_token? %>
-              <li><%= link_to "FB", user_omniauth_authorize_path(:facebook) %></li>
+                <li><%= link_to "FB", user_omniauth_authorize_path(:facebook) %></li>
               <% end %>
               <li class="divider"></li>
 

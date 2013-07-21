@@ -1,26 +1,28 @@
 <%- model_class = Location -%>
-<div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-
-    <%= link_to t(:add_location), new_location_path ,:class => "btn btn-large btn-success pull-right"%>
-  </h1>
-</div>
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li class="active"><%= t(:'navbar.locations') %></li>
+  <% if can? :create, Route %>
+    <li class="pull-right"><%= link_to t(:add_location), new_location_path, :class => "add-location btn btn-mini btn-success pull-right" %></li>
+  <% end %>
+</ul>
 <table class="table table-striped">
   <thead>
   <tr>
     <th><%= model_class.human_attribute_name(:name)%></th>
     <th><%= model_class.human_attribute_name(:address)%></th>
     <th><%= model_class.human_attribute_name(:postal_code)%></th>
-    <th></th>
+    <th><%= model_class.human_attribute_name(:translations)%></th>
     <th></th>
     <th></th>
   </tr>
   </thead>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= location.name %> ( <%= location.translated_locales.join(" | ") %> )</td>
+      <td><%= location.name %></td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>
+      <td><%= location.translated_locales.join(" | ") %></td>
       <td><%= link_to t(:details), location_path(location) ,:class => "btn btn-mini"%></td>
       <td><%= link_to t(:edit), edit_location_path(location) ,:class => "btn btn-mini btn-primary"%></td>
 

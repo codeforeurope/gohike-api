@@ -1,47 +1,42 @@
 <ul class="breadcrumb">
-  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
-  <li class="active"><%= t(:'navbar.route_profiles') %></li>
+  <li><%= link_to t(:home), home_path %><span class="divider">/</span></li>
+  <% unless @city.nil? %>
+    <li class=""><%= link_to t(:'navbar.cities') , cities_path %><span class="divider">/</span></li>
+    <li class=""><%= link_to @city.name , city_path(@city) %><span class="divider">/</span></li>
+  <% end %>
+  <li class="active"><%= t(:'navbar.routes_profiles') %></li>
+  <% if can? :create, RouteProfile %>
+    <li class="pull-right"><%= link_to t(:add_profile), (@city.nil? ? new_route_profile_path : new_city_route_profile_path(@city)), :class => "add-route btn btn-mini btn-success pull-right" %></li>
+  <% end %>
 </ul>
 <div class="row-fluid">
-  <ul class="thumbnails">
+  <%- model_class = RouteProfile -%>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:city) %></th>
+      <th><%= model_class.human_attribute_name(:translations) %></th>
+      <th></th>
+    </tr>
+    </thead>
     <% @route_profiles.each do |route_profile| %>
+      <tr>
+        <td><%= image_tag (route_profile.image.mobile.url || "holder.js?160x80"), :class => "route-list-img" %></td>
+        <td class="name"><%= link_to route_profile.name, route_profile_path(route_profile) %></td>
+        <td class="city"><%= route_profile.city.name unless route_profile.city.nil? %></td>
+        <td class="translations"><%= route_profile.translated_locales.join(" | ") %></td>
+        <td><%= link_to t(:edit), edit_route_profile_path(route_profile), :class => "btn btn-primary" %></td>
 
-      <li class="span4">
-        <div class="thumbnail">
-          <img style="width: 300px; height: 200px;" src="<%= route_profile.image.mobile %>">
-
-          <div class="caption">
-            <ul class="nav nav-tabs">
-              <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => route_profile, :active => true} %>
-              <% route_profile.translations.each do |translation| %>
-                <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => route_profile} if (translation.locale != I18n.locale) %>
-              <% end %>
-            </ul>
-
-            <div class="tab-content">
-              <div class="tab-pane active" id="<%= translation_tab_id(route_profile, locale) %>">
-                <h5><%= route_profile.name %></h5>
-
-                <p><%= route_profile.description %></p>
-              </div>
-              <% route_profile.translations.each do |translation| %>
-                <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => route_profile} %>
-              <% end %>
-
-            </div>
-
-            <p>
-
-              <%= link_to t(:'.edit'), edit_route_profile_path(route_profile), :class => "btn" %>
-            </p>
-          </div>
-        </div>
-      </li>
-
+      </tr>
     <% end %>
-  </ul>
+  </table>
+
+  <br/>
+
+
 </div>
 
 <br/>
 
-<%= link_to 'New Route profile', new_route_profile_path %>

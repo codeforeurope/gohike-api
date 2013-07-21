@@ -1,11 +1,16 @@
 <%- model_class = City -%>
-<div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize %>
-    <% if can? :manage, City %>
-      <%= link_to t(:add_city), new_city_path, :class => "btn btn-large btn-success pull-right" %>
-    <% end %>
-  </h1>
-</div>
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <li class="active"><%= t(:'navbar.cities') %></li>
+  <% if can? :create, RouteProfile %>
+    <li class="pull-right"><%= link_to t(:profiles), route_profiles_path, :class => "profiles btn btn-mini btn-primary pull-right" %></li>
+
+  <% end %>
+  <% if can? :create, City %>
+    <li class="pull-right"><%= link_to t(:add_city), new_city_path, :class => "add-city btn btn-mini btn-success pull-right" %></li>
+
+  <% end %>
+</ul>
 
 <table class="table table-striped">
   <thead>
@@ -25,9 +30,9 @@
       <td>
         <%= link_to t(:details), city_path(city), :class => "btn btn-mini" %>
 
-      <% if can? :update, city %>
-        <%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %>
-      <% end %>
+        <% if can? :update, city %>
+          <%= link_to t(:edit), edit_city_path(city), :class => "btn btn-mini btn-primary" %>
+        <% end %>
       </td>
     </tr>
   <% end %>
