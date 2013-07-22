@@ -30,4 +30,9 @@ class City < ActiveRecord::Base
 
   end
 
+  def self.by_device_location(latitude, longitude)
+     self.where("top_left_lat >= #{latitude} and top_left_lon <= #{longitude} AND bottom_right_lat <= #{latitude} and bottom_right_lon >= #{longitude}")
+  end
+
+
 end

@@ -45,10 +45,12 @@ Gohike::Application.routes.draw do
     end
     resources :devices
     devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations"}
+
+    mount Gohike::API => "/api"
   end
   #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   #match '', to: redirect("/#{I18n.default_locale}")
-  mount Gohike::API => "/api"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
