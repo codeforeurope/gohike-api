@@ -16,6 +16,12 @@ class Route < ActiveRecord::Base
   belongs_to :city
   has_one :reward
 
+
+
+  scope :in_city, ->(city_id) {
+    where(:city_id => city_id)
+  }
+
   def icon_data
     Base64.encode64(open(self.icon.to_s) { |io| io.read }) unless self.icon.to_s.blank?
   end

@@ -251,6 +251,7 @@ DEPENDENCIES
   gmaps4rails
   grape
   grape-rabl
+  has_scope
   inherited_resources
   jcrop-rails
   jquery-rails

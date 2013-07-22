@@ -15,6 +15,15 @@ class Location < ActiveRecord::Base
   has_many :routes, :through => :waypoints
   belongs_to :network, :class_name => "City", :foreign_key => :city_id
 
+  scope :in_city, ->(city_id) {
+      where(:city_id => city_id)
+  }
+
+
+  scope :in_cities, ->(city_ids) {
+    where("city_id IN (?)", city_ids.split(",")
+    ) }
+
   #attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   after_update :crop_image
@@ -31,6 +40,11 @@ class Location < ActiveRecord::Base
 #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
     "#{self.address},  #{self.postal_code} #{self.city}"
   end
+
+  #def self.default_scope
+  #
+  #  #where published: true
+  #end
 
   class Translation
     attr_accessible :locale, :name, :description

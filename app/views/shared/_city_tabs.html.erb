@@ -1,0 +1,10 @@
+<ul class="nav nav-tabs">
+  <li class="<%= "active" if (params[:in_city].nil?) %>">
+    <%= link_to t(:all), collection_url %>
+  </li>
+  <% cities_curated.each_with_index do |city, index| %>
+    <li class="<%= "active" if (params[:in_city]==city.id.to_s) %>">
+      <%= link_to city.name, {:in_city => city.id} %>
+    </li>
+  <% end %>
+</ul>

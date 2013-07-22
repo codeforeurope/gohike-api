@@ -1,4 +1,4 @@
-class Ability
+  class Ability
   include CanCan::Ability
 
   def initialize(user)
@@ -20,9 +20,9 @@ class Ability
       cannot [:update, :destroy], Route do |route|
         !user.role? :curator, route.city
       end
-      can :manage, Location
-      cannot [:create, :update, :destroy], Location do |location|
-        !user.role? :curator, location.city
+      can :read, Location
+      can [:create, :update, :destroy], Location do |location|
+        user.role? :curator, location.network
       end
       #can :manage, Reward
 

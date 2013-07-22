@@ -2,7 +2,7 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li class="active"><%= t(:'navbar.cities') %></li>
-  <% if can? :create, RouteProfile %>
+  <% if can? :read, RouteProfile %>
     <li class="pull-right"><%= link_to t(:profiles), route_profiles_path, :class => "profiles btn btn-mini btn-primary pull-right" %></li>
 
   <% end %>

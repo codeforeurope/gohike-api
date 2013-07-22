@@ -8,7 +8,7 @@
       <%= f.input :image %>
     </div>
     <div class="span5">
-      <%= f.association :network, collection: @cities, label_method: :name, value_method: :id %>
+      <%= f.association :network, collection: cities_curated, label_method: :name, value_method: :id %>
       <%= f.input :address %>
       <%= f.input :city %>
       <%= f.input :postal_code %>

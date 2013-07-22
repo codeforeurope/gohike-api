@@ -1,3 +1,4 @@
+
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %><span class="divider">/</span></li>
   <% unless @city.nil? %>
@@ -9,6 +10,7 @@
     <li class="pull-right"><%= link_to t(:add_profile), (@city.nil? ? new_route_profile_path : new_city_route_profile_path(@city)), :class => "add-route btn btn-mini btn-success pull-right" %></li>
   <% end %>
 </ul>
+<%= render :partial => "shared/city_tabs", :locals => {} %>
 <div class="row-fluid">
   <%- model_class = RouteProfile -%>
   <table class="table table-striped">
@@ -23,7 +25,7 @@
     </thead>
     <% @route_profiles.each do |route_profile| %>
       <tr>
-        <td><%= image_tag (route_profile.image.mobile.url || "holder.js?160x80"), :class => "route-list-img" %></td>
+        <td><%= image_tag (route_profile.image.mobile.url ), :class => "route-list-img" %></td>
         <td class="name"><%= link_to route_profile.name, route_profile_path(route_profile) %></td>
         <td class="city"><%= route_profile.city.name unless route_profile.city.nil? %></td>
         <td class="translations"><%= route_profile.translated_locales.join(" | ") %></td>

@@ -5,7 +5,7 @@ class RoutesController < InheritedResources::Base
   load_and_authorize_resource
   before_filter :load_locations, :only => :show
   before_filter :load_profiles, :only => [:new, :edit]
-
+  has_scope :in_city
 
   # POST /routes
   # POST /routes.json

@@ -6,10 +6,12 @@ class RouteProfilesController < InheritedResources::Base
 
   #defaults :singleton => true
   optional_belongs_to :city
+  has_scope :in_city
 
   def index
     super
   end
+
   def in_cities
     @profiles = RouteProfile.scoped_by_city_id(params[:city_ids])
     render :partial => "routes/profile"

@@ -17,7 +17,9 @@ class RouteProfile < ActiveRecord::Base
   validate :validate_minimum_image_size
 
   scope :in_cities, ->(city_ids) { where("city_id IN (?)", city_ids) }
-
+  scope :in_city, ->(city_id) {
+    where(:city_id => city_id)
+  }
 
   def icon_data
     Base64.encode64(open(self.icon.to_s) { |io| io.read }) unless self.icon.to_s.blank?

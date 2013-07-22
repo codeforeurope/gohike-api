@@ -1,12 +1,13 @@
+<%- model_class = Route -%>
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li class="active"><%= t(:'navbar.routes') %></li>
-  <% if can? :create, Route %>
+  <% if can? :create, model_class %>
     <li class="pull-right"><%= link_to t(:add_route), new_route_path, :class => "add-route btn btn-mini btn-success pull-right" %></li>
   <% end %>
 </ul>
+<%= render :partial => "shared/city_tabs", :locals => {} %>
 <div class="row-fluid">
-  <%- model_class = Route -%>
   <table class="table table-striped">
     <thead>
     <tr>

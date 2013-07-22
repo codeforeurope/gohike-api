@@ -16,13 +16,5 @@ module ApplicationHelper
     resource.class.name.downcase + "_" + resource.id.to_s + "_locale_" + locale.to_s
   end
 
-  def cities_curated
-
-    if can? :manage, :all
-      City.all
-    else
-      current_user.cities_curated
-    end
-  end
 
 end

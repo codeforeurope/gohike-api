@@ -32,4 +32,15 @@ class ApplicationController < ActionController::Base
   def extract_locale_from_header
     request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first || I18n.default_locale
   end
+
+  def cities_curated
+
+    if can? :manage, :all
+      City.all
+    else
+      current_user.cities_curated
+    end
+  end
+
+  helper_method :cities_curated
 end
