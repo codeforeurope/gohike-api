@@ -1,25 +1,20 @@
 require 'grape/rabl'
 module Gohike
-  class APIv1 < Grape::API
-    version 'v1', using: :header, vendor: 'code_for_europe'
+  class APIv2 < Grape::API
+    version 'v2', using: :header, vendor: 'code_for_europe'
     format :json
+    formatter :json, Grape::Formatter::Rabl
 
-    desc "Pipe out all content"
-    get '/content', :format => :text do
-      header "Content-Version",$redis.get(:version)
-      {:version => $redis.get(:version), :profiles => JSON.parse($redis.get(:profiles))}
-    end
-
-    desc "Respond with either OK or UPDATE"
+    desc "Called upon app start, returns :within, and :other lists of cities"
     params do
-      optional :version, type: String, desc: "Content version on the device or none"
+      requires :latitude, type: Numeric, desc: "latitude and longitude of the device"
+      requires :longitude, type: Numeric, desc: "latitude and longitude of the device"
     end
-    post '/ping' do
-      if params[:version] && params[:version] == $redis.get(:version)
-        {status: :ok}
-      else
-        {status: :update, size: $redis.get(:size)}
-      end
+    post '/locate', :rabl => "locate" do
+
+      @within = City.by_device_location(params[:latitude], params[:longitude])
+      @other = City.all
+
     end
 
     params do

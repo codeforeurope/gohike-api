@@ -1,6 +1,6 @@
 require 'grape/rabl'
 module Gohike
-  class API < Grape::API
+  class APIv1 < Grape::API
     version 'v1', using: :header, vendor: 'code_for_europe'
     format :json
 
