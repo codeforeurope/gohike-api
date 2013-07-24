@@ -1,5 +1,9 @@
 module ImageModel
+  def self.included(base)
 
+    base.attr_accessible :crop_x, :crop_y, :crop_w, :crop_h, :do_crop
+    base.send "attr_accessor", :crop_x, :crop_y, :crop_w, :crop_h, :do_crop
+  end
 
   def image_data
     Base64.encode64(open(self.image.mobile.to_s) { |io| io.read }) unless self.image.mobile.to_s.blank?
@@ -19,7 +23,6 @@ module ImageModel
       if image.file.respond_to?(:sanitize_regexp)
         img = MiniMagick::Image.read(image.file)
       else
-
         img = MiniMagick::Image.open(image.url)
       end
       unless img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT

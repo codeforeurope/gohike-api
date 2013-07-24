@@ -3,10 +3,7 @@ class Location < ActiveRecord::Base
   acts_as_gmappable :process_geocoding => :geocode?
   include ImageModel
 
-  attr_accessible :address, :city, :latitude, :longitude, :postal_code, :image, :name, :description, :city_id
-  attr_accessible :crop_x, :crop_y, :crop_w, :crop_h, :translations_attributes
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
-
+  attr_accessible :address, :city, :latitude, :longitude, :postal_code, :image, :name, :description, :city_id, :translations_attributes
 
   translates :name, :description, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations, :allow_destroy => true
@@ -16,15 +13,12 @@ class Location < ActiveRecord::Base
   belongs_to :network, :class_name => "City", :foreign_key => :city_id
 
   scope :in_city, ->(city_id) {
-      where(:city_id => city_id)
+    where(:city_id => city_id)
   }
 
-
   scope :in_cities, ->(city_ids) {
-    where("city_id IN (?)", city_ids.split(",")
-    ) }
-
-  #attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+    where("city_id IN (?)", city_ids.split(","))
+  }
 
   after_update :crop_image
   validates_presence_of :name, :description

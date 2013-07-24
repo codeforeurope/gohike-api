@@ -41,22 +41,41 @@ class RouteImageUploader < CarrierWave::Uploader::Base
   #end
 
   version :mobile do
-    process :crop
+    process :crop_mobile
     resize_to_fill(570, 380)
   end
 
-  def crop
+  version :icon do
+    process :crop_icon
+    resize_to_fill(100, 100)
+  end
+
+  def crop_mobile
     if model.crop_x.present?
       manipulate! do |img|
         x = model.crop_x.to_i
         y = model.crop_y.to_i
         w = model.crop_w.to_i
         h = model.crop_h.to_i
-        img.crop([ w, 'x', h, '+', x, '+', y ].join(''))
+        img.crop([w, 'x', h, '+', x, '+', y].join(''))
         img
       end
     end
   end
+
+  def crop_icon
+    if model.crop_x.present?
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop([w, 'x', h, '+', x, '+', y].join(''))
+        img
+      end
+    end
+  end
+
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list

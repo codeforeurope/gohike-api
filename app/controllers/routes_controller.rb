@@ -4,36 +4,24 @@ class RoutesController < InheritedResources::Base
   load_and_authorize_resource :route_profile, :through => :route
   load_and_authorize_resource
   before_filter :load_locations, :only => :show
-  before_filter :load_profiles, :only => [:new, :edit]
+  before_filter :load_profiles, :except => [:index, :destroy, :show]
   has_scope :in_city
 
   # POST /routes
   # POST /routes.json
   def create
-    create! do |success, failure|
-      success.html {
-        if params[:route][:image].present?
-          redirect_to crop_route_url(@route)
-        else
-          redirect_to route_url(@route)
-        end
-      }
-    end
+    create! {
+      params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
+    }
 
   end
 
   # PUT /routes/1
   # PUT /routes/1.json
   def update
-    update! do |success, failure|
-      success.html {
-        if params[:route][:image].present?
-          redirect_to crop_route_url(@route)
-        else
-          redirect_to route_url(@route)
-        end
-      }
-    end
+    update! {
+      params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
+    }
   end
 
 

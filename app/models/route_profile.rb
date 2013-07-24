@@ -1,17 +1,14 @@
 class RouteProfile < ActiveRecord::Base
   include ImageModel
-  mount_uploader :image, RouteImageUploader
-  mount_uploader :icon, RouteIconUploader
+  mount_uploader :image, RouteIconUploader
 
-  translates :name, :description, :fallbacks_for_empty_translations => true
-  accepts_nested_attributes_for :translations
-
-  attr_accessible :description, :icon, :image, :name, :translations_attributes, :city_id
-  attr_accessible :crop_x, :crop_y, :crop_w, :crop_h
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :description, :image, :name, :translations_attributes, :city_id
 
   belongs_to :city
   has_many :routes, :dependent => :destroy
+
+  translates :name, :description, :fallbacks_for_empty_translations => true
+  accepts_nested_attributes_for :translations
 
   after_update :crop_image
   validate :validate_minimum_image_size
@@ -27,7 +24,7 @@ class RouteProfile < ActiveRecord::Base
 
 
   class Translation
-    attr_accessible :locale, :name, :description
-    validates_presence_of :name, :description
+    attr_accessible :locale, :name
+    validates_presence_of :name
   end
 end
