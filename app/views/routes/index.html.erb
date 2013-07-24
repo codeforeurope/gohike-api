@@ -21,7 +21,7 @@
     </thead>
     <% @routes.each do |route| %>
       <tr>
-        <td><%= image_tag (route.image.mobile.url || "holder.js?160x80"), :class => "route-list-img" %></td>
+        <td><%= image_tag (route.image.mobile.url ), :class => "route-list-img" %></td>
         <td class="name"><%= link_to route.name, route_path(route) %></td>
         <td class="description"><%= route.description %></td>
         <td class="translations"><%= route.translated_locales.join(" | ") %></td>

@@ -186,10 +186,10 @@
       var west = spherical.computeOffset(cityLatLng, rad, -90);
       var south = spherical.computeOffset(cityLatLng, rad, 180);
       var east = spherical.computeOffset(cityLatLng, rad, 90);
-      $("#city_top_left_lat").val(north.hb);
-      $("#city_top_left_lon").val(west.ib);
-      $("#city_bottom_right_lat").val(south.hb);
-      $("#city_bottom_right_lon").val(east.ib);
+      $("#city_top_left_lat").val(north.lat());
+      $("#city_top_left_lon").val(west.lng());
+      $("#city_bottom_right_lat").val(south.lat());
+      $("#city_bottom_right_lon").val(east.lng());
 
 
       console.log(north);
