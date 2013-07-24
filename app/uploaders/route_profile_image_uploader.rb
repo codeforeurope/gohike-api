@@ -2,9 +2,12 @@
 
 class RouteProfileImageUploader < CarrierWave::Uploader::Base
 
+  before :store, :capture_md5
+
+  after :store, :persist_md5
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -52,4 +55,38 @@ class RouteProfileImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+
+  version :icon do
+    process :crop_icon
+    resize_to_fill(200, 200)
+  end
+
+  def crop_icon
+    if model.crop_x.present?
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop([w, 'x', h, '+', x, '+', y].join(''))
+        img
+      end
+    end
+  end
+
+
+  def capture_md5(args)
+    versions.each do |version, u|
+      if model.crop_x.present? || (model.send("#{mounted_as}_changed?") && !model.send("#{mounted_as}_#{version}_md5_changed?"))
+        model.send "#{mounted_as}_#{version}_md5=", Digest::MD5.file(Rails.public_path + u.url).hexdigest
+      end
+    end
+  end
+
+  def persist_md5(args)
+    if versions.present?
+      model.crop_x = nil
+      model.save
+    end
+  end
 end

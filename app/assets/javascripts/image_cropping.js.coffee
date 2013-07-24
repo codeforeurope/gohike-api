@@ -3,10 +3,12 @@ jQuery ->
 
 class AvatarCropper
   constructor: ->
+    @minWidth = $('#cropbox').data("min-width")
+    @minHeight = $('#cropbox').data("min-height")
     $('#cropbox').Jcrop
-      aspectRatio: 1.5
-      minSize:[570,380]
-      setSelect: [0,0,570,380]
+      aspectRatio: @minWidth/@minHeight
+      minSize:[@minWidth,@minHeight]
+      setSelect: [0,0,@minWidth,@minHeight]
       onSelect: @update
       onChange: @update
 
@@ -21,8 +23,8 @@ class AvatarCropper
     console.log(coords)
 #    console.log("width:" + )
 
-    rx = 285/coords.w
-    ry = 190/coords.h
+    rx = (@minWidth/2)/coords.w
+    ry = (@minHeight/2)/coords.h
 
     $('#preview').css
       width: Math.round(rx * $('#cropbox').width()) + 'px'

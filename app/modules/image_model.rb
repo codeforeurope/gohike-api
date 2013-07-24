@@ -27,8 +27,8 @@ module ImageModel
       else
         img = MiniMagick::Image.open(image.url)
       end
-      unless img[:width] >= MIN_WIDTH && img[:height] >= MIN_HEIGHT
-        errors.add :image, :image_minimum_size, :min_width => MIN_WIDTH, :min_height => MIN_HEIGHT
+      unless img[:width] >= self.class::MIN_WIDTH && img[:height] >= self.class::MIN_HEIGHT
+        errors.add :image, :image_minimum_size, :min_width => self.class::MIN_WIDTH, :min_height => self.class::MIN_HEIGHT
       end
     end
   end

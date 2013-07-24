@@ -2,14 +2,17 @@ class RouteProfile < ActiveRecord::Base
   include ImageModel
   mount_uploader :image, RouteProfileImageUploader
 
+  MIN_HEIGHT = 200
+  MIN_WIDTH = 200
+
   attr_accessible :description, :image, :name, :translations_attributes, :city_id
 
   belongs_to :city
   has_many :routes, :dependent => :destroy
 
-  translates :name, :description, :fallbacks_for_empty_translations => true
+  translates :name, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations
-
+  validates_presence_of :name
   after_update :crop_image
   validate :validate_minimum_image_size
 
@@ -27,4 +30,9 @@ class RouteProfile < ActiveRecord::Base
     attr_accessible :locale, :name
     validates_presence_of :name
   end
+
+  def published_routes
+    routes.where(:published => true)
+  end
+
 end
