@@ -1,0 +1,40 @@
+<ul class="breadcrumb">
+  <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
+  <% unless @city.nil? %>
+    <li class=""><%= link_to t(:'navbar.cities') , cities_path %><span class="divider">/</span></li>
+    <li class=""><%= link_to @city.name , city_path(@city) %><span class="divider">/</span></li>
+  <% end %>
+  <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
+  <li class="active"><%= @route_profile.name %></li>
+</ul>
+<div class="row-fluid">
+
+  <div class="span5">
+    <h4><%= t :details %>
+      <%= link_to t(:edit), edit_route_profile_path(@route_profile), :class => "btn btn-mini btn-primary pull-right" %>
+    </h4>
+    <ul class="nav nav-tabs">
+      <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route_profile, :active => true} %>
+      <% @route_profile.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route_profile} if (translation.locale != I18n.locale) %>
+      <% end %>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="<%= translation_tab_id(@route_profile, locale) %>">
+        <h5><%= @route_profile.name %></h5>
+      </div>
+      <% @route_profile.translations.each do |translation| %>
+        <%= render :partial => "shared/translation_values", :locals => {:translation => translation, :resource => @route_profile} %>
+      <% end %>
+
+    </div>
+  </div>
+  <div class="span5">
+    <h4><%= t :icon %>
+      <%= link_to t(:remove), @route_profile, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-mini btn-danger pull-right" if @route_profile.routes.empty? %>
+      <%= link_to t(:crop), crop_route_profile_path(@route_profile), :class => "btn btn-mini pull-right" unless @route_profile.image.blank? %>
+    </h4>
+    <img style="width: 100px; height: 100px;" src="<%= @route_profile.image.icon %>?<%= Time.now.to_i %>">
+  </div>
+</div>
