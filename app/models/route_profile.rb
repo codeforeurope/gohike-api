@@ -1,6 +1,6 @@
 class RouteProfile < ActiveRecord::Base
   include ImageModel
-  mount_uploader :image, RouteIconUploader
+  mount_uploader :image, RouteProfileImageUploader
 
   attr_accessible :description, :image, :name, :translations_attributes, :city_id
 

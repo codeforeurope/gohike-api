@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  mount_uploader :image, RouteImageUploader
+  mount_uploader :image, LocationImageUploader
   acts_as_gmappable :process_geocoding => :geocode?
   include ImageModel
 
@@ -26,6 +26,7 @@ class Location < ActiveRecord::Base
   validates_length_of :name, :maximum => 35
   validates_length_of :description, :maximum => 540
 
+
   def geocode?
     (!address.blank? && (latitude.blank? || longitude.blank?))
   end
@@ -46,4 +47,6 @@ class Location < ActiveRecord::Base
     validates_length_of :name, :maximum => 35
     validates_length_of :description, :maximum => 540
   end
+
+
 end

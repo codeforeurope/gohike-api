@@ -30,12 +30,12 @@
     </div>
   </div>
   <div class="span5">
-    <h4><%= t :icon_and_image %>
+    <h4><%= t :image %>
 
       <%= link_to t(:remove), @location, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-mini btn-danger pull-right" if @location.waypoints.empty? %>
       <%= link_to t(:crop), crop_location_path(@location), :class => "btn btn-mini pull-right" unless @location.image.blank? %>
     </h4>
-    <img style="width: 285px; height: 190px;" src="<%= @location.image.mobile %>">
+    <img style="width: 285px; height: 190px;" src="<%= @location.image.mobile %>?<%= Time.now.to_i %>">
   </div>
 </div>
 <div class="row-fluid">

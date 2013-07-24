@@ -10,6 +10,7 @@
 <table class="table table-striped">
   <thead>
   <tr>
+    <th><%= model_class.human_attribute_name(:image) %></th>
     <th><%= model_class.human_attribute_name(:name) %></th>
     <th><%= model_class.human_attribute_name(:address) %></th>
     <th><%= model_class.human_attribute_name(:postal_code) %></th>
@@ -20,6 +21,7 @@
   </thead>
   <% @locations.each do |location| %>
     <tr>
+      <td><%= image_tag (location.image.url ), :class => "route-list-img" %></td>
       <td><%= location.name %></td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>

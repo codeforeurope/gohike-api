@@ -12,7 +12,7 @@ class LocationsController < InheritedResources::Base
   # POST /routes.json
   def create
     create! {
-      params[:route_profile][:image].present? ? crop_location_url(@location) : location_url
+      params[:location][:image].present? ? crop_location_url(@location) : location_url
     }
 
   end
@@ -21,7 +21,7 @@ class LocationsController < InheritedResources::Base
   # PUT /routes/1.json
   def update
     update! {
-      params[:route_profile][:image].present? ? crop_location_url(@location) : location_url
+      params[:location][:image].present? ? crop_location_url(@location) : location_url
     }
   end
 

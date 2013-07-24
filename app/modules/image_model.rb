@@ -12,7 +12,9 @@ module ImageModel
   end
 
   def crop_image
-    image.recreate_versions! if crop_x.present?
+    if crop_x.present?
+      image.recreate_versions!
+    end
   end
 
   MIN_WIDTH = 570
