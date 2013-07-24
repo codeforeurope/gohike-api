@@ -17,6 +17,16 @@ module Gohike
 
     end
 
+    desc "Called once every 24 hours by the device to get available routes and profiles"
+    params do
+      requires :city_id, type: Integer, desc: "City id"
+    end
+    get '/catalog/:city_id', :rabl => "catalog" do
+
+      @profiles = City.find(params[:city_id]).publishable_profiles
+
+    end
+
     params do
       requires :checkins, type: Array, desc: "Checkins array"
       requires :identifier, type: String, desc: "Device Identifier"
