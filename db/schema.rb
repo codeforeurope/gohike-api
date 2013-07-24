@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130718232512) do
+ActiveRecord::Schema.define(:version => 20130724182222) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -72,16 +72,17 @@ ActiveRecord::Schema.define(:version => 20130718232512) do
     t.text     "description"
     t.string   "name_nl"
     t.text     "description_nl"
-    t.decimal  "latitude",       :precision => 12, :scale => 9
-    t.decimal  "longitude",      :precision => 12, :scale => 9
+    t.decimal  "latitude",         :precision => 12, :scale => 9
+    t.decimal  "longitude",        :precision => 12, :scale => 9
     t.string   "address"
     t.string   "city"
     t.string   "postal_code"
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.boolean  "gmaps"
     t.string   "image"
     t.integer  "city_id"
+    t.string   "image_mobile_md5"
   end
 
   create_table "reward_translations", :force => true do |t|
@@ -123,7 +124,6 @@ ActiveRecord::Schema.define(:version => 20130718232512) do
     t.integer  "route_profile_id"
     t.string   "locale"
     t.string   "name"
-    t.text     "description"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
@@ -133,15 +133,12 @@ ActiveRecord::Schema.define(:version => 20130718232512) do
 
   create_table "route_profiles", :force => true do |t|
     t.string   "name"
-    t.text     "description"
-    t.string   "name_nl"
-    t.text     "description_nl"
-    t.string   "icon"
     t.string   "image"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.boolean  "is_publishable"
     t.integer  "city_id"
+    t.string   "image_icon_md5"
   end
 
   create_table "route_translations", :force => true do |t|
@@ -161,13 +158,15 @@ ActiveRecord::Schema.define(:version => 20130718232512) do
     t.text     "description"
     t.string   "name_nl"
     t.text     "description_nl"
-    t.string   "icon"
     t.string   "image"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "route_profile_id"
     t.boolean  "is_publishable"
     t.integer  "city_id"
+    t.string   "image_mobile_md5"
+    t.string   "image_icon_md5"
+    t.boolean  "published"
   end
 
   add_index "routes", ["route_profile_id"], :name => "index_routes_on_route_profile_id"
