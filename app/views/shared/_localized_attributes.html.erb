@@ -22,8 +22,9 @@
   <div class="tab-pane active" id="<%= translation_tab_id(resource, I18n.locale) %>">
 
     <%= f.input :name %>
-    <%= f.input :description, :as => :text, :input_html => {:rows => 10} %>
-
+    <% if resource.has_attribute? :description %>
+      <%= f.input :description, :as => :text, :input_html => {:rows => 10} %>
+    <% end %>
   </div>
 
   <% resource.translations.each do |translation| %>

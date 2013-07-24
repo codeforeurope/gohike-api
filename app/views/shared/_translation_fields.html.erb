@@ -1,6 +1,8 @@
-<div class="tab-pane<%= I18n.locale == locale ? " active" : "" %>" id="<%= translation_tab_id(resource,locale) %>">
+<div class="tab-pane<%= I18n.locale == locale ? " active" : "" %>" id="<%= translation_tab_id(resource, locale) %>">
   <%= f.globalize_fields_for locale do |g| %>
     <%= g.input :name %>
-    <%= g.input :description,:as => :text, :input_html => {:rows => 10} %>
+    <% if resource.has_attribute? :description %>
+      <%= g.input :description, :as => :text, :input_html => {:rows => 10} %>
+    <% end %>
   <% end %>
 </div>
