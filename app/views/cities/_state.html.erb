@@ -1,5 +1,5 @@
 <% country_code ||= params[:city] ? params[:city][:country_code] : nil %>
-<% country = Carmen::Country.coded(country_code) %>
+<% country = Carmen::Country.coded(country_code) unless country_code.nil? %>
 <% if !country.nil? and country.subregions? %>
   <%= subregion_select :city, :state_province, country_code ,{ :include_blank => true }, :label => "State/Province" %>
 <% end %>
