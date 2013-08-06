@@ -1,0 +1,111 @@
+{"name": {
+  "fi": "sssss",
+  "cn": "sadas",
+  "de": "Gröne ptah",
+  "nl": "Groene Pad",
+  "en": "Green Trail"
+}, "description": {
+  "fi": "sssss",
+  "cn": "asdsa",
+  "de": "Gröne ptah",
+  "nl": "Groene Pad",
+  "en": "Take a stroll through amazing green spaces Amsterdam has to offer."
+}, "id": 1, "waypoints": [
+  {
+    "rank": 0,
+    "name": {
+      "en": "Piotr's Apartment",
+      "nl": "De Apartment van Piotr",
+      "es": "edefede",
+      "de": "asdsadassa"
+    },
+    "description": {
+      "en": "Piotr's Apartment",
+      "nl": "sadadsdd",
+      "es": "dedeed",
+      "de": "asdasd"
+    },
+    "location_id": 3,
+    "latitude": "52.3786327",
+    "longitude": "4.8350151",
+    "image": {
+      "md5": null,
+      "url": null
+    },
+    "route_id": 1
+  },
+  {
+    "rank": 1,
+    "name": {
+      "en": "Waag Society"
+    },
+    "description": {
+      "en": "asdfsadawdadasdas"
+    },
+    "location_id": 4,
+    "latitude": "52.376425199",
+    "longitude": "4.922161652",
+    "image": {
+      "md5": null,
+      "url": null
+    },
+    "route_id": 1
+  },
+  {
+    "rank": 2,
+    "name": {
+      "nl": "Synagoge Liberaal Joodse Gemeente ",
+      "de": "GGGG Synagoge Liberaal Joodse Gemeente ",
+      "en": "Liberal Jewish Synagogue"
+    },
+    "description": {
+      "nl": "Synagoge Liberaal Joodse Gemeente ",
+      "de": "Synagoge Liberaal Joodse Gemeente ",
+      "en": "Synagoge Liberaal Joodse Gemeente "
+    },
+    "location_id": 1,
+    "latitude": "52.3382046",
+    "longitude": "4.8982083",
+    "image": {
+      "md5": null,
+      "url": "https://gohike.s3.amazonaws.com/uploads/location/image/1/mobile_2013-04-19_12.58.46.jpg"
+    },
+    "route_id": 1
+  },
+  {
+    "rank": 3,
+    "name": {
+      "en": "blah"
+    },
+    "description": {
+      "en": "blah"
+    },
+    "location_id": 9,
+    "latitude": "52.373150256",
+    "longitude": "4.89765699",
+    "image": {
+      "md5": null,
+      "url": "https://gohike.s3.amazonaws.com/uploads/location/image/9/mobile_Amsterdam_DeWaag.JPG"
+    },
+    "route_id": 1
+  },
+  {
+    "rank": 4,
+    "name": {
+      "nl": "de vuist beeldhouwkunst",
+      "en": "The fist sculpture"
+    },
+    "description": {
+      "nl": "de vuist beeldhouwkunst",
+      "en": "The fist sculpture"
+    },
+    "location_id": 2,
+    "latitude": "52.340236696",
+    "longitude": "4.883688045",
+    "image": {
+      "md5": null,
+      "url": null
+    },
+    "route_id": 1
+  }
+]}
