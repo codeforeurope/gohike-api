@@ -11,20 +11,26 @@ module Gohike
       requires :longitude, type: Numeric, desc: "latitude and longitude of the device"
     end
     post '/locate', :rabl => "locate" do
-
       @within = City.by_device_location(params[:latitude], params[:longitude])
       @other = City.all
-
     end
 
     desc "Called once every 24 hours by the device to get available routes and profiles"
     params do
       requires :city_id, type: Integer, desc: "City id"
+      optional :locale, type: String, desc: "Locale"
     end
-    get '/catalog/:city_id', :rabl => "catalog" do
-
+    get '(:locale/)catalog/:city_id', :rabl => "catalog" do
+      I18n.locale = params[:locale].present? ? params[:locale] : :en
       @profiles = City.find(params[:city_id]).publishable_profiles
+    end
 
+    desc "This replaces /content endpoint. Provides a direct download of the entire route"
+    params do
+      requires :route_id, type: Integer, desc: ""
+    end
+    get '/route/:route_id' do
+      JSON.parse($redis.get Route.find(params[:route_id]).published_key)
     end
 
     params do

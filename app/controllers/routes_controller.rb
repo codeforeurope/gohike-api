@@ -35,6 +35,22 @@ class RoutesController < InheritedResources::Base
     head :no_content
   end
 
+  def publish
+    if @route.validate_for_publishing
+      delete_published_key = @route.published_key
+      renderer = Rabl::Renderer.new('route', @route, {:format => 'json', :view_path => 'app/views/api'})
+      route_json = renderer.render
+      md5 = OpenSSL::Digest::MD5.new
+      published_key = md5.hexdigest(route_json)
+      $redis.del delete_published_key if delete_published_key.present?
+      $redis.set published_key,route_json
+      @route.update_attribute :published_key, published_key
+    else
+
+    end
+
+  end
+
 
   private
   def load_locations

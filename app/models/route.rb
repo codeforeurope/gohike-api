@@ -29,4 +29,17 @@ class Route < ActiveRecord::Base
     attr_accessible :locale, :name, :description
     validates_presence_of :name, :description
   end
+
+  def validate_for_publishing
+    return true
+    locales = translated_locales
+    waypoints.joins(:location).each do |waypoint|
+      locales.each do |locale|
+        if waypoint.location.translation_for(locale, false).blank?
+          errors.add(:base, :missing_translation, :location => waypoint.location.name, :l => locale)
+        end
+      end
+    end
+    errors.empty? ? true : false
+  end
 end

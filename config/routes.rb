@@ -11,6 +11,7 @@ Gohike::Application.routes.draw do
 
     get "start", :to => "start#index"
 
+
     get "home", :to => "home#index"
 
     resources :routes do
@@ -18,7 +19,7 @@ Gohike::Application.routes.draw do
       member do
         put :waypoints
         get :crop
-
+        post :publish
       end
     end
     resources :rewards
@@ -46,8 +47,9 @@ Gohike::Application.routes.draw do
     resources :devices
     devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations"}
 
-    mount Gohike::API => "/api"
+
   end
+  mount Gohike::API => "/api"
   #match '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   #match '', to: redirect("/#{I18n.default_locale}")
 

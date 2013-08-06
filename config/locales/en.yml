@@ -36,3 +36,7 @@ en:
           attributes:
             image:
               image_minimum_size: "The picture is below the minimum size. (570x380 pixel for pictures, 480x480 for rewards)"
+        route:
+          attributes:
+            base:
+              missing_translation: "Missing translation in location %{location} for %{l}"

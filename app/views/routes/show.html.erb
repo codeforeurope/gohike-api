@@ -8,7 +8,15 @@
 
   <div class="span6">
     <h4><%= t :details %>
+      <% if can? :publish, @route %>
+        <%
+           class_attr = "btn btn-mini btn-warning pull-right"
+
+        %>
+        <%= link_to t(:publish), publish_route_path(@route), :class => class_attr, :remote=>true, :method => :post %>
+      <% end %>
       <%= link_to t(:edit), edit_route_path(@route), :class => "btn btn-mini btn-primary pull-right" %>
+
     </h4>
 
     <ul class="nav nav-tabs">

@@ -32,7 +32,7 @@ class RouteProfile < ActiveRecord::Base
   end
 
   def published_routes
-    routes.where(:published => true)
+    routes.where("published_key IS NOT NULL")
   end
 
 end

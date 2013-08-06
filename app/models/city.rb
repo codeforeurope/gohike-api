@@ -36,7 +36,7 @@ class City < ActiveRecord::Base
 
   def publishable_profiles
     route_profiles.all(:joins => :routes,
-        :conditions => "routes.published = #{true}",
+        :conditions => "routes.published_key IS NOT NULL",
         :group => 'route_profiles.id',
         :having => "count(routes.id) > 0")
   end

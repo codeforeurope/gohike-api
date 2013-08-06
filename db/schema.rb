@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724182222) do
+ActiveRecord::Schema.define(:version => 20130725123443) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20130724182222) do
     t.integer  "city_id"
     t.string   "image_mobile_md5"
     t.string   "image_icon_md5"
-    t.boolean  "published"
+    t.string   "published_key"
   end
 
   add_index "routes", ["route_profile_id"], :name => "index_routes_on_route_profile_id"

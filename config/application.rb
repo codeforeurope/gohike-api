@@ -11,8 +11,7 @@ end
 
 module Gohike
   class Application < Rails::Application
-    config.paths.add "app/api", glob: "**/*.rb"
-    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
     config.middleware.use(Rack::Config) do |env|
       env['api.tilt.root'] = Rails.root.join "app", "views", "api"
     end
@@ -69,5 +68,8 @@ module Gohike
     config.assets.initialize_on_precompile = false
 
     config.middleware.insert_before(ActionDispatch::Static, Rack::Deflater)
+
+    config.paths.add "app/api", glob: "**/*.rb"
+    config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
   end
 end

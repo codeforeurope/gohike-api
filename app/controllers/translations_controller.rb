@@ -7,13 +7,7 @@ class TranslationsController < ApplicationController
 
     @resource = params[:resource_id] == 0.to_s ? resource_type.new : resource_type.find(params[:resource_id])
 
-    ### this is here because resources :routes is not in routes.rb.
-    #if resource_type == Route
-    #  @parent_resource = @resource.route_profile
-    #  @form_source << @parent_resource
-    #end
-    ###
-    @form_source << @resource
+    @resource.translations.build
     @locale = params[:target_locale]
 
     respond_to do |format|
