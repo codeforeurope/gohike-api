@@ -7,6 +7,8 @@ en:
   nl: "Dutch"
   fi: "Finnish"
   es: "Spanish"
+  publish: "Publish"
+  republish: "Re-Publish"
   search_available: "Search Locations"
   omniauth:
     facebook:

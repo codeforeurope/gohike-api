@@ -11,7 +11,7 @@
 
   <div class="span5">
     <h4><%= t :details %>
-      <%= link_to t(:edit), edit_route_profile_path(@route_profile), :class => "btn btn-mini btn-primary pull-right" %>
+      <%= link_to t(:edit), edit_route_profile_path(@route_profile), :class => "btn btn-mini btn-primary pull-right" if can? :update, @route_profile %>
     </h4>
     <ul class="nav nav-tabs">
       <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route_profile, :active => true} %>

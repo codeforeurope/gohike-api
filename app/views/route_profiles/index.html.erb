@@ -7,7 +7,7 @@
   <% end %>
   <li class="active"><%= t(:'navbar.routes_profiles') %></li>
   <% if can? :create, RouteProfile %>
-    <li class="pull-right"><%= link_to t(:add_profile), (@city.nil? ? new_route_profile_path : new_city_route_profile_path(@city)), :class => "add-route btn btn-mini btn-success pull-right" %></li>
+    <li class="pull-right"><%= link_to t(:add_profile), (@city.blank? ? new_route_profile_path : new_city_route_profile_path(@city)), :class => "add-route btn btn-mini btn-success pull-right" %></li>
   <% end %>
 </ul>
 <%= render :partial => "shared/city_tabs", :locals => {} %>

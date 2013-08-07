@@ -12,13 +12,13 @@
       cannot [:create, :update, :destroy], City do |city|
         !user.role? :curator, city
       end
-      can :manage, RouteProfile
-      cannot [:create, :update, :destroy], RouteProfile do |profile|
-        !user.role? :curator, profile.city
+      can [:read, :new, :search], RouteProfile
+      can [:create, :update, :destroy, :crop], RouteProfile do |profile|
+        user.role? :curator, profile.city
       end
-      can :manage, Route
-      cannot [:update, :destroy], Route do |route|
-        !user.role? :curator, route.city
+      can [:read, :new, :search], Route
+      can [:create, :update, :destroy, :crop], Route do |route|
+        user.role? :curator, route.city
       end
       can [:read, :new, :search], Location
       can [:create, :update, :destroy, :crop], Location do |location|

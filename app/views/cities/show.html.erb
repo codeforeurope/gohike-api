@@ -2,15 +2,19 @@
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <li><%= link_to t(:'navbar.cities'), cities_path %> <span class="divider">/</span></li>
   <li class="active"><%= @city.name %></li>
+  <% if can? :read, RouteProfile %>
+    <li class="pull-right"><%= link_to t(:profiles) + " in " +  @city.name.html_safe, route_profiles_path(:in_city => @city.id), :class => "profiles btn btn-mini btn-primary pull-right" %></li>
+  <% end %>
 </ul>
 <div class="row">
-<div class="span4">
-<h4><%= t :details %>
-  <% if can? :manage, @city %>
-    <%= link_to t(:edit), edit_city_path(@city), :class => "btn btn-mini btn-primary pull-right" %>
-  <% end %>
-</h4>
-</div>
+  <div class="span4">
+    <h4><%= t :details %>
+      <% if can? :update, @city %>
+        <%= link_to t(:edit), edit_city_path(@city), :class => "btn btn-mini btn-primary pull-right" %>
+      <% end %>
+
+    </h4>
+  </div>
 </div>
 <div class="row-fluid">
 
