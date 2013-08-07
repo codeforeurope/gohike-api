@@ -1,9 +1,18 @@
 object :route
 attributes :id
 
+node(:image) do |route|
+  {:md5 => route.image_mobile_md5, :url => route.image.mobile.url}
+end
+node(:icon) do |route|
+  {:md5 => route.image_icon_md5, :url => route.image.icon.url}
+end
+
 extends "translation", :locals => {:node => :name}
 
 extends "translation", :locals => {:node => :description}
+
+
 
 child :waypoints do
   attributes :rank
