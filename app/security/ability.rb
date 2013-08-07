@@ -20,7 +20,7 @@
       cannot [:update, :destroy], Route do |route|
         !user.role? :curator, route.city
       end
-      can [:read, :new], Location
+      can [:read, :new, :search], Location
       can [:create, :update, :destroy, :crop], Location do |location|
         user.role? :curator, location.network
       end

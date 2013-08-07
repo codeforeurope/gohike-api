@@ -2,30 +2,59 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.half {
+  width: 50%;
+}
+
+#locations {
+  li {
+    background-color: #eee;
+  }
+}
 .waypoint-list {
   list-style-type: none;
   margin: 0;
   padding: 5px 0 2.5em;
-  float: left;
-  margin-right: 10px;
-  min-width: 200px;
-  min-height: 300px;
+  height: 400px;
   border: 1px solid #cecece;
   &.ui-sortable-disabled {
     opacity: .5;
+  }
+  overflow-y: scroll;
+  .pull-right & {
+    margin-left: 10px;
+  }
+  .pull-left & {
+    margin-right: 10px;
   }
 }
 
 .waypoint-list li {
   margin: 0 5px 5px 5px;
-  padding: 5px;
+  padding: 2px;
   font-size: 1.2em;
-  width: 200px;
-
+  vertical-align: top;
   border: 1px solid #cecece;
-
+  height: 50px;
+  .waypoint-img {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    display: inline-block;
+    float: left ;
+    margin-right:5px;
+  }
+  .waypoint-translations {
+    color: black;
+    font-size: 12px ;
+  }
 }
 
+.search-locations {
+  width: 95%;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 a.btn.pull-right {
   margin-left: 10px;
 }
@@ -39,7 +68,7 @@ a.btn.pull-right {
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 4px;
-    &:hover{
+    &:hover {
       color: white;
       background-color: #f89406;
       *background-color: #df8505;
@@ -49,11 +78,12 @@ a.btn.pull-right {
 }
 
 .waypoint-info {
-  height:22px;
+  height: 22px;
   width: 22px;
   vertical-align: middle;
   cursor: pointer;
 }
+
 .popover-content {
   font-size: $fontSizeSmall;
   font-weight: normal;
@@ -62,6 +92,7 @@ a.btn.pull-right {
 .original-image {
   float: left;
 }
+
 .preview-image {
   float: right;
   img {
@@ -72,3 +103,4 @@ a.btn.pull-right {
 .route-list-img {
   height: 60px;
 }
+

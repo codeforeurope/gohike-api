@@ -1,7 +1,11 @@
 class LocationsController < InheritedResources::Base
+  layout Proc.new { |controller| (controller.request.xhr?) ? false : 'application' }
   before_filter :authenticate_user!
   before_filter :load_markers, :only => :show
-  load_and_authorize_resource
+  optional_belongs_to :city
+
+  load_and_authorize_resource :city, :through => :location
+  load_and_authorize_resource :location
   has_scope :in_city
 
   def load_markers
@@ -25,10 +29,7 @@ class LocationsController < InheritedResources::Base
     }
   end
 
-  #protected
-  #def collection
-  #  city_id = params[:in_city] || (cities_curated.first.id if !cities_curated.empty?)
-  #
-  #  end_of_association_chain.in_city(city_id)
-  #end
+  def search
+    @locations = @locations.where("id NOT IN (:exclude) AND (name ILIKE :term OR description ILIKE :term OR address ILIKE :term)", {:term => "%#{params[:term]}%", :exclude => params[:exclude].split(",")})
+  end
 end

@@ -1,0 +1,3 @@
+<span class="waypoint-img" style="background-image: url(<%= location.image.icon.url %>)"></span>
+<span class="waypoint-name"><%= link_to location.name, location_path(location), :target => "_blank" %></span><br>
+<span class="waypoint-translations"><%= location.translated_locales.join(" | ")  %></span>

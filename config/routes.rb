@@ -27,6 +27,11 @@ Gohike::Application.routes.draw do
 
     resources :cities do
       resources :route_profiles
+      resources :locations do
+        collection do
+          get :search
+        end
+      end
     end
 
     resources :route_profiles do
@@ -41,8 +46,8 @@ Gohike::Application.routes.draw do
     resources :locations do
       member do
         get :crop
-
       end
+
     end
     resources :devices
     devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "registrations"}

@@ -7,6 +7,7 @@ en:
   nl: "Dutch"
   fi: "Finnish"
   es: "Spanish"
+  search_available: "Search Locations"
   omniauth:
     facebook:
       success: "Successfully connected Facebook"

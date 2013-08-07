@@ -34,7 +34,25 @@ class LocationImageUploader < CarrierWave::Uploader::Base
     resize_to_fill(570, 380)
   end
 
+  version :icon do
+    process :crop_icon
+    resize_to_fill(200, 200)
+  end
+
   def crop_mobile
+    if model.crop_x.present?
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop([w, 'x', h, '+', x, '+', y].join(''))
+        img
+      end
+    end
+  end
+
+  def crop_icon
     if model.crop_x.present?
       manipulate! do |img|
         x = model.crop_x.to_i

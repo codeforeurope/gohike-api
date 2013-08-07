@@ -1,0 +1,5 @@
+<% @locations.each do |location| %>
+  <li class="ui-state-default alert-info" data-location-id="<%= location.id %>">
+    <%= render :partial => "routes/waypoint", :locals => {:location => location} %>
+  </li>
+<% end %>

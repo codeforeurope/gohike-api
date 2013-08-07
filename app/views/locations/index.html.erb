@@ -21,7 +21,7 @@
   </thead>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= image_tag (location.image.url ), :class => "route-list-img" %></td>
+      <td><%= image_tag (location.image.icon.url ), :class => "route-list-img" %></td>
       <td><%= location.name %></td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>
