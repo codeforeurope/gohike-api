@@ -1,4 +1,4 @@
-<%= simple_form_for([@route_profile, @route, @reward], :url=> route_profile_route_reward_path(@route_profile, @route), :remote => true) do |f| %>
+<%= simple_form_for([@route, @reward], :url=> route_reward_path(@route), :remote => true) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs clearfix">

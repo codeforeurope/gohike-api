@@ -11,8 +11,9 @@
     <% if can? :publish, @route %>
       <%
          class_attr = "btn btn-mini btn-warning pull-right"
+         publish = @route.published_key.present? ? :republish : :publish
       %>
-      <%= link_to t(:publish), publish_route_path(@route), :class => class_attr, :remote => true, :method => :post %>
+      <%= link_to t(publish), publish_route_path(@route), :class => class_attr, :remote => true, :method => :post %>
     <% end %>
     <%= link_to t(:edit), edit_route_path(@route), :class => "btn btn-mini btn-primary pull-right" %>
 

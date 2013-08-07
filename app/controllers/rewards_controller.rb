@@ -3,11 +3,7 @@ class RewardsController < InheritedResources::Base
   respond_to :js, :json, :html
   before_filter :authenticate_user!, :except => :show
   defaults :singleton => true
-  #optional_belongs_to :route_profile, :singleton => true do
-  #  optional_belongs_to :route do
-  #    optional_belongs_to :reward
-  #  end
-  #end
+
   optional_belongs_to :route
   optional_belongs_to :route_profile
 
@@ -22,7 +18,6 @@ class RewardsController < InheritedResources::Base
 
   def resource
     if params[:id].blank?
-
       @reward ||= association_chain[0].reward
     else
       super
@@ -31,5 +26,27 @@ class RewardsController < InheritedResources::Base
 
   def edit
     super
+  end
+
+  def show
+    super do |format|
+      format.html {
+        if request.xhr?
+          render :partial => 'routes/reward'
+        else
+          render layout: "reward"
+        end
+
+      } # show.html.erb
+      format.json { render json: @reward }
+    end
+  end
+
+  def destroy
+    resource.destroy
+    respond_to do |format|
+      format.html { head :ok }
+      format.json { head :no_content }
+    end
   end
 end
