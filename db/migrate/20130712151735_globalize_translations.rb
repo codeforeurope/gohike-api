@@ -14,7 +14,7 @@ class GlobalizeTranslations < ActiveRecord::Migration
 
     rename_column :route_profiles, :name_en, :name
     rename_column :route_profiles, :description_en, :description
-    RouteProfile.create_translation_table!({:name => :string, :description => :text}, {migrate_data: true})
+    RouteProfile.create_translation_table!({:name => :string}, {migrate_data: true})
   end
 
   def down
