@@ -12,7 +12,7 @@ class RouteProfile < ActiveRecord::Base
 
   translates :name, :fallbacks_for_empty_translations => true
   accepts_nested_attributes_for :translations
-  #validates_presence_of :name
+  validates_presence_of :name
   after_update :crop_image
   validate :validate_minimum_image_size
 
@@ -28,7 +28,7 @@ class RouteProfile < ActiveRecord::Base
 
   class Translation
     attr_accessible :locale, :name
-    #validates_presence_of :name
+    validates_presence_of :name
   end
 
   def published_routes

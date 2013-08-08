@@ -20,11 +20,11 @@ class Location < ActiveRecord::Base
     where("city_id IN (?)", city_ids.split(","))
   }
 
-  #after_update :crop_image
-  #validates_presence_of :name, :description
-  #validate :validate_minimum_image_size
-  #validates_length_of :name, :maximum => 35
-  #validates_length_of :description, :maximum => 540
+  after_update :crop_image
+  validates_presence_of :name, :description
+  validate :validate_minimum_image_size
+  validates_length_of :name, :maximum => 35
+  validates_length_of :description, :maximum => 540
 
 
   def geocode?
@@ -43,9 +43,9 @@ class Location < ActiveRecord::Base
 
   class Translation
     attr_accessible :locale, :name, :description
-    #validates_presence_of :name, :description
-    #validates_length_of :name, :maximum => 35
-    #validates_length_of :description, :maximum => 540
+    validates_presence_of :name, :description
+    validates_length_of :name, :maximum => 35
+    validates_length_of :description, :maximum => 540
   end
 
 
