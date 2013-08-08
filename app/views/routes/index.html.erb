@@ -21,7 +21,7 @@
     </thead>
     <% @routes.each do |route| %>
       <tr>
-        <td><%= image_tag (route.image.icon.url ), :class => "route-list-img" %></td>
+        <td><%= image_tag (route.image.icon.url ), :class => "route-list-img" if route.image.icon.present? %></td>
         <td class="name"><%= link_to route.name, route_path(route) %></td>
         <td class="profile"><%= link_to route.route_profile.name, route_profile_path(route.route_profile) if route.route_profile.present? %></td>
         <td class="translations"><%= route.translated_locales.join(" | ") %></td>
