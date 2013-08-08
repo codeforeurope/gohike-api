@@ -20,8 +20,7 @@ gem "fog"
 gem "remotipart", "~> 1.0"
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'globalize3'
-gem 'batch_translations', :require => 'batch_translations',
-    :git => 'git@github.com:psteininger/batch_translations.git'
+gem 'batch_translations', :github => 'psteininger/batch_translations'
 #countries and states
 gem "carmen-rails"
 gem 'omniauth-facebook'
@@ -37,7 +36,7 @@ group :assets do
   gem 'bootstrap-sass', '2.3.1.0'
 
   gem 'jcrop-rails'
-  gem 'bootstrap-slider-rails', :require => 'bootstrap-slider-rails', :git => 'https://github.com/utahstreetlabs/bootstrap-slider-rails.git'
+  gem 'bootstrap-slider-rails', :github => 'utahstreetlabs/bootstrap-slider-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

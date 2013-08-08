@@ -1,11 +1,11 @@
 GIT
-  remote: git@github.com:psteininger/batch_translations.git
+  remote: git://github.com/psteininger/batch_translations.git
   revision: be991d54dc4abb1314e23d3f8abc0608cec27e6f
   specs:
     batch_translations (0.0.4)
 
 GIT
-  remote: https://github.com/utahstreetlabs/bootstrap-slider-rails.git
+  remote: git://github.com/utahstreetlabs/bootstrap-slider-rails.git
   revision: 9a70d58df4b959273d5d0a4a874fa206206b176d
   specs:
     bootstrap-slider-rails (2.0.0.2)
