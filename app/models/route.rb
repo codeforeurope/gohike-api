@@ -21,13 +21,13 @@ class Route < ActiveRecord::Base
     Base64.encode64(open(self.icon.to_s) { |io| io.read }) unless self.icon.to_s.blank?
   end
 
-  after_update :crop_image
-  validate :validate_minimum_image_size
-  validates_presence_of :name, :description, :city_id, :route_profile_id
+  #after_update :crop_image
+  #validate :validate_minimum_image_size
+  #validates_presence_of :name, :description, :city_id, :route_profile_id
 
   class Translation
     attr_accessible :locale, :name, :description
-    validates_presence_of :name, :description
+    #validates_presence_of :name, :description
   end
 
   def validate_for_publishing
