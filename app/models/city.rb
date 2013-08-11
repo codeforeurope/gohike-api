@@ -38,6 +38,7 @@ class City < ActiveRecord::Base
     route_profiles.all(:joins => :routes,
         :conditions => "routes.published_key IS NOT NULL",
         :group => 'route_profiles.id',
+        :order => 'priority',
         :having => "count(routes.id) > 0")
   end
 

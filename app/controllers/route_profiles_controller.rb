@@ -8,6 +8,8 @@ class RouteProfilesController < InheritedResources::Base
   optional_belongs_to :city
   has_scope :in_city
 
+  before_filter :load_routes, :only => :show
+
   def index
     super
   end
@@ -35,5 +37,9 @@ class RouteProfilesController < InheritedResources::Base
     }
   end
 
+  private
+  def load_routes
+    @routes = @route_profile.routes
+  end
 
 end

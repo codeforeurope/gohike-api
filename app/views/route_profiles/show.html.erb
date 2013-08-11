@@ -1,8 +1,10 @@
 <ul class="breadcrumb">
   <li><%= link_to t(:home), home_path %> <span class="divider">/</span></li>
   <% unless @city.nil? %>
-    <li class=""><%= link_to t(:'navbar.cities') , cities_path %><span class="divider">/</span></li>
-    <li class=""><%= link_to @city.name , city_path(@city) %><span class="divider">/</span></li>
+    <li class=""><%= link_to t(:'navbar.cities'), cities_path %>
+      <span class="divider">/</span></li>
+    <li class=""><%= link_to @city.name, city_path(@city) %>
+      <span class="divider">/</span></li>
   <% end %>
   <li><%= link_to t(:'navbar.route_profiles'), route_profiles_path %> <span class="divider">/</span></li>
   <li class="active"><%= @route_profile.name %></li>
@@ -38,3 +40,5 @@
     <img style="width: 100px; height: 100px;" src="<%= @route_profile.image.icon %>?<%= Time.now.to_i %>">
   </div>
 </div>
+<h4><%= t(:"navbar.route_profiles") %> </h4>
+<%= render :partial => "routes/listing", :locals => {} %>

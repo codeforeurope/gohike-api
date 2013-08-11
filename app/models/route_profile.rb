@@ -2,10 +2,12 @@ class RouteProfile < ActiveRecord::Base
   include ImageModel
   mount_uploader :image, RouteProfileImageUploader
 
+  default_scope order('priority DESC')
+
   MIN_HEIGHT = 200
   MIN_WIDTH = 200
 
-  attr_accessible :description, :image, :name, :translations_attributes,:city, :city_id
+  attr_accessible :description, :image, :name, :translations_attributes,:city, :city_id, :priority
 
   belongs_to :city
   has_many :routes, :dependent => :destroy

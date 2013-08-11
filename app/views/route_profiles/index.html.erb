@@ -11,34 +11,6 @@
   <% end %>
 </ul>
 <%= render :partial => "shared/city_tabs", :locals => {} %>
-<div class="row-fluid">
-  <%- model_class = RouteProfile -%>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:image) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:city) %></th>
-      <th><%= model_class.human_attribute_name(:translations) %></th>
-      <th></th>
-    </tr>
-    </thead>
-    <% @route_profiles.each do |route_profile| %>
-      <tr>
-        <td><%= image_tag (route_profile.image.icon.url ), :class => "route-list-img"  %></td>
-        <td class="name"><%= link_to route_profile.name, route_profile_path(route_profile) %></td>
-        <td class="city"><%= route_profile.city.name unless route_profile.city.nil? %></td>
-        <td class="translations"><%= route_profile.translated_locales.join(" | ") %></td>
-        <td><%= link_to t(:edit), edit_route_profile_path(route_profile), :class => "btn btn-primary" %></td>
+<%= render :partial => "route_profiles/listing", :locals => {} %>
 
-      </tr>
-    <% end %>
-  </table>
-
-  <br/>
-
-
-</div>
-
-<br/>
 

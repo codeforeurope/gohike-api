@@ -1,0 +1,31 @@
+<%- model_class = Route -%>
+<div class="row-fluid">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:image) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <% unless @route_profile.present? %>
+        <th><%= model_class.human_attribute_name(:route_profile) %></th>
+      <% end %>
+      <th><%= model_class.human_attribute_name(:translations) %></th>
+      <th><%= model_class.human_attribute_name(:waypoints) %></th>
+      <th></th>
+    </tr>
+    </thead>
+    <% @routes.each do |route| %>
+      <tr>
+        <td><%= image_tag (route.image.icon.url), :class => "route-list-img" %></td>
+        <td class="name"><%= link_to route.name, route_path(route) %></td>
+        <% unless @route_profile.present? %>
+          <td class="profile"><%= link_to route.route_profile.name, route_profile_path(route.route_profile) if route.route_profile.present? %></td>
+        <% end %>
+        <td class="translations"><%= route.translated_locales.join(" | ") %></td>
+        <td><%= route.waypoints.count %></td>
+        <td><%= link_to t(:details), route_path(route), :class => "btn" %></td>
+        <td><%= link_to t(:edit), edit_route_path(route), :class => "btn btn-primary" %></td>
+
+      </tr>
+    <% end %>
+  </table>
+</div>
