@@ -21,7 +21,7 @@
   </thead>
   <% @locations.each do |location| %>
     <tr>
-      <td><%= image_tag (location.image.present? ? location.image.icon : "clear.gif"), :class => "route-list-img" %></td>
+      <td><img src="<%= location.image.icon %>" class="route-list-img"></td>
       <td><%= location.name %></td>
       <td><%= location.address %></td>
       <td><%= location.postal_code %></td>
