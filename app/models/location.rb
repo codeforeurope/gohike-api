@@ -45,7 +45,7 @@ class Location < ActiveRecord::Base
     attr_accessible :locale, :name, :description
     validates_presence_of :name, :description
     validates_length_of :name, :maximum => 35
-    validates_length_of :description, :maximum => 540
+    validates_length_of :description, :maximum => 2048
   end
 
 
