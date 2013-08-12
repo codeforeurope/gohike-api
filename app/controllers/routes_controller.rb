@@ -10,18 +10,21 @@ class RoutesController < InheritedResources::Base
   # POST /routes
   # POST /routes.json
   def create
-    create! {
-      params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
-    }
-
+    create! do |success, failure|
+      success.html {
+        redirect_to params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
+      }
+    end
   end
 
   # PUT /routes/1
   # PUT /routes/1.json
   def update
-    update! {
-      params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
-    }
+    update! do |success, failure|
+      success.html {
+        redirect_to params[:route][:image].present? ? crop_route_url(@route) : route_url(@route)
+      }
+    end
   end
 
 
@@ -43,7 +46,7 @@ class RoutesController < InheritedResources::Base
       md5 = OpenSSL::Digest::MD5.new
       published_key = md5.hexdigest(route_json)
       $redis.del delete_published_key if delete_published_key.present?
-      $redis.set published_key,route_json
+      $redis.set published_key, route_json
       @route.update_attribute :published_key, published_key
     else
 

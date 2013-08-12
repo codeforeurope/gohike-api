@@ -15,18 +15,21 @@ class LocationsController < InheritedResources::Base
   # POST /routes
   # POST /routes.json
   def create
-    create! {
-      params[:location][:image].present? ? crop_location_url(@location) : location_url
-    }
-
+    create! do |success, failure|
+      success.html {
+        redirect_to params[:location][:image].present? ? crop_location_url(@location) : location_url(@location)
+      }
+    end
   end
 
   # PUT /routes/1
   # PUT /routes/1.json
   def update
-    update! {
-      params[:location][:image].present? ? crop_location_url(@location) : location_url
-    }
+    update! do |success, failure|
+      success.html {
+        redirect_to params[:location][:image].present? ? crop_location_url(@location) : location_url(@location)
+      }
+    end
   end
 
   def search
