@@ -24,7 +24,7 @@ class Location < ActiveRecord::Base
   validates_presence_of :name, :description
   validate :validate_minimum_image_size
   validates_length_of :name, :maximum => 35
-  validates_length_of :description, :maximum => 540
+  validates_length_of :description, :maximum => 2048
 
 
   def geocode?
