@@ -16,7 +16,7 @@
       can [:create, :update, :destroy, :crop], RouteProfile do |profile|
         user.role? :curator, profile.city
       end
-      can [:read, :new, :search], Route
+      can [:read, :new, :search, :waypoints], Route
       can [:create, :update, :destroy, :crop, :publish, :unpublish], Route do |route|
         user.role? :curator, route.city
       end
