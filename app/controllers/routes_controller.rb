@@ -48,10 +48,18 @@ class RoutesController < InheritedResources::Base
       $redis.del delete_published_key if delete_published_key.present?
       $redis.set published_key, route_json
       @route.update_attribute :published_key, published_key
+      render :partial => "details"
     else
 
     end
 
+
+  end
+
+  def unpublish
+    $redis.del @route.published_key
+    @route.update_attribute :published_key, nil
+    render :partial => "details"
   end
 
 

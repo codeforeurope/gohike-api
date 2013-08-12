@@ -6,18 +6,7 @@
 <div class="row-fluid">
 
 
-  <h4>
-    <%= t(:details) %>
-    <% if can? :publish, @route %>
-      <%
-         class_attr = "btn btn-mini btn-warning pull-right"
-         publish = @route.published_key.present? ? :republish : :publish
-      %>
-      <%= link_to t(publish), publish_route_path(@route), :class => class_attr, :remote => true, :method => :post %>
-    <% end %>
-    <%= link_to t(:edit), edit_route_path(@route), :class => "btn btn-mini btn-primary pull-right" %>
-
-  </h4>
+  <%= render :partial => "details" %>
 
   <ul class="nav nav-tabs">
     <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route, :active => true} %>
@@ -66,7 +55,7 @@
     </ul>
   </div>
   <div class="pull-right half">
-    <%= search_field_tag :search_location, nil, :placeholder => t(:search_available), :class=>"search-locations", :data=>{"search-url" => search_city_locations_path(@route.city) } %>
+    <%= search_field_tag :search_location, nil, :placeholder => t(:search_available), :class => "search-locations", :data => {"search-url" => search_city_locations_path(@route.city)} %>
     <ul class="connected waypoint-list clearfix" id="locations">
       <% @locations.each do |location| %>
         <li class="ui-state-default alert-info" data-location-id="<%= location.id %>">

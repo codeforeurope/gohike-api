@@ -20,6 +20,7 @@ Gohike::Application.routes.draw do
         put :waypoints
         get :crop
         post :publish
+        post :unpublish
       end
     end
     resources :rewards
