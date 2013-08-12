@@ -13,7 +13,7 @@
     </thead>
     <% @route_profiles.each do |route_profile| %>
       <tr>
-        <td><%= image_tag (route_profile.image.icon.url ), :class => "route-list-img"  %></td>
+        <td><%= image_tag (route_profile.image.icon ), :class => "route-list-img"  %></td>
         <td class="name"><%= link_to route_profile.name, route_profile_path(route_profile) %></td>
         <td class="city"><%= route_profile.city.name unless route_profile.city.nil? %></td>
         <td class="translations"><%= route_profile.translated_locales.join(" | ") %></td>

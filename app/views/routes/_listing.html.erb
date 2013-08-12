@@ -15,7 +15,7 @@
     </thead>
     <% @routes.each do |route| %>
       <tr>
-        <td><%= image_tag (route.image.icon.url), :class => "route-list-img" %></td>
+        <td><%= image_tag (route.image.icon), :class => "route-list-img" %></td>
         <td class="name"><%= link_to route.name, route_path(route) %></td>
         <% unless @route_profile.present? %>
           <td class="profile"><%= link_to route.route_profile.name, route_profile_path(route.route_profile) if route.route_profile.present? %></td>
