@@ -17,6 +17,10 @@ class LocationsController < InheritedResources::Base
   def create
     create! do |success, failure|
       success.html {
+        if @location.id.blank?
+          logger.info @location.errors
+          #logger.info @location.errors
+        end
         redirect_to params[:location][:image].present? ? crop_location_url(@location) : location_url(@location)
       }
     end
