@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130811184148) do
+ActiveRecord::Schema.define(:version => 20130828180546) do
 
   create_table "checkins", :force => true do |t|
     t.integer  "route_id"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20130811184148) do
     t.integer  "route_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "image_md5"
   end
 
   create_table "roles", :force => true do |t|

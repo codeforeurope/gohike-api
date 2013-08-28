@@ -1,7 +1,9 @@
 # encoding: utf-8
 
 class RewardUploader < CarrierWave::Uploader::Base
+  before :store, :capture_md5
 
+  after :store, :persist_md5
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -29,7 +31,6 @@ class RewardUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process :scale => [200, 300]
   #
   # def scale(width, height)
   #   # do something
@@ -51,5 +52,17 @@ class RewardUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def capture_md5(args)
+    if model.send("#{mounted_as}_changed?") && !model.send("#{mounted_as}_md5_changed?")
+      model.send "#{mounted_as}_md5=", Digest::MD5.file(Rails.public_path + url).hexdigest
+    end
+  end
+
+  def persist_md5(args)
+    if model.send("#{mounted_as}_changed?") && model.send("#{mounted_as}_md5_changed?")
+      model.save
+    end
+  end
 
 end
