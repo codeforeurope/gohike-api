@@ -3,6 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-jQuery ->
-  $('a.publish').on 'ajax:success', (event,data,c)->
-    alert("Content was published. Version: " + data.version + "<br> Size:" + data.length )
+#jQuery ->
+#  $('a.publish').on 'ajax:success', (event,data,c)->
+#    alert("Content was published. Version: " + data.version + "<br> Size:" + data.length )

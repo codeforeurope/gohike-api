@@ -60,3 +60,7 @@ jQuery ->
 
   if $("#new_route").length > 0
     $("#route_city_id").trigger "change"
+
+
+  $(document).on 'ajax:success', "#route_details .publish, #route_details .unpublish", (xhr, data, status)->
+    $("#route_details").replaceWith(data)

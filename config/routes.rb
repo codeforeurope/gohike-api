@@ -19,8 +19,8 @@ Gohike::Application.routes.draw do
       member do
         put :waypoints
         get :crop
-        post :publish
-        post :unpublish
+        put :publish
+        put :unpublish
       end
     end
     resources :rewards

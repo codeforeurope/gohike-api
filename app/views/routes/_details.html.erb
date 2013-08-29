@@ -2,15 +2,15 @@
   <%= t(:details) %>
   <% if can? :publish, @route %>
     <%
-       class_attr = "btn btn-mini btn-warning pull-right"
+       class_attr = "publish btn btn-mini btn-warning pull-right"
        publish = @route.published_key.present? ? :republish : :publish
        publish_icon = @route.published_key.present? ? "icon-repeat" : "icon-ok-circle"
     %>
-    <%= link_to publish_route_path(@route), :class => class_attr, :remote => true, :method => :post, :data => {:replace => "#route_details"} do %>
+    <%= link_to publish_route_path(@route), :class => class_attr, :remote => true, :method => :put, :data => {:replace => "#route_details"} do %>
       <i class="<%= publish_icon %> icon-white"></i> <%= t(publish) %>
     <% end %>
     <% if @route.published_key.present? %>
-      <%= link_to unpublish_route_path(@route), :class => "btn btn-mini btn-inverse pull-right", :remote => true, :method => :post, :data => {:replace => "#route_details"} do %>
+      <%= link_to unpublish_route_path(@route), :class => "unpublish btn btn-mini btn-inverse pull-right", :remote => true, :method => :put, :data => {:replace => "#route_details"} do %>
         <i class="icon-ban-circle icon-white"></i> <%= t(:unpublish) %>
       <% end %>
     <% end %>
