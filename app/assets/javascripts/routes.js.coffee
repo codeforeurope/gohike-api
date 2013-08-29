@@ -64,3 +64,4 @@ jQuery ->
 
   $(document).on 'ajax:success', "#route_details .publish, #route_details .unpublish", (xhr, data, status)->
     $("#route_details").replaceWith(data)
+

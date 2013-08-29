@@ -1,4 +1,7 @@
-<%= simple_form_for (@resource) do |builder| %>
-  <%= render :partial => 'shared/translation_fields', :locals => {:locale => @locale, :f => builder, :resource => @resource} %>
+<% id = Time.zone.now.to_i %>
+<%= simple_form_for @resource do |f| %>
+  <%= render :partial => "shared/translation_tabs", :locals => {:locale => @translation.locale, :resource => @resource} %>
+  <%= f.simple_fields_for :translations, :child_index => id do |builder| %>
+    <%= render :partial => 'shared/translation_fields', :locals => {:locale => @translation.locale, :f => builder, :resource => @resource} if builder.object.new_record? %>
+  <% end %>
 <% end %>
-<%= render :partial => "shared/translation_tabs", :locals => {:locale => @locale, :resource => @resource} %>

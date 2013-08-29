@@ -8,7 +8,7 @@
 
   <%= render :partial => "details" %>
 
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs translations-tabs">
     <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @route, :active => true} %>
     <% @route.translations.each do |translation| %>
       <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @route} if (translation.locale != I18n.locale) %>

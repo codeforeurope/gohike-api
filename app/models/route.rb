@@ -4,8 +4,12 @@ class Route < ActiveRecord::Base
   #mount_uploader :icon, RouteIconUploader
   attr_accessible :description, :icon, :image, :name, :description, :translations_attributes, :city_id, :route_profile_id
 
-  translates :name, :description, :fallbacks_for_empty_translations => true
-  accepts_nested_attributes_for :translations
+  translates :name, :description, :fallbacks_for_empty_translations => true do
+    attr_accessible :locale, :name, :description
+    validates_presence_of :locale, :name, :description
+  end
+
+  accepts_nested_attributes_for :translations, :allow_destroy => true
 
 
   has_many :waypoints, :order => "rank ASC", :dependent => :destroy
@@ -25,10 +29,6 @@ class Route < ActiveRecord::Base
   validate :validate_minimum_image_size
   validates_presence_of :name, :description, :city_id, :route_profile_id
 
-  class Translation
-    attr_accessible :locale, :name, :description
-    validates_presence_of :name, :description
-  end
 
   def validate_for_publishing
     return true

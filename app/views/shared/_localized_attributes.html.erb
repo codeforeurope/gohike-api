@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs translation-tabs">
   <%= render :partial => "shared/translation_tabs", :locals => {:resource => resource, :locale => I18n.locale, :f => f, :active => true} %>
   <% resource.translations.each do |translation| %>
     <%= render :partial => "shared/translation_tabs", :locals => {:resource => resource, :locale => translation.locale, :f => f} if (translation.locale != I18n.locale) %>
@@ -18,7 +18,7 @@
     </div>
   </li>
 </ul>
-<div class="tab-content">
+<div class="tab-content translation-content">
   <div class="tab-pane active" id="<%= translation_tab_id(resource, I18n.locale) %>">
 
     <%= f.input :name %>
@@ -27,7 +27,7 @@
     <% end %>
   </div>
 
-  <% resource.translations.each do |translation| %>
-    <%= render :partial => "shared/translation_fields", :locals => {:locale => translation.locale, :f => f, :resource => resource} if (translation.locale != I18n.locale) %>
+  <%= f.simple_fields_for :translations do |builder| %>
+    <%= render :partial => "shared/translation_fields", :locals => {:f => builder} if (builder.object.locale != I18n.locale) %>
   <% end %>
 </div>

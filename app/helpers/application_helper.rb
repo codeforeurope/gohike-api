@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def translation_tab_id(resource, locale)
-    resource.class.name.downcase + "_" + resource.id.to_s + "_locale_" + locale.to_s
+    (params[:action] == "show" ? "show_":"")+resource.class.name.downcase + "_" + resource.id.to_s + "_locale_" + locale.to_s
   end
 
 

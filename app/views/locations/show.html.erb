@@ -9,7 +9,7 @@
     <h4><%= t :details %>
       <%= link_to t(:edit), edit_location_path(@location), :class => "btn btn-mini btn-primary pull-right" %>
     </h4>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs translations-tabs">
       <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @location, :active => true} %>
       <% @location.translations.each do |translation| %>
         <%= render :partial => "shared/translation_tabs", :locals => {:locale => translation.locale, :resource => @location} if (translation.locale != I18n.locale) %>
