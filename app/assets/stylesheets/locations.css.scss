@@ -13,7 +13,7 @@
     border-top-color: white;
 
   }
-  &:hover .caret,  &:focus .caret,  {
+  &:hover .caret, &:focus .caret, {
     border-top-color: white;
   }
 }
@@ -21,4 +21,28 @@
 .nav-tabs > li .close {
   margin: -2px 0 0 10px;
   font-size: 18px;
+}
+
+.location-map {
+  float: left;
+  width: auto;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333;
+  opacity: 0.50;
+}
+
+.form-horizontal input {
+  &.search-map {
+    width: 390px;
+    margin: 5px;
+    margin-bottom: 5px;
+  }
 }

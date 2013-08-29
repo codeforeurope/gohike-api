@@ -23,9 +23,10 @@ class City < ActiveRecord::Base
 
   def fullname
     if country_code == "US"
-      "#{self.name}," + (self.state_province.present? ? " #{self.state_province}" : "")
+      "#{self.name.camelize}," + (self.state_province.present? ? " #{self.state_province}" : "")
     else
-      "#{self.name}," + (self.state_province.present? ? " #{self.state_province}," : "") +" #{self.country_name}"
+      "#{self.name.camelize},"  +" #{self.country_name}"
+      #+ (self.state_province.present? ? " #{self.state_province}," : "")
     end
 
   end

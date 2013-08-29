@@ -11,6 +11,7 @@ en:
   publish: "Publish"
   republish: "Re-Publish"
   search_available: "Search Locations"
+  search_map: "Type in an address here if you have it"
   omniauth:
     facebook:
       success: "Successfully connected Facebook"
@@ -33,6 +34,11 @@ en:
 #      destroy:
 #        notice: "{resource_name} was successfully destroyed"
 #        alert: "{resource_name} could not be destroyed"
+  locations:
+    new:
+      title: "Add Location"
+    form:
+      select_city_to_use_map: "Please select the network before adding the location"
   activerecord:
     errors:
       models:

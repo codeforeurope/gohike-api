@@ -21,7 +21,7 @@ class Location < ActiveRecord::Base
   }
 
   after_update :crop_image
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :city_id,  :address, :city, :latitude, :longitude
   validate :validate_minimum_image_size
   validates_length_of :name, :maximum => 35
   validates_length_of :description, :maximum => 2048
