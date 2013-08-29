@@ -1,5 +1,5 @@
 object :route
-attributes :id
+attributes :id, :published_key
 
 node(:image) do |route|
   {:md5 => route.image_mobile_md5, :url => route.image.mobile.url}
