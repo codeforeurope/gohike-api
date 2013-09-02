@@ -2,50 +2,51 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-  window.Gmaps.map.callback = () ->
-    map = Gmaps.map.map
-    map.setOptions({
-      auto_adjust: true,
-      zoomControl: true,
-      streetViewControl: false,
-      scaleControl: false,
-      rotateControl: false,
-      mapTypeControl: false,
-      panControl: false,
-      scrollwheel: false
-    })
-    geocoder = new google.maps.Geocoder()
-    crosshairShape = {coords: [0, 0, 0, 0], type: 'rect'}
-    mapReady = false
+  if(window.Gmaps.map)
+    window.Gmaps.map.callback = () ->
+      map = Gmaps.map.map
+      map.setOptions({
+        auto_adjust: true,
+        zoomControl: true,
+        streetViewControl: false,
+        scaleControl: false,
+        rotateControl: false,
+        mapTypeControl: false,
+        panControl: false,
+        scrollwheel: false
+      })
+      geocoder = new google.maps.Geocoder()
+      crosshairShape = {coords: [0, 0, 0, 0], type: 'rect'}
+      mapReady = false
 
-    marker = new google.maps.Marker({
-      map: map,
-      icon: 'http://www.daftlogic.com/images/cross-hairs.gif',
-      shape: crosshairShape
-    })
-    marker.bindTo('position', map, 'center')
-    google.maps.event.addListener map, 'idle', () ->
-      currentCenter = map.getCenter()
-      request = {location: currentCenter }
-      $address = $("#location_address")
-      $city = $("#location_city")
-      $postal_code = $("#location_postal_code")
-      $latitude = $("#location_latitude")
-      $longitude = $("#location_longitude")
+      marker = new google.maps.Marker({
+        map: map,
+        icon: 'http://www.daftlogic.com/images/cross-hairs.gif',
+        shape: crosshairShape
+      })
+      marker.bindTo('position', map, 'center')
+      google.maps.event.addListener map, 'idle', () ->
+        currentCenter = map.getCenter()
+        request = {location: currentCenter }
+        $address = $("#location_address")
+        $city = $("#location_city")
+        $postal_code = $("#location_postal_code")
+        $latitude = $("#location_latitude")
+        $longitude = $("#location_longitude")
 
-      if mapReady
-        $latitude.val(currentCenter.lat())
-        $longitude.val(currentCenter.lng())
-        geocoder.geocode request, (results, status) ->
-          if status == google.maps.GeocoderStatus.OK and results[0]
-            parts = results[0].formatted_address.split(", ")
-            city_parts = parts[1].split(" ")
-            $address.val(parts[0])
-            $city.val(city_parts.pop())
-            $postal_code.val(city_parts.join(" "))
+        if mapReady
+          $latitude.val(currentCenter.lat())
+          $longitude.val(currentCenter.lng())
+          geocoder.geocode request, (results, status) ->
+            if status == google.maps.GeocoderStatus.OK and results[0]
+              parts = results[0].formatted_address.split(", ")
+              city_parts = parts[1].split(" ")
+              $address.val(parts[0])
+              $city.val(city_parts.pop())
+              $postal_code.val(city_parts.join(" "))
 
 
-      mapReady = true
+        mapReady = true
 
 
 
