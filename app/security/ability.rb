@@ -26,17 +26,15 @@
       end
       #can :manage, Reward
 
-      can [:new, :create, :update, :destroy], Reward do |reward|
+      can [:new,:create, :update, :destroy], Reward do |reward|
         user.role? :curator, reward.route.city
       end
 
     else
       can :read, Location
-
-
     end
     cannot [:create, :update, :destroy], Checkin
     can :read, Reward
-
+    can :read, Route
   end
 end

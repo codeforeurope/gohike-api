@@ -5,9 +5,9 @@ class RewardsController < InheritedResources::Base
   defaults :singleton => true
 
   optional_belongs_to :route
-  optional_belongs_to :route_profile
+  #optional_belongs_to :route_profile
 
-  load_and_authorize_resource :route_profile, :through => :route
+  #load_and_authorize_resource :route_profile, :through => :route
   load_and_authorize_resource :route, :through => :reward
   load_and_authorize_resource :reward
 
@@ -20,7 +20,7 @@ class RewardsController < InheritedResources::Base
     if params[:id].blank?
       @reward ||= association_chain[0].reward
     else
-      super
+      @reward = Reward.find(params[:id])
     end
   end
 
