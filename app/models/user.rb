@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :cities_curated, :source_type => 'City', :through => :roles, :source => :authorizable, :conditions => "roles.name ='curator'"
   has_many :logins, :class_name => 'UserProvider', :foreign_key => :user_id, :dependent => :delete_all
   attr_accessor :login_attributes
+  has_many :devices
 
 
   def role? (name, resource = nil)

@@ -46,6 +46,35 @@ module Gohike
       end
     end
 
+    params do
+      requires :user_name, type: String, desc: "User name"
+      requires :user_email, type: String, desc: "User email"
+      requires :fb_id, type: String, desc: "FB id"
+      requires :fb_token, type: String, desc: "FB token"
+      requires :fb_expires_at, type:Integer, desc: "FB token expiration date"
+      requires :device_id, type: String, desc: "Device UUID or equivalent"
+      requires :device_platform, type: String, desc: "Device platform"
+      requires :device_version, type: String, desc: "Device platform version"
+    end
+    post '/connect' do
+      error!('Unauthorized', 401) unless headers['Take-A-Hike-Secret'] == ENV["APP_SECRET"].strip
+
+      u = User.where(:email => params[:user_email]).first_or_initialize
+
+
+      device = u.devices.where(:identifier => params[:device_id]).first_or_initialize
+      device.platform = params[:device_platform]
+      device.platform_version = params[:device_version]
+      login = u.logins.where(:uid => params[:fb_id], :provider => :facebook ).first_or_initialize
+      login.token = params[:fb_token]
+      login.expires_at = params[:fb_expires_at]
+      if(login.new_record?)
+        u.logins << login
+      end
+      u.save!
+
+    end
+
   end
 end
 
