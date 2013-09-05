@@ -51,7 +51,7 @@ class RouteImageUploader < CarrierWave::Uploader::Base
 
   version :icon do
     process :crop_icon
-    resize_to_fill(200, 200)
+    resize_to_fill(380, 380)
   end
 
   def crop_mobile
