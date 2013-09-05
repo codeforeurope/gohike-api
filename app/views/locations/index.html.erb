@@ -27,7 +27,9 @@
       <td><%= location.postal_code %></td>
       <td><%= location.translated_locales.join(" | ") %></td>
       <td><%= link_to t(:details), location_path(location), :class => "btn btn-mini" %></td>
-      <td><%= link_to t(:edit), edit_location_path(location), :class => "btn btn-mini btn-primary" %></td>
+      <td><%= if can? :update, location
+                link_to t(:edit), edit_location_path(location), :class => "btn btn-mini btn-primary"
+              end %></td>
 
     </tr>
   <% end %>
