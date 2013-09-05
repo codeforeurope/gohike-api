@@ -25,7 +25,7 @@ class RouteProfilesController < InheritedResources::Base
   def create
     create! do |success, failure|
       success.html {
-        redirect_toparams[:route_profile][:image].present? ? crop_route_profile_url(@route_profile) : route_profile_url(@route_profile)
+        redirect_to params[:route_profile][:image].present? ? crop_route_profile_url(@route_profile) : route_profile_url(@route_profile)
       }
     end
   end
