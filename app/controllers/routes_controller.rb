@@ -70,7 +70,11 @@ class RoutesController < InheritedResources::Base
   end
 
   def load_profiles
-    @profiles = RouteProfile.scoped_by_city_id([@route.city_id])
+    if @route.city_id.present?
+      @profiles = RouteProfile.scoped_by_city_id([@route.city_id])
+    else
+      @profiles = []
+    end
   end
 end
 

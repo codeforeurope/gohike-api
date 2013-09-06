@@ -50,13 +50,14 @@ jQuery ->
       return true
 
 
-  $("#route_city_id").change (e)->
+  $("form").on('change' , "#route_city_id", (e)->
     $select_wrapper = $(this).parent().parent().next()
     $select_controls = $select_wrapper.find("select")
     city_id = $(this).val()
     url = "/route_profiles/in_cities?city_ids=#{city_id}"
     $select_controls.load url, (data, xhr, status)->
-      $select_wrapper.removeClass("hidden")
+      $select_controls.prop("disabled", false)
+  ).change()
 
   if $("#new_route").length > 0
     $("#route_city_id").trigger "change"

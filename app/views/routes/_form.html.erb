@@ -5,8 +5,11 @@
 
     <div class="span5">
       <%= f.association :city, :collection => cities_curated, :include_blank => false %>
-      <%= f.input :route_profile_id, :wrapper_html => {:class => ("hidden" if @route.city.blank?)} do %>
-        <%= f.select :route_profile_id, options_from_collection_for_select(@profiles, :id, :name, :selected => @route.route_profile_id), :include_blank => false %>
+      <%= f.input :route_profile_id do %>
+        <%= f.select :route_profile_id,
+                     options_from_collection_for_select(@profiles, :id, :name, :selected => @route.route_profile_id),
+                     {:include_blank => false},
+                     {:disabled => @route.city_id.blank?} %>
       <% end %>
       <%= f.input :image %>
     </div>

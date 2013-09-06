@@ -12,7 +12,7 @@
       cannot [:create, :update, :destroy], City do |city|
         !user.role? :curator, city
       end
-      can [:read, :new, :search], RouteProfile
+      can [:read, :new, :search, :in_cities], RouteProfile
       can [:create, :update, :destroy, :crop], RouteProfile do |profile|
         user.role? :curator, profile.city
       end

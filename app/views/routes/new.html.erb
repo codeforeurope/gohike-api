@@ -1,4 +1,9 @@
-<h1>New route</h1>
+<ul class="breadcrumb">
+  <li><%= link_to t(:home) , home_path %> <span class="divider">/</span></li>
+  <li><%= link_to t(:'navbar.routes') , routes_path %> <span class="divider">/</span></li>
+  <li class="active"><%=t(:new_route) %></li>
+</ul>
+
 
 <%= render 'form' %>
 
