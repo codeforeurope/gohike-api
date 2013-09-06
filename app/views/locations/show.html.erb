@@ -7,7 +7,7 @@
 
   <div class="span5">
     <h4><%= t :details %>
-      <%= link_to t(:edit), edit_location_path(@location), :class => "btn btn-mini btn-primary pull-right" %>
+      <%= link_to t(:edit), edit_location_path(@location), :class => "btn btn-mini btn-primary pull-right" if can? :edit, @location%>
     </h4>
     <ul class="nav nav-tabs translations-tabs">
       <%= render :partial => "shared/translation_tabs", :locals => {:locale => I18n.locale, :resource => @location, :active => true} %>
@@ -32,8 +32,8 @@
   <div class="span5">
     <h4><%= t :image %>
 
-      <%= link_to t(:remove), @location, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-mini btn-danger pull-right" if @location.waypoints.empty? %>
-      <%= link_to t(:crop), crop_location_path(@location), :class => "btn btn-mini pull-right" unless @location.image.blank? %>
+      <%= link_to t(:remove), @location, method: :delete, data: {confirm: 'Are you sure?'}, :class => "btn btn-mini btn-danger pull-right" if @location.waypoints.empty? && can?(:destroy, @location)%>
+      <%= link_to t(:crop), crop_location_path(@location), :class => "btn btn-mini pull-right" if @location.image.present? && can?(:crop, @location)  %>
     </h4>
     <img style="width: 285px; height: 190px;" src="<%= @location.image.mobile %>?<%= Time.now.to_i %>">
   </div>
