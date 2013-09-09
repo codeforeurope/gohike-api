@@ -12,7 +12,7 @@ module Gohike
     end
     post '/locate', :rabl => "locate" do
       @within = City.by_device_location(params[:latitude], params[:longitude])
-      @other = City.all
+      @other = City.with_publishable_profiles
     end
 
     desc "Called once every 24 hours by the device to get available routes and profiles"

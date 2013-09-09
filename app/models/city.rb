@@ -43,4 +43,14 @@ class City < ActiveRecord::Base
         :having => "count(routes.id) > 0")
   end
 
+  def self.with_publishable_profiles
+    cities = []
+    self.find_each do |city|
+      if (city.publishable_profiles.count > 0)
+        cities << city
+      end
+    end
+    return cities
+  end
+
 end
