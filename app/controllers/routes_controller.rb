@@ -45,6 +45,7 @@ class RoutesController < InheritedResources::Base
       route_json = renderer.render
       md5 = OpenSSL::Digest::MD5.new
       published_key = md5.hexdigest(route_json)
+      route_json.sub! delete_published_key, published_key
       $redis.del delete_published_key if delete_published_key.present?
       $redis.set published_key, route_json
       @route.update_attribute :published_key, published_key
