@@ -19,10 +19,18 @@ module Gohike
     params do
       requires :city_id, type: Integer, desc: "City id"
       optional :locale, type: String, desc: "Locale"
+      optional :profiles, type: String, desc: "Profile list (i.e. 1,4,5)"
     end
     get '(:locale/)catalog/:city_id', :rabl => "catalog" do
       I18n.locale = params[:locale].present? ? params[:locale] : :en
       @profiles = City.find(params[:city_id]).publishable_profiles
+      if params[:profiles].present?
+        profile_ids =params[:profiles].split(",")
+        @profiles = @profiles.select do |profile|
+           profile if profile_ids.include? profile.id.to_s
+        end
+      end
+
     end
 
     desc "This replaces /content endpoint. Provides a direct download of the entire route"
@@ -56,23 +64,31 @@ module Gohike
       requires :device_platform, type: String, desc: "Device platform"
       requires :device_version, type: String, desc: "Device platform version"
     end
-    post '/connect' do
+    post '/connect', :rabl => "connect" do
       error!('Unauthorized', 401) unless headers['Take-A-Hike-Secret'] == ENV["APP_SECRET"].strip
 
-      u = User.where(:email => params[:user_email]).first_or_initialize
+      @user = User.where(:email => params[:user_email]).first_or_initialize
 
-
-      device = u.devices.where(:identifier => params[:device_id]).first_or_initialize
+      device = Device.where("identifier = ? AND (user_id IS NULL OR user_id = ?)",  params[:device_id], @user.id || 0).first_or_initialize
       device.platform = params[:device_platform]
       device.platform_version = params[:device_version]
-      login = u.logins.where(:uid => params[:fb_id], :provider => :facebook ).first_or_initialize
+      if device.user_id.blank?
+         if @user.new_record?
+           @user.devices << device
+         else
+           device.user_id = @user.id
+           device.save
+         end
+      end
+
+      login = @user.logins.where(:uid => params[:fb_id], :provider => :facebook ).first_or_initialize
       login.token = params[:fb_token]
       login.expires_at = params[:fb_expires_at]
-      if(login.new_record?)
-        u.logins << login
+      if login.new_record?
+        @user.logins << login
       end
-      u.save!
-
+      @user.save
+      @user
     end
 
   end
