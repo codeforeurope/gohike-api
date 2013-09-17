@@ -40,13 +40,16 @@ class RoutesController < InheritedResources::Base
 
   def publish
     if @route.validate_for_publishing
+      if @route.published_key.blank?
+        @route.published_key = Devise.friendly_token
+      end
       delete_published_key = @route.published_key
       renderer = Rabl::Renderer.new('route', @route, {:format => 'json', :view_path => 'app/views/api'})
       route_json = renderer.render
       md5 = OpenSSL::Digest::MD5.new
       published_key = md5.hexdigest(route_json)
       route_json.sub! delete_published_key, published_key
-      $redis.del delete_published_key if delete_published_key.present?
+      $redis.del delete_published_key if $redis.exists(delete_published_key)
       $redis.set published_key, route_json
       @route.update_attribute :published_key, published_key
       render :partial => "details"
