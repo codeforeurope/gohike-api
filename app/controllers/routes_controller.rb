@@ -70,7 +70,7 @@ class RoutesController < InheritedResources::Base
   private
   def load_locations
     location_ids = @route.waypoints.map { |waypoint| waypoint.location_id }
-    @locations = Location.where('id NOT in (?)', location_ids.empty? ? 0 : location_ids)
+    @locations = @route.city.locations.where('id NOT in (?)', location_ids.empty? ? 0 : location_ids)
   end
 
   def load_profiles
