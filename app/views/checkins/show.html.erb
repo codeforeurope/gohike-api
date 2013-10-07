@@ -2,17 +2,17 @@
 
 <p>
   <b>Route:</b>
-  <%= link_to @checkin.route.name, @checkin.route %>
+  <%= link_to @checkin.route.name, @checkin.route unless @checkin.route.nil? %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= link_to @checkin.location.name, @checkin.location %>
+  <%= link_to @checkin.location.name, @checkin.location unless @checkin.location.nil? %>
 </p>
 
 <p>
   <b>Device:</b>
-  <%= link_to @checkin.device.identifier, @checkin.device %>
+  <%= link_to @checkin.device.identifier, @checkin.device unless @checkin.device.nil? %>
 </p>
 
 <p>
