@@ -2,12 +2,22 @@
 
 <p>
   <b>Route:</b>
-  <%= @checkin.route.name_en %>
+  <%= link_to @checkin.route.name, @checkin.route %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= @checkin.location.name_en %>
+  <%= link_to @checkin.location.name, @checkin.location %>
+</p>
+
+<p>
+  <b>Device:</b>
+  <%= link_to @checkin.device.identifier, @checkin.device %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= link_to @checkin.device.user.email, @checkin.device.user unless @checkin.device.user.nil?  %>
 </p>
 
 <p>
@@ -16,5 +26,4 @@
 </p>
 
 
-<%= link_to 'Edit', edit_checkin_path(@checkin) %> |
 <%= link_to 'Back', checkins_path %>
