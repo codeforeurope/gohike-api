@@ -23,7 +23,9 @@
         <td class="translations"><%= route.translated_locales.join(" | ") %></td>
         <td><%= route.waypoints.count %></td>
         <td><%= link_to t(:details), route_path(route), :class => "btn" %></td>
-        <td><%= link_to t(:edit), edit_route_path(route), :class => "btn btn-primary" %></td>
+        <td><%= if can? :manage, route
+                  link_to t(:edit), edit_route_path(route), :class => "btn btn-primary"
+                end %></td>
 
       </tr>
     <% end %>
